@@ -19,7 +19,7 @@ public class AsteroidsApp extends Application {
 
     private Pane root;
 
-    private int spawnDelay = 2;
+    private int spawnDelay = 60;
 
     private List<GameObject> bullets = new ArrayList<>();
     private List<GameObject> enemies = new ArrayList<>();
@@ -76,30 +76,31 @@ public class AsteroidsApp extends Application {
 
         for (GameObject enemy : enemies) {
             if (player.isColliding(enemy)) {
-                player.setAlive(false);
 
-                root.getChildren().removeAll(player.getView());
-                System.out.println("Game Over!");
+                root.getChildren().remove(player.getView());
+                player.setVelocity(Point2D.ZERO);
+
+                if(player.isAlive())System.out.println("Game Over!");
+                player.setAlive(false);
             }
         }
 
         bullets.removeIf(GameObject::isDead); //go through the list; if a bullet is dead, remove it
         enemies.removeIf(GameObject::isDead);
-        if (player.isDead()) player.setVelocity(Point2D.ZERO);
 
         bullets.forEach(GameObject::update);
         enemies.forEach(GameObject::update);
 
         player.update();
 
-        if (spawnDelay > 0) spawnDelay--;
+        if (spawnDelay > 0) spawnDelay--; //delay for asteroid spawns
 
-        if (spawnDelay == 0) {
+        if (spawnDelay == 0 && player.isAlive()) { //asteroid spawn mechanics
             double direction = Math.random();
-            if (0.75 < direction && direction <= 1) addEnemy(new Enemy(), player.getView().getTranslateX() + 35 + Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() + 35 + Math.random() * root.getPrefHeight()/2);
-            else if (0.50 < direction && direction <= 0.75) addEnemy(new Enemy(), player.getView().getTranslateX() + 35 + Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() - 35 - Math.random() * root.getPrefHeight()/2);
-            else if (0.25 < direction && direction <= 0.50) addEnemy(new Enemy(), player.getView().getTranslateX() - 35 - Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() - 35 - Math.random() * root.getPrefHeight()/2);
-            else if (0.00 < direction && direction <= 0.25) addEnemy(new Enemy(), player.getView().getTranslateX() - 35 - Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() + 35 + Math.random() * root.getPrefHeight()/2);
+            if (0.75 < direction && direction <= 1) addEnemy(new Enemy(), player.getView().getTranslateX() + 50 + Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() + 50 + Math.random() * root.getPrefHeight()/2);
+            else if (0.50 < direction && direction <= 0.75) addEnemy(new Enemy(), player.getView().getTranslateX() + 50 + Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() - 50 - Math.random() * root.getPrefHeight()/2);
+            else if (0.25 < direction && direction <= 0.50) addEnemy(new Enemy(), player.getView().getTranslateX() - 50 - Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() - 50 - Math.random() * root.getPrefHeight()/2);
+            else if (0.00 < direction && direction <= 0.25) addEnemy(new Enemy(), player.getView().getTranslateX() - 50 - Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() + 50 + Math.random() * root.getPrefHeight()/2);
             spawnDelay = 120;
         }
     }
@@ -132,12 +133,8 @@ public class AsteroidsApp extends Application {
             }
             if (e.getCode() == KeyCode.RIGHT) {
                 player.rotateRight();
-            } /*
-            if (e.getCode() == KeyCode.UP) {
-                player.setVelocity(new Point2D(1, 0));
             }
-            else player.setVelocity(new Point2D(0, 0)); */
-            if (e.getCode() == KeyCode.SPACE) {
+            if (e.getCode() == KeyCode.SPACE && player.isAlive()) { //player cant shoot if dead
                 Bullet bullet = new Bullet();
                 bullet.setVelocity(player.getVelocity().normalize().multiply(5));
                 addBullet(bullet, player.getView().getTranslateX(), player.getView().getTranslateY());
