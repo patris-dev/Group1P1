@@ -4,12 +4,12 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.Scene; //
+import javafx.scene.input.KeyCode; // To interact with keyboard
+import javafx.scene.layout.Pane; // Game field
+import javafx.scene.paint.Color; // To color elements
+import javafx.scene.shape.Circle; //To draw a circle
+import javafx.scene.shape.Rectangle; // To draw a rectangle
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
