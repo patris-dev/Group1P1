@@ -11,6 +11,7 @@ import javafx.scene.paint.Color; // To color elements
 import javafx.scene.shape.Circle; //To draw a circle
 import javafx.scene.shape.Rectangle; // To draw a rectangle
 import javafx.stage.Stage;
+import java.util.concurrent.ThreadLocalRandom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,7 @@ public class AsteroidsApp extends Application {
     private void addEnemy(GameObject enemy, double x, double y) {
         enemies.add(enemy);
         addGameObject(enemy, x, y);
+        enemy.setVelocity(new Point2D(Math.random()-0.5, Math.random()-0.5)); //adds movement to the asteroids (enemies)
     }
 
     private void addGameObject(GameObject object, double x, double y) {
