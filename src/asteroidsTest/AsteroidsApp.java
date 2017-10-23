@@ -19,6 +19,8 @@ public class AsteroidsApp extends Application {
 
     private Pane root;
 
+    private int spawnDelay = 2;
+
     private List<GameObject> bullets = new ArrayList<>();
     private List<GameObject> enemies = new ArrayList<>();
 
@@ -72,16 +74,33 @@ public class AsteroidsApp extends Application {
             }
         }
 
+        for (GameObject enemy : enemies) {
+            if (player.isColliding(enemy)) {
+                player.setAlive(false);
+
+                root.getChildren().removeAll(player.getView());
+                System.out.println("Game Over!");
+            }
+        }
+
         bullets.removeIf(GameObject::isDead); //go through the list; if a bullet is dead, remove it
         enemies.removeIf(GameObject::isDead);
+        if (player.isDead()) player.setVelocity(Point2D.ZERO);
 
         bullets.forEach(GameObject::update);
         enemies.forEach(GameObject::update);
 
         player.update();
 
-        if (Math.random() < 0.02) {
-            addEnemy(new Enemy(), Math.random() * root.getPrefWidth(), Math.random() * root.getPrefHeight());
+        if (spawnDelay > 0) spawnDelay--;
+
+        if (spawnDelay == 0) {
+            double direction = Math.random();
+            if (0.75 < direction && direction <= 1) addEnemy(new Enemy(), player.getView().getTranslateX() + 35 + Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() + 35 + Math.random() * root.getPrefHeight()/2);
+            else if (0.50 < direction && direction <= 0.75) addEnemy(new Enemy(), player.getView().getTranslateX() + 35 + Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() - 35 - Math.random() * root.getPrefHeight()/2);
+            else if (0.25 < direction && direction <= 0.50) addEnemy(new Enemy(), player.getView().getTranslateX() - 35 - Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() - 35 - Math.random() * root.getPrefHeight()/2);
+            else if (0.00 < direction && direction <= 0.25) addEnemy(new Enemy(), player.getView().getTranslateX() - 35 - Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() + 35 + Math.random() * root.getPrefHeight()/2);
+            spawnDelay = 120;
         }
     }
 
