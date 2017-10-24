@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane; // Game field
 import javafx.scene.paint.Color; // To color elements
 import javafx.scene.shape.Circle; //To draw a circle
 import javafx.scene.shape.Rectangle; // To draw a rectangle
-import javafx.stage.Stage;
+import javafx.stage.Stage; //control basic window properties such as title, icon, visibility, resizability, fullscreen mode, and decorations
 import java.util.concurrent.ThreadLocalRandom;
 
 import java.util.ArrayList;
@@ -132,6 +132,7 @@ public class AsteroidsApp extends Application {
         primaryStage.getScene().setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.LEFT) {
                 player.rotateLeft();
+
             }
             if (e.getCode() == KeyCode.RIGHT) {
                 player.rotateRight();
