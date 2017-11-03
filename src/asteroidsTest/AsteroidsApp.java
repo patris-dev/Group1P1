@@ -11,7 +11,6 @@ import javafx.scene.paint.Color; // To color elements
 import javafx.scene.shape.Circle; //To draw a circle
 import javafx.scene.shape.Rectangle; // To draw a rectangle
 import javafx.stage.Stage;
-import java.util.concurrent.ThreadLocalRandom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,6 +104,12 @@ public class AsteroidsApp extends Application {
             else if (0.00 < direction && direction <= 0.25) addEnemy(new Enemy(), player.getView().getTranslateX() - 50 - Math.random() * root.getPrefWidth()/2, player.getView().getTranslateY() + 50 + Math.random() * root.getPrefHeight()/2);
             spawnDelay = 120;
         }
+
+
+
+
+
+
     }
 
     private static class Player extends GameObject {
@@ -125,16 +130,23 @@ public class AsteroidsApp extends Application {
         }
     }
 
+    private boolean leftPressed = false;
+    private boolean rightPressed = false;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+
+
         primaryStage.setScene(new Scene(createContent()));
         primaryStage.getScene().setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.LEFT) {
-                player.rotateLeft();
+            if (e.getCode() == KeyCode.LEFT && !leftPressed) {
+                    player.rotateLeft();
+                    leftPressed = true;
             }
-            if (e.getCode() == KeyCode.RIGHT) {
+            if (e.getCode() == KeyCode.RIGHT && !rightPressed) {
                 player.rotateRight();
+                rightPressed = true;
             }
             if (e.getCode() == KeyCode.SPACE && player.isAlive()) { //player cant shoot if dead
                 Bullet bullet = new Bullet();
@@ -142,6 +154,15 @@ public class AsteroidsApp extends Application {
                 addBullet(bullet, player.getView().getTranslateX(), player.getView().getTranslateY());
             }
         });
+        primaryStage.getScene().setOnKeyReleased(e -> {
+            if (e.getCode() == KeyCode.LEFT) {
+                leftPressed = false;
+            }
+            if (e.getCode() == KeyCode.RIGHT) {
+                rightPressed = false;
+            }
+        });
+
         primaryStage.show();
     }
 
