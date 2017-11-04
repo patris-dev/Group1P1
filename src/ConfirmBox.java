@@ -52,6 +52,9 @@ public class ConfirmBox {
         //creates a scene which contains our layout
         Scene scene = new Scene(layout);
 
+        //uses the MenuTheme.css style
+        scene.getStylesheets().add("MenuTheme.css");
+
         //sets the scene of our window to scene
         window.setScene(scene);
 

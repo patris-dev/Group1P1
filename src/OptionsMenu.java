@@ -35,6 +35,9 @@ public class OptionsMenu {
         //creates a scene which contains our layout
         Scene sceneOptions = new Scene(optionsMenu, windowWidth, windowHeight);
 
+        //uses the MenuTheme.css style
+        sceneOptions.getStylesheets().add("MenuTheme.css");
+
         //sets the scene of our stage to sceneOptions
         window.setScene(sceneOptions);
 

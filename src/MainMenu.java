@@ -19,6 +19,10 @@ public class MainMenu {
 
         //title of the game in the main menu, could later on be changed into an image
         Label gameTitle=new Label("Lazy Town");
+        gameTitle.setId("label-title");
+
+        //adds a bit of padding to the top so the title would be lower
+        gameTitle.setPadding(new Insets(40, 0, 0, 0));
 
         //creates buttons
         Button buttonNewGame=new Button("New Game");
@@ -68,6 +72,9 @@ public class MainMenu {
 
         //creates a Scene which contains our layout (which, in this case, is borderPane), sets the window size
         Scene sceneMainMenu = new Scene(borderPane, windowWidth, windowHeight);
+
+        //uses the MenuTheme.css style
+        sceneMainMenu.getStylesheets().add("MenuTheme.css");
 
         //sets the scene of our stage to sceneMainMenu
         window.setScene(sceneMainMenu);
