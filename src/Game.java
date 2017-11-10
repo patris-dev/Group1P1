@@ -8,9 +8,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * This is the class that represents the OptionsMenu scene.
+ * This is the class that represents the Game scene.
  */
-public class OptionsMenu {
+public class Game {
 
     // Parameters for the window and buttons
     private static int windowWidth = 800;

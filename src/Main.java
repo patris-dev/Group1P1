@@ -13,18 +13,21 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-//Application - the main JavaFX configured app
-    public class Main extends Application {
+
+/**
+ * This is the main application class which creates our Stage and sets the scene to MainMenu.
+ */
+public class Main extends Application {
 
         private Stage window;
 
         public static void main(String[] args) {
-            //goes into Application, sets up main as a JavaFX application, launches start
+            // Goes into Application, sets up main as a JavaFX application, launches start
             launch(args);
         }
 
 
-        //the main function of a JavaFX application
+        // The main function of a JavaFX application
         @Override
         public void start(Stage primaryStage) throws Exception {
 
@@ -43,18 +46,18 @@ import javafx.stage.StageStyle;
             A Layout can contain either several objects, or other layouts.
              */
 
-            //Stage is the window
-            //sets the title of the window
+            // Stage is the window
+            // Sets the title of the window
             window = primaryStage;
             window.setTitle("LazyTown");
 
-            //prevents the window from being resized
+            // Prevents the window from being resized
             window.setResizable(false);
 
-            //sets the default scene as MainMenu
+            // Sets the default scene as MainMenu
             MainMenu.show(window);
 
-            //shows the Stage on our screen
+            // Shows the Stage on our screen
             window.show();
         }
 
