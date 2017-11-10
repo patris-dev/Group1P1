@@ -1,16 +1,16 @@
+package LazyTown;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * This is the class that represents the OptionsMenu scene.
+ * This is the class that represents the Game scene.
  */
-public class OptionsMenu {
+public class Game {
 
     // Parameters for the window and buttons
     private static int windowWidth = 800;
@@ -39,7 +39,7 @@ public class OptionsMenu {
         Scene sceneOptions = new Scene(optionsMenu, windowWidth, windowHeight);
 
         // Uses the MenuTheme.css style
-        sceneOptions.getStylesheets().add("MenuTheme.css");
+        sceneOptions.getStylesheets().add("LazyTown/assets/MenuTheme.css");
 
         // Sets the scene of our stage to sceneOptions
         window.setScene(sceneOptions);

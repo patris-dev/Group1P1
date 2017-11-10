@@ -1,9 +1,9 @@
 @font-face {
-    src: url('assets/lunchtime.ttf');
+    src: url('lunchtime.ttf');
 }
 .root{
     -fx-background-color: black;
-    -fx-background-image: url('assets/forest.png');
+    -fx-background-image: url('forest.png');
     -fx-background-size: cover;
     -fx-font-family: 'Lunchtime Doubly So';
 

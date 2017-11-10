@@ -1,3 +1,5 @@
+package LazyTown;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -79,7 +81,7 @@ public class MainMenu {
         Scene sceneMainMenu = new Scene(borderPane, windowWidth, windowHeight);
 
         // Uses the MenuTheme.css style
-        sceneMainMenu.getStylesheets().add("MenuTheme.css");
+        sceneMainMenu.getStylesheets().add("LazyTown/assets/MenuTheme.css");
 
         // Sets the scene of our stage to sceneMainMenu
         window.setScene(sceneMainMenu);
