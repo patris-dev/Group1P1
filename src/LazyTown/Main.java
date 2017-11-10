@@ -3,7 +3,6 @@ package LazyTown;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-
 /**
  * This is the main application class which creates our Stage and sets the scene to MainMenu.
  */
@@ -15,7 +14,6 @@ public class Main extends Application {
             // Goes into Application, sets up main as a JavaFX application, launches start
             launch(args);
         }
-
 
         // The main function of a JavaFX application
         @Override

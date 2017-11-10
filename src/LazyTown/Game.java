@@ -20,29 +20,14 @@ public class Game {
 
     public static void show(Stage window) {
 
-        // Creates a button to get back
-        Button backButton = new Button("Back");
-        backButton.setMinSize(buttonWidth, buttonHeight);
-
-        // When the button is clicked, set the scene of our window to MainMenu
-        backButton.setOnAction(e -> MainMenu.show(window));
-
         // Create our layout in the form of a VBox
-        VBox optionsMenu = new VBox(10);
-        optionsMenu.setPadding(new Insets(10, 10, 10, 10));
-
-        // Adds our button to the layout, positions it to the center
-        optionsMenu.getChildren().addAll(backButton);
-        optionsMenu.setAlignment(Pos.CENTER);
+        VBox vBox = new VBox(10);
 
         // Creates a scene which contains our layout
-        Scene sceneOptions = new Scene(optionsMenu, windowWidth, windowHeight);
-
-        // Uses the MenuTheme.css style
-        sceneOptions.getStylesheets().add("LazyTown/assets/MenuTheme.css");
+        Scene sceneGame = new Scene(vBox, windowWidth, windowHeight);
 
         // Sets the scene of our stage to sceneOptions
-        window.setScene(sceneOptions);
+        window.setScene(sceneGame);
 
     }
 
