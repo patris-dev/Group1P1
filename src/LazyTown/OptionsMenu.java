@@ -11,18 +11,11 @@ import javafx.stage.Stage;
  * This is the class that represents the OptionsMenu scene.
  */
 public class OptionsMenu {
-
-    // Parameters for the window and buttons
-    private static int windowWidth = 800;
-    private static int windowHeight = 600;
-    private static int buttonWidth = windowWidth/4;
-    private static int buttonHeight = windowHeight/10;
-
-    public static void show(Stage primaryStage) {
+        public static void show(Stage primaryStage) {
 
         // Creates a button to get back
         Button backButton = new Button("Back");
-        backButton.setMinSize(buttonWidth, buttonHeight);
+        backButton.setMinSize(Main.getButtonWidth(), Main.getButtonHeight());
 
         // When the button is clicked, set the scene of our window to MainMenu
         backButton.setOnAction(e -> MainMenu.show(primaryStage));
@@ -36,7 +29,7 @@ public class OptionsMenu {
         optionsMenu.setAlignment(Pos.CENTER);
 
         // Creates a scene which contains our layout
-        Scene sceneOptions = new Scene(optionsMenu, windowWidth, windowHeight);
+        Scene sceneOptions = new Scene(optionsMenu, Main.getWindowWidth(), Main.getWindowHeight());
 
         // Uses the MenuTheme.css style
         sceneOptions.getStylesheets().add("LazyTown/assets/MenuTheme.css");
