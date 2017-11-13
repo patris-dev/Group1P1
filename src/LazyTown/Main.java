@@ -7,7 +7,11 @@ import javafx.stage.Stage;
  * This is the main application class which creates our Stage and sets the scene to MainMenu.
  */
 public class Main extends Application {
-
+    // Parameters for the window and buttons
+    private static final int WINDOW_WIDTH = 800;
+    private static final int WINDOW_HEIGHT = 600;
+    private static final int BUTTON_WIDTH = WINDOW_WIDTH/4;
+    private static final int BUTTON_HEIGHT = WINDOW_HEIGHT/10;
         private Stage window;
 
         public static void main(String[] args) {
@@ -47,7 +51,24 @@ public class Main extends Application {
 
             // Shows the Stage on our screen
             window.show();
+
+
         }
 
+    public static int getWindowWidth() {
+        return WINDOW_WIDTH;
     }
+
+    public static int getWindowHeight() {
+        return WINDOW_HEIGHT;
+    }
+
+    public static int getButtonWidth() {
+        return BUTTON_WIDTH;
+    }
+
+    public static int getButtonHeight() {
+        return BUTTON_HEIGHT;
+    }
+}
 
