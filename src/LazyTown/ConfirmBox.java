@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * This is a class that calls in a new window with two buttons (Yes/No).
@@ -24,6 +25,8 @@ public class ConfirmBox {
         Stage primaryStage = new Stage();
         primaryStage.setTitle(title);
         primaryStage.setMinWidth(250);
+        primaryStage.setResizable(false);
+        // primaryStage.initStyle(StageStyle.TRANSPARENT);
 
         // Block input events on other windows until this is one is closed
         primaryStage.initModality(Modality.APPLICATION_MODAL);
