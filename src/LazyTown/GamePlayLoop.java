@@ -11,7 +11,8 @@ public class GamePlayLoop extends AnimationTimer{
 
     @Override
     public void handle(long now) {
-
+        // Test code to write to the console and show thast the pulse engine is hooked up correctly to the game.
+        System.out.println("Tick");
     }
 
     @Override
