@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * This is the class that represents the MainMenu scene.
  */
 public class MainMenu {
-    public static void show(Stage window) {
+    public static void show(Stage primaryStage) {
 
         // Title of the game in the main menu, could later on be changed into an image
         Label gameTitle=new Label("Lazy Town");
@@ -37,19 +37,19 @@ public class MainMenu {
         // Button.setOnAction(e -> YourCommand);
         buttonNewGame.setOnAction(e->{
             // Sets the scene for our window to the Game
-            Game.show(window);
+            Game.show(primaryStage);
         });
 
         buttonOptions.setOnAction(e->{
             // Sets the scene for our window to the OptionsMenu
-            OptionsMenu.show(window);
+            OptionsMenu.show(primaryStage);
         });
 
         buttonExitGame.setOnAction(e->{
             // Opens up a ConfirmBox that asks if we want to close the program. If the user presses the "yes" button,
             // ConfirmBox.display returns true
             if(ConfirmBox.display("Exit Game","Are you sure you want to exit?")){
-                window.close();
+                primaryStage.close();
             }
         });
 
@@ -78,7 +78,7 @@ public class MainMenu {
         sceneMainMenu.getStylesheets().add("LazyTown/assets/MenuTheme.css");
 
         // Sets the scene of our stage to sceneMainMenu
-        window.setScene(sceneMainMenu);
+        primaryStage.setScene(sceneMainMenu);
 
     }
 

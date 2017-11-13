@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class Game {
 
-   public static void show(Stage window) {
+   public static void show(Stage primaryStage) {
 
         // Create our layout in the form of a VBox
         VBox vBox = new VBox(10);
@@ -21,7 +21,7 @@ public class Game {
         Scene sceneGame = new Scene(vBox, Main.getWindowWidth(), Main.getWindowHeight());
 
         // Sets the scene of our stage to sceneOptions
-        window.setScene(sceneGame);
+        primaryStage.setScene(sceneGame);
 
     }
 

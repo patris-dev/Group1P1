@@ -21,12 +21,12 @@ public class ConfirmBox {
     public static boolean display(String title, String message) {
 
         // Creates our new window
-        Stage window = new Stage();
-        window.setTitle(title);
-        window.setMinWidth(250);
+        Stage primaryStage = new Stage();
+        primaryStage.setTitle(title);
+        primaryStage.setMinWidth(250);
 
         // Block input events on other windows until this is one is closed
-        window.initModality(Modality.APPLICATION_MODAL);
+        primaryStage.initModality(Modality.APPLICATION_MODAL);
 
         // Creates a label for our message (for example: "Are you sure you want to quit?")
         Label label = new Label(message);
@@ -40,11 +40,11 @@ public class ConfirmBox {
         // If the user presses a button, return true/false and close the window
         yesButton.setOnAction(e -> {
             answer = true;
-            window.close();
+            primaryStage.close();
         });
         noButton.setOnAction(e -> {
             answer = false;
-            window.close();
+            primaryStage.close();
         });
 
         // Creates a layout (VBox) to store our message and our buttons
@@ -62,10 +62,10 @@ public class ConfirmBox {
         scene.getStylesheets().add("LazyTown/assets/MenuTheme.css");
 
         // Sets the scene of our window to scene
-        window.setScene(scene);
+        primaryStage.setScene(scene);
 
         // Works together with Modality - shows the window and doesn't allow for other windows to be interacted with
-        window.showAndWait();
+        primaryStage.showAndWait();
 
         // Returns a true/false value based on which button was pressed
         return answer;
