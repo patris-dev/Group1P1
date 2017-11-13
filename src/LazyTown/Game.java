@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 public class Game {
     static StackPane root;
     static Scene sceneGame;
+    static GamePlayLoop gamePlayLoop;
+
     // Here we declare four booleans which will be the foundation of the player controls, we do not initialize them as
     // they default to false, whenever they are changed to true, logic will happen in another class. Later on, there
     // will be more variables as we give the player character more controls, like interaction, and using items.
@@ -64,28 +66,29 @@ public class Game {
 
     // This method is used for loading in our art assets, audio and visual.
     private static void assetLoading() {
-
-    }
-
-    // This method takes care of rendering our actors to the stackPane object that we have set up
-    private static void renderActors() {
-
+       // This method is empty for now as we don't have any assets to load
     }
 
     // This method takes care of spawning in our various actors, among those are the player, the guards, the pickups,
     // and whatever the player can interact with, later it could be extended to be more things, like props.
     private static void spawnActors() {
-
+        // Once we have our actor class with its subclasses in place, we can start spawning them into our game.
+    }
+    // This method takes care of rendering our actors to the stackPane object that we have set up
+    private static void renderActors() {
+       // Same as with spawning, we need actors to spawn, and then render
     }
 
     // This method is in charge of handling our actors. For now this is an empty method, but it will play a role when we
     // need to do collision detection and clean up actors in our scene that are no longer valid.
     private static void actorHandler() {
-
+       // This is a bit more advanced functionality, and will be implemented after the actor and its subclasses
     }
 
     // This method starts our game loop, so what we have here is actually a dynamic game.
     private static void startGameLoop() {
+        gamePlayLoop = new GamePlayLoop();
+        gamePlayLoop.start();
 
     }
 
