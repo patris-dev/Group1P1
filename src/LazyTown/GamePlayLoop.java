@@ -2,6 +2,8 @@ package LazyTown;
 
 import javafx.animation.AnimationTimer;
 
+import static LazyTown.Game.playerOne;
+
 public class GamePlayLoop extends AnimationTimer{
 
     // This class takes care of our gameplay loop, it extends from Animation timer, which basically just means that we
@@ -13,6 +15,7 @@ public class GamePlayLoop extends AnimationTimer{
     public void handle(long now) {
         // Test code to write to the console and show thast the pulse engine is hooked up correctly to the game.
         System.out.println("Tick");
+        playerOne.update();
     }
 
     @Override

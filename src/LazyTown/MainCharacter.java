@@ -22,9 +22,9 @@ public class MainCharacter extends MovedActor {
         if (left)
             iX -= velX;
         if (up)
-            iY += velY;
-        if (down)
             iY -= velY;
+        if (down)
+            iY += velY;
         spriteFrame.setTranslateX(iX);
         spriteFrame.setTranslateY(iY);
     }

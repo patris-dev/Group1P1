@@ -3,9 +3,12 @@ package LazyTown;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+
 
 /**
  * This is the class that represents the Game scene.
@@ -14,6 +17,8 @@ public class Game {
     static StackPane root;
     static Scene sceneGame;
     static GamePlayLoop gamePlayLoop;
+    static Image playerSprite;
+    static MovedActor playerOne;
 
     // Here we declare four booleans which will be the foundation of the player controls, we do not initialize them as
     // they default to false, whenever they are changed to true, logic will happen in another class. Later on, there
@@ -66,16 +71,19 @@ public class Game {
 
     // This method is used for loading in our art assets, audio and visual.
     private static void assetLoading() {
-       // This method is empty for now as we don't have any assets to load
+       playerSprite = new Image("LazyTown/assets/PC.png", 100, 100, true,
+               false, true);
     }
 
     // This method takes care of spawning in our various actors, among those are the player, the guards, the pickups,
     // and whatever the player can interact with, later it could be extended to be more things, like props.
     private static void spawnActors() {
+       playerOne = new MainCharacter("",0,0,playerSprite);
         // Once we have our actor class with its subclasses in place, we can start spawning them into our game.
     }
     // This method takes care of rendering our actors to the stackPane object that we have set up
     private static void renderActors() {
+       root.getChildren().add(playerOne.spriteFrame);
        // Same as with spawning, we need actors to spawn, and then render
     }
 
