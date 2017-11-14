@@ -10,15 +10,18 @@ public abstract class MovedActor extends Actor {
     // progresses. These variables include velocity in the x and y direction, the actors health and the damage output
     // when it shoots, our player character wont be able to shoot, but there will also be enemy guards that will be able
     // to damage the player.
-    protected double velX, velY, lifespan, damage;
+    protected double velX, velY, health, damage;
     // We also have variables for controlling the bounds and if there is friction on movement, this friction could be
     // used to adjust player speed when in water or similar. It is not an essential variable, but it seems like a fun
     // gimmick.
     protected float boundScale, boundRotation, friction;
 
-    // Our constructor, which calls the Actor constructor with the super keyword.
+    // Our constructor, which calls the Actor constructor with the super keyword. We also set some default values for
+    // some of our variables. Health to 100 and movement speed to 2
     public MovedActor(String SVGdata, double xLoc, double yLoc, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
+        health = 100;
+        velX = velY = 2;
     }
 
     @Override
@@ -38,10 +41,10 @@ public abstract class MovedActor extends Actor {
         return velY;
     } public void setVelY(double velY) {
         this.velY = velY;
-    } public double getLifespan() {
-        return lifespan;
-    } public void setLifespan(double lifespan) {
-        this.lifespan = lifespan;
+    } public double getHealth() {
+        return health;
+    } public void setHealth(double lifespan) {
+        this.health = lifespan;
     } public double getDamage() {
         return damage;
     } public void setDamage(double damage) {
