@@ -13,8 +13,6 @@ public class GamePlayLoop extends AnimationTimer{
 
     @Override
     public void handle(long now) {
-        // Test code to see that our loop is working and being started
-        System.out.println("Tick");
         // Applying updates to the player character
         playerOne.update();
     }

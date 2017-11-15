@@ -8,8 +8,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     // Parameters for the window and buttons
-    private static final int WINDOW_WIDTH = 800;
-    private static final int WINDOW_HEIGHT = 600;
+    private static final int WINDOW_WIDTH = 1024;
+    private static final int WINDOW_HEIGHT = 768;
     private static final int BUTTON_WIDTH = WINDOW_WIDTH/4;
     private static final int BUTTON_HEIGHT = WINDOW_HEIGHT/10;
 
