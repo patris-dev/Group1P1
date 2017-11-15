@@ -2,6 +2,8 @@ package LazyTown;
 
 import javafx.animation.AnimationTimer;
 
+import static LazyTown.Game.playerOne;
+
 public class GamePlayLoop extends AnimationTimer{
 
     // This class takes care of our gameplay loop, it extends from Animation timer, which basically just means that we
@@ -11,7 +13,8 @@ public class GamePlayLoop extends AnimationTimer{
 
     @Override
     public void handle(long now) {
-
+        // Applying updates to the player character
+        playerOne.update();
     }
 
     @Override

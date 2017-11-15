@@ -1,5 +1,6 @@
 package LazyTown;
 
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,14 +14,7 @@ import javafx.stage.Stage;
  * This is the class that represents the MainMenu scene.
  */
 public class MainMenu {
-
-    // Parameters for the window and buttons
-    private static int windowWidth = 800;
-    private static int windowHeight = 600;
-    private static int buttonWidth = windowWidth/4;
-    private static int buttonHeight = windowHeight/10;
-
-    public static void show(Stage window) {
+    public static void show(Stage primaryStage) {
 
         // Title of the game in the main menu, could later on be changed into an image
         Label gameTitle=new Label("Lazy Town");
@@ -35,27 +29,27 @@ public class MainMenu {
         Button buttonExitGame=new Button("Exit Game");
 
         // Sets button sizes
-        buttonNewGame.setMinSize(buttonWidth,buttonHeight);
-        buttonOptions.setMinSize(buttonWidth,buttonHeight);
-        buttonExitGame.setMinSize(buttonWidth,buttonHeight);
+        buttonNewGame.setMinSize(Main.getButtonWidth(),Main.getButtonHeight());
+        buttonOptions.setMinSize(Main.getButtonWidth(),Main.getButtonHeight());
+        buttonExitGame.setMinSize(Main.getButtonWidth(),Main.getButtonHeight());
 
         // Shorter version of handling events using a lambda expression, 'e' represents the event
         // Button.setOnAction(e -> YourCommand);
         buttonNewGame.setOnAction(e->{
             // Sets the scene for our window to the Game
-            Game.show(window);
+            Game.show(primaryStage);
         });
 
         buttonOptions.setOnAction(e->{
             // Sets the scene for our window to the OptionsMenu
-            OptionsMenu.show(window);
+            OptionsMenu.show(primaryStage);
         });
 
         buttonExitGame.setOnAction(e->{
             // Opens up a ConfirmBox that asks if we want to close the program. If the user presses the "yes" button,
             // ConfirmBox.display returns true
             if(ConfirmBox.display("Exit Game","Are you sure you want to exit?")){
-                window.close();
+                primaryStage.close();
             }
         });
 
@@ -78,13 +72,13 @@ public class MainMenu {
         borderPane.setPadding(new Insets(10,10,10,10));
 
         // Creates a Scene which contains our layout (which, in this case, is borderPane), sets the window size
-        Scene sceneMainMenu = new Scene(borderPane, windowWidth, windowHeight);
+        Scene sceneMainMenu = new Scene(borderPane, Main.getWindowWidth(), Main.getWindowHeight());
 
         // Uses the MenuTheme.css style
         sceneMainMenu.getStylesheets().add("LazyTown/assets/MenuTheme.css");
 
         // Sets the scene of our stage to sceneMainMenu
-        window.setScene(sceneMainMenu);
+        primaryStage.setScene(sceneMainMenu);
 
     }
 
