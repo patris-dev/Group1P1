@@ -41,6 +41,9 @@ public class Main extends Application {
         // Shows the Stage on our screen
         primaryStage.show();
 
+        SoundEngine menuMusic = new SoundEngine();
+        menuMusic.play("src/LazyTown/assets/menuMusic.mp3");
+
     }
 
     public static int getWindowWidth() {
