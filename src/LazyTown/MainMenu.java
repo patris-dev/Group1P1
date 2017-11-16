@@ -37,6 +37,8 @@ public class MainMenu {
         // Shorter version of handling events using a lambda expression, 'e' represents the event
         // Button.setOnAction(e -> YourCommand);
         buttonNewGame.setOnAction(e->{
+            // Stops the menu music.
+            Main.getMenuMusic().stop();
             // Sets the scene for our window to the Game
             Game.show(primaryStage);
         });

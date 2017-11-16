@@ -6,13 +6,15 @@
  * Changes the background color to black (in case the image isn't found);
  * Changes the background image to forest.png;
  * Makes the image cover the whole scene;
- * Makes all components use the Lunchtime font.
+ * Makes all components use the Lunchtime font;
+ * Sets the default font size to 20px.
  */
 .root{
     -fx-background-color: black;
     -fx-background-image: url('forest.png');
     -fx-background-size: cover;
     -fx-font-family: 'Lunchtime Doubly So';
+    -fx-font-size: 20px;
 
 }
 /* Button refers to all the buttons.
@@ -51,5 +53,11 @@
 .label{
     -fx-text-fill: black;
     -fx-font-size: 25px;
+}
+/* Check-box refers to all check boxes.
+ * Sets the text color to black.
+ */
+.check-box{
+    -fx-text-fill: black;
 }
 
