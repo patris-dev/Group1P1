@@ -35,31 +35,57 @@ public abstract class MovedActor extends Actor {
     // Finally we have our getters and setters
     public double getVelX() {
         return velX;
-    } public void setVelX(double velX) {
+    }
+
+    public void setVelX(double velX) {
         this.velX = velX;
-    } public double getVelY() {
+    }
+
+    public double getVelY() {
         return velY;
-    } public void setVelY(double velY) {
+    }
+
+    public void setVelY(double velY) {
         this.velY = velY;
-    } public double getHealth() {
+    }
+
+    public double getHealth() {
         return health;
-    } public void setHealth(double lifespan) {
+    }
+
+    public void setHealth(double lifespan) {
         this.health = lifespan;
-    } public double getDamage() {
+    }
+
+    public double getDamage() {
         return damage;
-    } public void setDamage(double damage) {
+    }
+
+    public void setDamage(double damage) {
         this.damage = damage;
-    } public float getBoundScale() {
+    }
+
+    public float getBoundScale() {
         return boundScale;
-    } public void setBoundScale(float boundScale) {
+    }
+
+    public void setBoundScale(float boundScale) {
         this.boundScale = boundScale;
-    } public float getBoundRotation() {
+    }
+
+    public float getBoundRotation() {
         return boundRotation;
-    } public void setBoundRotation(float boundRotation) {
+    }
+
+    public void setBoundRotation(float boundRotation) {
         this.boundRotation = boundRotation;
-    } public float getFriction() {
+    }
+
+    public float getFriction() {
         return friction;
-    } public void setFriction(float friction) {
+    }
+
+    public void setFriction(float friction) {
         this.friction = friction;
     }
 }

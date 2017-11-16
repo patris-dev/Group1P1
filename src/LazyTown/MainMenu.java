@@ -17,16 +17,17 @@ public class MainMenu {
     public static void show(Stage primaryStage) {
 
         // Title of the game in the main menu, could later on be changed into an image
-        Label gameTitle=new Label("Lazy Town");
+        Label gameTitle = new Label("Lazy Town");
+        // Sets the ID of our label to label-title to differentiate it from other labels in CSS
         gameTitle.setId("label-title");
 
         // Adds a bit of padding to the top so the title would be lower
         gameTitle.setPadding(new Insets(40, 0, 0, 0));
 
         // Creates buttons
-        Button buttonNewGame=new Button("New Game");
-        Button buttonOptions=new Button("Options");
-        Button buttonExitGame=new Button("Exit Game");
+        Button buttonNewGame = new Button("New Game");
+        Button buttonOptions = new Button("Options");
+        Button buttonExitGame = new Button("Exit Game");
 
         // Sets button sizes
         buttonNewGame.setMinSize(Main.getButtonWidth(),Main.getButtonHeight());

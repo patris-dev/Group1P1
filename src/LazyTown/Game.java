@@ -32,7 +32,7 @@ public class Game {
 
 
 
-       // Sets the scene of our stage to sceneOptions
+       // Sets the scene of our stage to sceneGame
        primaryStage.setScene(sceneGame);
 
        // Methods we need to call to make our game work

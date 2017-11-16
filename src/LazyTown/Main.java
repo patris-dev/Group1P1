@@ -10,8 +10,8 @@ public class Main extends Application {
     // Parameters for the window and buttons
     private static final int WINDOW_WIDTH = 1024;
     private static final int WINDOW_HEIGHT = 768;
-    private static final int BUTTON_WIDTH = WINDOW_WIDTH/4;
-    private static final int BUTTON_HEIGHT = WINDOW_HEIGHT/10;
+    private static final int BUTTON_WIDTH = WINDOW_WIDTH / 4;
+    private static final int BUTTON_HEIGHT = WINDOW_HEIGHT / 10;
 
 
     // The main function of a JavaFX application
@@ -29,11 +29,10 @@ public class Main extends Application {
            A Stage can contain one scene at a given time.
            A Scene can contain one layout at a given time.
            A Layout can contain either several objects, or other layouts.
-            */
+         */
 
         // Stage is the window
         // Sets the title of the window
-//        window = primaryStage;
         primaryStage.setTitle("LazyTown");
         // Prevents the window from being resized
         primaryStage.setResizable(false);
@@ -41,7 +40,6 @@ public class Main extends Application {
         MainMenu.show(primaryStage);
         // Shows the Stage on our screen
         primaryStage.show();
-
 
     }
 

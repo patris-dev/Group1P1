@@ -13,7 +13,7 @@ public abstract class Actor {
     protected List<Image> imageStates = new ArrayList<>();
     // Then we make an ImageView object to view the images from
     protected ImageView spriteFrame;
-    // Then we create and SVGPath object, which defines our bounds around the sprite, this is done for collision
+    // Then we create an SVGPath object, which defines our bounds around the sprite, this is done for collision
     protected SVGPath spriteBoundary;
     // Variables for x and y coordinates in our scene
     protected double iX, iY;
