@@ -16,7 +16,6 @@
     -fx-background-size: cover;
     -fx-font-family: 'Lunchtime Doubly So';
     -fx-font-size: 20px;
-
 }
 
 /* Button refers to all the buttons.
@@ -32,6 +31,7 @@
     -fx-background-color: #C1FFAF;
     -fx-border-width: 5px;
     -fx-border-color: black;
+    -fx-background-insets: 100%;
 
 }
 /* Button:hover refers to all the buttons which have a mouse cursor on top of them.
@@ -71,7 +71,8 @@
     -fx-background-color: aliceblue;
     -fx-border-color: black;
     -fx-border-radius: 0;
-    -fx-border-width: 2px;
+    -fx-border-width: 3px;
+    -fx-background-insets: 100%;
 }
 /*
  * Mark refers to the symbol that appears when a checkbox is selected.
@@ -87,16 +88,20 @@
 .slider .track{
     -fx-pref-height: 20;
     -fx-background-color: aliceblue;
-    -fx-border-width: 2px;
+    -fx-border-width: 3px;
     -fx-border-color: black;
+    -fx-background-insets: 100%;
 }
 /*
  * Thumb refers to the moving part of the slider.
  */
 .slider .thumb{
     -fx-background-color: #C1FFAF;
-    -fx-border-width: 2px;
+    -fx-border-width: 3px;
     -fx-border-color: black;
+    -fx-border-radius: 0;
+    -fx-background-insets: 100%;
+    -fx-background-radius: 0;
 }
 
 
