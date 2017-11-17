@@ -22,19 +22,21 @@ public class SoundEngine {
     // Media is our audio object.
     private Media media;
 
+    // A dynamic SoundProperties object for determining properties of a created SoundEngine object.
+    // This object will be set to one of our static SoundProperties objects, depending on the type.
     // isMuted shows whether the audio should not be played.
     // volume specifies the volume of the played sound. The range of volume is from 0.0 to 1.0.
     private SoundProperties soundProperties = new SoundProperties(true, 0.0);
 
-    // Static variables for muting and volume. These affect all the sounds that are played.
+    // Static SoundProperties objects for determining properties for all music/sfx sounds.
     private static SoundProperties propertiesMusic = new SoundProperties(false, 0.1);
-    private static SoundProperties propertiesSFX   = new SoundProperties(false, 0.5);
+    private static SoundProperties propertiesSFX   = new SoundProperties(false, 0.3);
 
     // Constructor for our Sound Engine, requires to put in type.
     // type - a string specifying the type of sound files the engine should play (either "music" or "sfx").
     // If type is invalid, default values will remain (audio will be muted, and volume will be set to 0.0).
     public SoundEngine(String type) {
-        // Checks the type of sound file, sets the volume and isMuted accordingly.
+        // Checks the type of sound file, sets the dynamic soundProperties to one of the static ones.
         switch (type) {
             case "music": soundProperties = propertiesMusic; break;
             case "sfx":   soundProperties = propertiesSFX;   break;
@@ -44,12 +46,12 @@ public class SoundEngine {
     // Loads in a sound file.
     // mp3FileName - a string specifying the name of the file, located in the package specified in the path variable.
     public void load(String mp3FileName) {
-        // Sets the filename to a new value - mp3FileName. If it is empty, leaves the previously set filename.
+        // Sets the filename to mp3FileName.
         filename = mp3FileName;
-        // Appends the filename to our path, sets the path of the media file to the whole path.
+        // Creates a fullPath string which is composed of our path and filename strings.
         String fullPath = path + filename;
+        // Sets the location of our media file to fullPath.
         media = new Media(new File(fullPath).toURI().toString());
-
         // Initializes the mediaPlayer to load the media file.
         mediaPlayer = new MediaPlayer(media);
     }
@@ -61,9 +63,8 @@ public class SoundEngine {
     }
 
     // Plays the loaded sound file.
-    // Loads it again first, uses the previously loaded file.
     // Sets the volume of audio to our volume variable.
-    // Checks if the audio is muted. If not, plays the sound.
+    // Checks if the audio is muted. If not, plays the sound from the beginning.
     public void play() {
         mediaPlayer.setVolume(soundProperties.getVolume());
         if (!soundProperties.isMuted()) {
@@ -76,6 +77,19 @@ public class SoundEngine {
     public void play(String mp3FileName) {
         load(mp3FileName);
         play();
+    }
+
+    // Pauses the track so it can be played again (resumed) afterwards.
+    public void pause() {
+        mediaPlayer.pause();
+    }
+
+    // Resumes playing a track from the time it was paused.
+    public void resume() {
+        mediaPlayer.setVolume(soundProperties.getVolume());
+        if (!soundProperties.isMuted()) {
+            mediaPlayer.play();
+        }
     }
 
     // Getters and setters.

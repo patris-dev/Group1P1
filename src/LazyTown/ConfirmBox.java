@@ -16,7 +16,7 @@ import javafx.stage.StageStyle;
  */
 public class ConfirmBox {
 
-    static boolean answer;
+    private static boolean answer;
 
     // ConfirmBox will create a window and return a boolean based on what the user has clicked
     public static boolean display(String title, String message) {

@@ -2,6 +2,7 @@
 @font-face {
     src: url('lunchtime.ttf');
 }
+
 /* Root refers to all the contents in a scene.
  * Changes the background color to black (in case the image isn't found);
  * Changes the background image to forest.png;
@@ -17,6 +18,7 @@
     -fx-font-size: 20px;
 
 }
+
 /* Button refers to all the buttons.
  * Sets the text color to black, sets the text size to 25px;
  * Makes the button square (rounding is reduced to 0);
@@ -39,6 +41,7 @@
     -fx-background-color: #DBFFD1;
 
 }
+
 /* Label-title refers to a specific label which is used for titles.
  * Since the ID is specified, this style will override the generic label styling.
  * Makes the font bigger than the generic label.
@@ -54,10 +57,46 @@
     -fx-text-fill: black;
     -fx-font-size: 25px;
 }
+
 /* Check-box refers to all check boxes.
  * Sets the text color to black.
  */
 .check-box{
     -fx-text-fill: black;
 }
+/*
+ * Box refers to the part of a checkbox which is clickable
+ */
+.check-box .box{
+    -fx-background-color: aliceblue;
+    -fx-border-color: black;
+    -fx-border-radius: 0;
+    -fx-border-width: 2px;
+}
+/*
+ * Mark refers to the symbol that appears when a checkbox is selected.
+ */
+.check-box:selected .mark{
+    -fx-background-color: black;
+}
+
+/*
+ * Slider refers to all sliders.
+ * Track refers to the track path of the slider.
+ */
+.slider .track{
+    -fx-pref-height: 20;
+    -fx-background-color: aliceblue;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+/*
+ * Thumb refers to the moving part of the slider.
+ */
+.slider .thumb{
+    -fx-background-color: #C1FFAF;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+
 
