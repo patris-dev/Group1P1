@@ -66,7 +66,7 @@ public class SoundEngine {
     // Sets the volume of audio to our volume variable.
     // Checks if the audio is muted. If not, plays the sound from the beginning.
     public void play() {
-        mediaPlayer.setVolume(soundProperties.getVolume());
+        updateVolume();
         if (!soundProperties.isMuted()) {
             mediaPlayer.seek(Duration.ZERO);
             mediaPlayer.play();
@@ -86,10 +86,15 @@ public class SoundEngine {
 
     // Resumes playing a track from the time it was paused.
     public void resume() {
-        mediaPlayer.setVolume(soundProperties.getVolume());
+        updateVolume();
         if (!soundProperties.isMuted()) {
             mediaPlayer.play();
         }
+    }
+
+    // Updates the volume.
+    public void updateVolume() {
+        mediaPlayer.setVolume(soundProperties.getVolume());
     }
 
     // Getters and setters.

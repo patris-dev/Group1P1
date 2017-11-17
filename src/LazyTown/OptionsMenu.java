@@ -65,7 +65,7 @@ public class OptionsMenu {
         // When the slider is moved, sets the volume accordingly. Resumes the track to update the current volume.
         volumeMusic.valueProperty().addListener((observable, oldValue, newValue) -> {
             SoundEngine.setMusicVolume((double) newValue);
-            Main.getMenuMusic().resume();
+            Main.getMenuMusic().updateVolume();
         });
 
         // A slider for controlling the volume of SFX.
