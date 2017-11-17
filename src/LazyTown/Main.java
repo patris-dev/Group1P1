@@ -13,10 +13,11 @@ public class Main extends Application {
     private static final int WINDOW_HEIGHT = 768;
     private static final int BUTTON_WIDTH = WINDOW_WIDTH / 4;
     private static final int BUTTON_HEIGHT = WINDOW_HEIGHT / 10;
-    // A SoundEngine object to load the menu music.
+    // A SoundEngine object to load the menu music. Specifies that this engine will be used for music.
     // ! Important - do not convert into a local variable, as the media will be stopped by the garbage collector.
-    private static SoundEngine menuMusic = new SoundEngine();
-
+    private static SoundEngine menuMusic = new SoundEngine("music");
+    // A SoundEngine object to load the button click sounds. Specifies that this engine will be used for sfx.
+    private static SoundEngine buttonClicks = new SoundEngine("sfx");
 
     // The main function of a JavaFX application
     @Override
@@ -30,8 +31,9 @@ public class Main extends Application {
         // Sets the default scene as MainMenu
         MainMenu.show(primaryStage);
 
-        // Tells the menuMusic to load the menuMusic file, specifies that it's a music file.
-        menuMusic.load("menuMusic.mp3", "music");
+        // Tells the menuMusic to load the menuMusic file.
+        menuMusic.load("menuMusic.mp3");
+        buttonClicks.load("buttonClick.mp3");
 
         // Shows the Stage on our screen
         primaryStage.show();
@@ -59,6 +61,10 @@ public class Main extends Application {
 
     public static SoundEngine getMenuMusic() {
         return menuMusic;
+    }
+
+    public static SoundEngine getButtonClicks() {
+        return buttonClicks;
     }
 }
 

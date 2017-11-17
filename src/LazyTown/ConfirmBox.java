@@ -42,10 +42,16 @@ public class ConfirmBox {
 
         // If the user presses a button, return true/false and close the window
         yesButton.setOnAction(e -> {
+            // Plays the buttonClick sound.
+            Main.getButtonClicks().play();
+
             answer = true;
             primaryStage.close();
         });
         noButton.setOnAction(e -> {
+            // Plays the buttonClick sound.
+            Main.getButtonClicks().play();
+
             answer = false;
             primaryStage.close();
         });

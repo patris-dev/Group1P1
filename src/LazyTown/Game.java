@@ -19,7 +19,7 @@ public class Game {
     static MovedActor playerOne;
     private static final int SPRITE_WIDTH = 75;
     private static final int SPRITE_HEIGHT = SPRITE_WIDTH;
-    private static SoundEngine backgroundMusic = new SoundEngine();
+    private static SoundEngine backgroundMusic = new SoundEngine("music");
 
     // Here we declare four booleans which will be the foundation of the player controls, we do not initialize them as
     // they default to false, whenever they are changed to true, logic will happen in another class. Later on, there
@@ -77,7 +77,7 @@ public class Game {
        playerSprite = new Image("LazyTown/assets/PC.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                false, true);
        // Loads and plays the background music.
-       backgroundMusic.load("menuMusic2.mp3", "music");
+       backgroundMusic.load("menuMusic2.mp3");
     }
 
     private static void playMusic() {

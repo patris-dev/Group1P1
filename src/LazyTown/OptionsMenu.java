@@ -19,7 +19,12 @@ public class OptionsMenu {
         backButton.setMinSize(Main.getButtonWidth(), Main.getButtonHeight());
 
         // When the button is clicked, set the scene of our window to MainMenu
-        backButton.setOnAction(e -> MainMenu.show(primaryStage));
+        backButton.setOnAction(e -> {
+            // Plays the buttonClick sound.
+            Main.getButtonClicks().play();
+
+            MainMenu.show(primaryStage);
+        });
 
         // A checkbox which mutes the music everywhere. Also stops/resumes the current music playing.
         CheckBox muteMusic = new CheckBox("Mute Music");
