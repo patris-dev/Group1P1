@@ -61,6 +61,11 @@ public class SoundEngine {
         mediaPlayer.setVolume(volume);
         if (!isMuted) mediaPlayer.play();
     }
+    // Overloaded play method that loads and plays an audio track, in one method call
+    public void play(String mp3FileName, String path) {
+        load(mp3FileName, path);
+        play();
+    }
 
     // Getters and setters.
     public static void setMuteMusic(boolean muteMusic) {
