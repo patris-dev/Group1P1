@@ -12,10 +12,20 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.*;
+import java.util.Objects;
+
 /**
  * This is the class that represents the OptionsMenu scene.
  */
 public class OptionsMenu {
+
+    private static Slider volumeMusic;
+    private static Slider volumeSFX;
+    private static CheckBox muteMusic;
+    private static CheckBox muteSFX;
+    private static String settingsPath = "src/LazyTown/savedData/settings.txt";
+
     public static void show(Stage primaryStage) {
 
         // Creates a button to get back
@@ -26,7 +36,9 @@ public class OptionsMenu {
         backButton.setOnAction(e -> {
             // Plays the buttonClick sound.
             Main.getButtonClicks().play();
-
+            // Saves the settings to a txt file.
+            saveSettings();
+            // Sets the scene back to our MainMenu scene.
             MainMenu.show(primaryStage);
         });
 
@@ -36,7 +48,7 @@ public class OptionsMenu {
         sfxLabel.setPadding(new Insets(20, 0, 0, 0));
 
         // A checkbox which mutes the music everywhere. Also stops/resumes the current music playing.
-        CheckBox muteMusic = new CheckBox("Mute");
+        muteMusic = new CheckBox("Mute");
         muteMusic.setOnAction(e -> {
             if (muteMusic.isSelected()) {
                 SoundEngine.setMuteMusic(true);
@@ -49,7 +61,7 @@ public class OptionsMenu {
         });
 
         // A checkbox which mutes the SFX (sound effects) everywhere.
-        CheckBox muteSFX = new CheckBox("Mute");
+        muteSFX = new CheckBox("Mute");
         muteSFX.setOnAction(e -> {
             if (muteSFX.isSelected()) {
                 SoundEngine.setMuteSFX(true);
@@ -60,7 +72,7 @@ public class OptionsMenu {
         });
 
         // A slider for controlling the volume of Music.
-        Slider volumeMusic = new Slider(0.0, 1.0, 0.1);
+        volumeMusic = new Slider(0.0, 1.0, 0.1);
         volumeMusic.setMaxWidth(Main.getWindowWidth() / 3);
         // When the slider is moved, sets the volume accordingly. Resumes the track to update the current volume.
         volumeMusic.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -69,7 +81,7 @@ public class OptionsMenu {
         });
 
         // A slider for controlling the volume of SFX.
-        Slider volumeSFX = new Slider(0.0, 1.0, 0.3);
+        volumeSFX = new Slider(0.0, 1.0, 0.3);
         volumeSFX.setMaxWidth(Main.getWindowWidth() / 3);
         // When the slider is moved, sets the volume accordingly. Makes a button click sound.
         volumeSFX.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -77,6 +89,8 @@ public class OptionsMenu {
             Main.getButtonClicks().play();
         });
 
+        // Gets settings from a txt file.
+        loadSettings();
 
         // Create our layout in the form of a VBox
         VBox optionsMenu = new VBox(5);
@@ -95,6 +109,57 @@ public class OptionsMenu {
         // Sets the scene of our stage to sceneOptions
         primaryStage.setScene(sceneOptions);
 
+    }
+
+    private static void loadSettings() {
+        String line;
+        try {
+            // FileReader reads text files. Sets the location of file to settingsPath.
+            FileReader fileReader = new FileReader(settingsPath);
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            // Reads the settings on each line: music volume, music isMuted, SFX volume, SFX isMuted.
+            // Sets the values of sliders and checkboxes accordingly.
+            line = bufferedReader.readLine();
+            volumeMusic.setValue(Double.parseDouble(line));
+
+            line = bufferedReader.readLine();
+            if (line.equals("true")) muteMusic.setSelected(true);
+            else muteMusic.setSelected(false);
+
+            line = bufferedReader.readLine();
+            volumeSFX.setValue(Double.parseDouble(line));
+
+            line = bufferedReader.readLine();
+            if (line.equals("true")) muteSFX.setSelected(true);
+            else muteSFX.setSelected(false);
+
+            // Closes the file.
+            bufferedReader.close();
+        }
+        // We must catch an exception when reading/writing text files, but for now it is ignored.
+        catch(IOException ignored) { }
+    }
+
+    private static void saveSettings() {
+        try {
+            // FileWriter writes txt files. Sets the location of file to settingsPath.
+            FileWriter fileWriter = new FileWriter(settingsPath);
+            // Always wrap FileWriter in BufferedWriter.
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            // Writes the music volume, music isMuted, SFX volume, SFX isMuted on separate lines.
+            bufferedWriter.write(Double.toString(volumeMusic.getValue())  + "\n");
+            bufferedWriter.write(Boolean.toString(muteMusic.isSelected()) + "\n");
+            bufferedWriter.write(Double.toString(volumeSFX.getValue())  + "\n");
+            bufferedWriter.write(Boolean.toString(muteSFX.isSelected()) + "\n");
+
+            // Closes the file.
+            bufferedWriter.close();
+        }
+        // We must catch an exception when reading/writing text files, but for now it is ignored.
+        catch(IOException ignored) { }
     }
 
 
