@@ -37,16 +37,24 @@ public class MainMenu {
         // Shorter version of handling events using a lambda expression, 'e' represents the event
         // Button.setOnAction(e -> YourCommand);
         buttonNewGame.setOnAction(e->{
+            // Plays the buttonClick sound.
+            Main.getButtonClicks().play();
+            // Stops the menu music.
+            Main.getMenuMusic().stop();
             // Sets the scene for our window to the Game
             Game.show(primaryStage);
         });
 
         buttonOptions.setOnAction(e->{
+            // Plays the buttonClick sound.
+            Main.getButtonClicks().play();
             // Sets the scene for our window to the OptionsMenu
             OptionsMenu.show(primaryStage);
         });
 
         buttonExitGame.setOnAction(e->{
+            // Plays the buttonClick sound.
+            Main.getButtonClicks().play();
             // Opens up a ConfirmBox that asks if we want to close the program. If the user presses the "yes" button,
             // ConfirmBox.display returns true
             if(ConfirmBox.display("Exit Game","Are you sure you want to exit?")){

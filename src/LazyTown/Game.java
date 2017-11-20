@@ -12,13 +12,14 @@ import javafx.stage.Stage;
  * This is the class that represents the Game scene.
  */
 public class Game {
-    static StackPane root;
-    static Scene sceneGame;
-    static GamePlayLoop gamePlayLoop;
-    static Image playerSprite;
+    private static StackPane root;
+    private static Scene sceneGame;
+    private static GamePlayLoop gamePlayLoop;
+    private static Image playerSprite;
     static MovedActor playerOne;
-    static final int SPRITE_WIDTH = 75;
-    static final int SPRITE_HEIGHT = SPRITE_WIDTH;
+    private static final int SPRITE_WIDTH = 75;
+    private static final int SPRITE_HEIGHT = SPRITE_WIDTH;
+    private static SoundEngine backgroundMusic = new SoundEngine("music");
 
     // Here we declare four booleans which will be the foundation of the player controls, we do not initialize them as
     // they default to false, whenever they are changed to true, logic will happen in another class. Later on, there
@@ -38,6 +39,7 @@ public class Game {
        // Methods we need to call to make our game work
        eventHandling();
        assetLoading();
+       playMusic();
        spawnActors();
        renderActors();
        actorHandler();
@@ -51,10 +53,11 @@ public class Game {
         // the most compact and elegant way of programming this logic.
         sceneGame.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case W:     up      = true; break;
-                case A:     left    = true; break;
-                case S:     down    = true; break;
-                case D:     right   = true; break;
+                case W:         up      = true; break;
+                case A:         left    = true; break;
+                case S:         down    = true; break;
+                case D:         right   = true; break;
+                case ESCAPE:    exitGame();
             }
         });
 
@@ -73,6 +76,12 @@ public class Game {
     private static void assetLoading() {
        playerSprite = new Image("LazyTown/assets/PC.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                false, true);
+       // Loads and plays the background music.
+       backgroundMusic.load("menuMusic2.mp3");
+    }
+
+    private static void playMusic() {
+        backgroundMusic.play();
     }
 
     // This method takes care of spawning in our various actors, among those are the player, the guards, the pickups,
@@ -85,7 +94,7 @@ public class Game {
        root.getChildren().add(playerOne.spriteFrame);
     }
 
-    // This method is in charge of handling our actors. For now this is an empty method, but it will play a role when we
+    // This method is in charge of handling our actors. For now this is an empty method, but it will load a role when we
     // need to do collision detection and clean up actors in our scene that are no longer valid.
     private static void actorHandler() {
        // This is a bit more advanced functionality, and will be implemented after the actor and its subclasses
@@ -96,6 +105,11 @@ public class Game {
         gamePlayLoop = new GamePlayLoop();
         gamePlayLoop.start();
 
+    }
+
+    private static void exitGame(){
+        if(ConfirmBox.display("Exit Game","Are you sure you want to exit?"))
+            System.exit(0);
     }
 
 

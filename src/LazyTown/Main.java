@@ -3,6 +3,7 @@ package LazyTown;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+
 /**
  * This is the main application class which creates our Stage and sets the scene to MainMenu.
  */
@@ -12,24 +13,15 @@ public class Main extends Application {
     private static final int WINDOW_HEIGHT = 768;
     private static final int BUTTON_WIDTH = WINDOW_WIDTH / 4;
     private static final int BUTTON_HEIGHT = WINDOW_HEIGHT / 10;
-
+    // A SoundEngine object to load the menu music. Specifies that this engine will be used for music.
+    // ! Important - do not convert into a local variable, as the media will be stopped by the garbage collector.
+    private static SoundEngine menuMusic = new SoundEngine("music");
+    // A SoundEngine object to load the button click sounds. Specifies that this engine will be used for sfx.
+    private static SoundEngine buttonClicks = new SoundEngine("sfx");
 
     // The main function of a JavaFX application
     @Override
     public void start(Stage primaryStage) throws Exception {
-        /*
-           The main way of how a JavaFX application works:
-           Stage is the window;
-           Scene is the background;
-           Layout contains objects you can store;
-           Objects are buttons, labels, etc.
-
-            Stage -> Scene -> Layout -> Objects
-
-           A Stage can contain one scene at a given time.
-           A Scene can contain one layout at a given time.
-           A Layout can contain either several objects, or other layouts.
-         */
 
         // Stage is the window
         // Sets the title of the window
@@ -38,8 +30,16 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         // Sets the default scene as MainMenu
         MainMenu.show(primaryStage);
+
+        // Tells the menuMusic to load the menuMusic file.
+        menuMusic.load("menuMusic.mp3");
+        buttonClicks.load("buttonClick.mp3");
+
         // Shows the Stage on our screen
         primaryStage.show();
+
+        // Tells the SoundEngine menuMusic to play the loaded file.
+        menuMusic.play();
 
     }
 
@@ -57,6 +57,14 @@ public class Main extends Application {
 
     public static int getButtonHeight() {
         return BUTTON_HEIGHT;
+    }
+
+    public static SoundEngine getMenuMusic() {
+        return menuMusic;
+    }
+
+    public static SoundEngine getButtonClicks() {
+        return buttonClicks;
     }
 }
 
