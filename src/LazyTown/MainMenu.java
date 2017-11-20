@@ -15,6 +15,7 @@ import javafx.stage.Stage;
  */
 public class MainMenu {
     public static void show(Stage primaryStage) {
+        Game newGame = new Game();
 
         // Title of the game in the main menu, could later on be changed into an image
         Label gameTitle = new Label("Lazy Town");
@@ -40,7 +41,7 @@ public class MainMenu {
             // Stops the menu music.
             Main.getMenuMusic().stop();
             // Sets the scene for our window to the Game
-            Game.show(primaryStage);
+            newGame.show(primaryStage);
         });
 
         buttonOptions.setOnAction(e->{
