@@ -34,8 +34,8 @@ public class SoundEngine {
     private SoundProperties soundProperties = new SoundProperties(true, 0.0);
 
     // Static SoundProperties objects for determining properties for all music/sfx sounds.
-    private static SoundProperties propertiesMusic = new SoundProperties(false, 0.1);
-    private static SoundProperties propertiesSFX   = new SoundProperties(false, 0.3);
+    private static final SoundProperties PROPERTIES_MUSIC = new SoundProperties(false, 0.1);
+    private static final SoundProperties PROPERTIES_SFX = new SoundProperties(false, 0.3);
 
     // Constructor for our Sound Engine, requires to put in type.
     // type - a string specifying the type of sound files the engine should play (either "music" or "sfx").
@@ -43,8 +43,8 @@ public class SoundEngine {
     public SoundEngine(String type) {
         // Checks the type of sound file, sets the dynamic soundProperties to one of the static ones.
         switch (type) {
-            case "music": soundProperties = propertiesMusic; break;
-            case "sfx":   soundProperties = propertiesSFX;   break;
+            case "music": soundProperties = PROPERTIES_MUSIC; break;
+            case "sfx":   soundProperties = PROPERTIES_SFX;   break;
         }
     }
 
@@ -137,18 +137,34 @@ public class SoundEngine {
 
     // Getters and setters.
     public static void setMuteMusic(boolean muteMusic) {
-        SoundEngine.propertiesMusic.setMuted(muteMusic);
+        SoundEngine.PROPERTIES_MUSIC.setMuted(muteMusic);
     }
 
     public static void setMuteSFX(boolean muteSFX) {
-        SoundEngine.propertiesSFX.setMuted(muteSFX);
+        SoundEngine.PROPERTIES_SFX.setMuted(muteSFX);
     }
 
     public static void setMusicVolume(double musicVolume) {
-        SoundEngine.propertiesMusic.setVolume(musicVolume);
+        SoundEngine.PROPERTIES_MUSIC.setVolume(musicVolume);
     }
 
     public static void setSFXVolume(double SFXVolume) {
-        SoundEngine.propertiesSFX.setVolume(SFXVolume);
+        SoundEngine.PROPERTIES_SFX.setVolume(SFXVolume);
     }
+
+    public static double getMusicVolume() {
+        return SoundEngine.PROPERTIES_MUSIC.getVolume();
+    }
+    public static boolean getMusicMute() {
+        return SoundEngine.PROPERTIES_MUSIC.isMuted();
+    }
+    public static double getSFXVolume() {
+        return SoundEngine.PROPERTIES_SFX.getVolume();
+    }
+    public static boolean getSFXMute() {
+        return SoundEngine.PROPERTIES_SFX.isMuted();
+    }
+
+
+
 }

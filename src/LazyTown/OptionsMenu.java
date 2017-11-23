@@ -1,7 +1,5 @@
 package LazyTown;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,7 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.Objects;
 
 /**
  * This is the class that represents the OptionsMenu scene.
@@ -90,7 +87,7 @@ public class OptionsMenu {
         });
 
         // Gets settings from a txt file.
-        loadSettings();
+        showSettings();
 
         // Create our layout in the form of a VBox
         VBox optionsMenu = new VBox(5);
@@ -111,35 +108,13 @@ public class OptionsMenu {
 
     }
 
-    private static void loadSettings() {
-        String line;
-        try {
-            // FileReader reads text files. Sets the location of file to settingsPath.
-            FileReader fileReader = new FileReader(SoundEngine.SETTINGS_PATH);
-            // Always wrap FileReader in BufferedReader.
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-            // Reads the settings on each line: music volume, music isMuted, SFX volume, SFX isMuted.
-            // Sets the values of sliders and checkboxes accordingly.
-            line = bufferedReader.readLine();
-            volumeMusic.setValue(Double.parseDouble(line));
-
-            line = bufferedReader.readLine();
-            if (line.equals("true")) muteMusic.setSelected(true);
-            else muteMusic.setSelected(false);
-
-            line = bufferedReader.readLine();
-            volumeSFX.setValue(Double.parseDouble(line));
-
-            line = bufferedReader.readLine();
-            if (line.equals("true")) muteSFX.setSelected(true);
-            else muteSFX.setSelected(false);
-
-            // Closes the file.
-            bufferedReader.close();
-        }
-        // We must catch an exception when reading/writing text files, but for now it is ignored.
-        catch(IOException ignored) { }
+    // This method takes care of showing a graphical representation of our settings so that they can be adjusted
+    // visually
+    private static void showSettings() {
+        volumeMusic.setValue(SoundEngine.getMusicVolume());
+        muteMusic.setSelected(SoundEngine.getMusicMute());
+        volumeSFX.setValue(SoundEngine.getSFXVolume());
+        muteSFX.setSelected(SoundEngine.getSFXMute());
     }
 
     private static void saveSettings() {
