@@ -32,6 +32,7 @@ public class Main extends Application {
         MainMenu.show(primaryStage);
 
         // Tells the menuMusic to load the menuMusic file.
+        SoundEngine.loadSettings();
         menuMusic.load("menuMusic.mp3");
         buttonClicks.load("buttonClick.mp3");
 

@@ -24,7 +24,7 @@ public class OptionsMenu {
     private static Slider volumeSFX;
     private static CheckBox muteMusic;
     private static CheckBox muteSFX;
-    private static String settingsPath = "src/LazyTown/savedData/settings.txt";
+
 
     public static void show(Stage primaryStage) {
 
@@ -115,7 +115,7 @@ public class OptionsMenu {
         String line;
         try {
             // FileReader reads text files. Sets the location of file to settingsPath.
-            FileReader fileReader = new FileReader(settingsPath);
+            FileReader fileReader = new FileReader(SoundEngine.SETTINGS_PATH);
             // Always wrap FileReader in BufferedReader.
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
@@ -145,7 +145,7 @@ public class OptionsMenu {
     private static void saveSettings() {
         try {
             // FileWriter writes txt files. Sets the location of file to settingsPath.
-            FileWriter fileWriter = new FileWriter(settingsPath);
+            FileWriter fileWriter = new FileWriter(SoundEngine.SETTINGS_PATH);
             // Always wrap FileWriter in BufferedWriter.
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 

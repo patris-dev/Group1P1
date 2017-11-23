@@ -4,7 +4,10 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * This is the class that allows to play sound files.
@@ -21,6 +24,8 @@ public class SoundEngine {
     private MediaPlayer mediaPlayer;
     // Media is our audio object.
     private Media media;
+
+    static final String SETTINGS_PATH = "src/LazyTown/savedData/settings.txt";
 
     // A dynamic SoundProperties object for determining properties of a created SoundEngine object.
     // This object will be set to one of our static SoundProperties objects, depending on the type.
@@ -90,6 +95,39 @@ public class SoundEngine {
         if (!soundProperties.isMuted()) {
             mediaPlayer.play();
         }
+    }
+
+    public static void loadSettings() {
+        String line;
+        try {
+            // FileReader reads text files. Sets the location of file to settingsPath.
+            FileReader fileReader = new FileReader(SETTINGS_PATH);
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            // Reads the settings on each line: music volume, music isMuted, SFX volume, SFX isMuted.
+            // Sets the values of sliders and checkboxes accordingly.
+            line = bufferedReader.readLine();
+            SoundEngine.setMusicVolume(Double.parseDouble(line));
+
+            line = bufferedReader.readLine();
+            if (line.equals("true")) {
+                SoundEngine.setMuteMusic(true); }
+            else SoundEngine.setMuteMusic(false);
+
+            line = bufferedReader.readLine();
+            SoundEngine.setSFXVolume(Double.parseDouble(line));
+
+            line = bufferedReader.readLine();
+            if (line.equals("true")) {
+                SoundEngine.setMuteSFX(true); }
+            else SoundEngine.setMuteSFX(false);
+
+            // Closes the file.
+            bufferedReader.close();
+        }
+        // We must catch an exception when reading/writing text files, but for now it is ignored.
+        catch(IOException ignored) { }
     }
 
     // Updates the volume.
