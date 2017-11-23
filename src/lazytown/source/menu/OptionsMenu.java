@@ -1,7 +1,7 @@
-package LazyTown.source.menu;
+package lazytown.source.menu;
 
-import LazyTown.source.Main;
-import LazyTown.source.sound.SoundEngine;
+import lazytown.source.Main;
+import lazytown.source.sound.SoundEngine;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -103,7 +103,7 @@ public class OptionsMenu {
         Scene sceneOptions = new Scene(optionsMenu, Main.getWindowWidth(), Main.getWindowHeight());
 
         // Uses the MenuTheme.css style
-        sceneOptions.getStylesheets().add("LazyTown/assets/MenuTheme.css");
+        sceneOptions.getStylesheets().add("lazytown/assets/MenuTheme.css");
 
         // Sets the scene of our stage to sceneOptions
         primaryStage.setScene(sceneOptions);

@@ -1,11 +1,11 @@
-package LazyTown.source.game;
+package lazytown.source.game;
 
 
-import LazyTown.source.Main;
-import LazyTown.source.game.actor.MainCharacter;
-import LazyTown.source.game.actor.MovedActor;
-import LazyTown.source.sound.SoundEngine;
-import LazyTown.source.menu.ConfirmBox;
+import lazytown.source.Main;
+import lazytown.source.game.actor.MainCharacter;
+import lazytown.source.game.actor.MovedActor;
+import lazytown.source.sound.SoundEngine;
+import lazytown.source.menu.ConfirmBox;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
@@ -79,7 +79,7 @@ public class Game {
 
     // This method is used for loading in our art assets, audio and visual.
     private static void assetLoading() {
-       playerSprite = new Image("LazyTown/assets/PC.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+       playerSprite = new Image("lazytown/assets/PC.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                false, true);
        // Loads and plays the background music.
        backgroundMusic.load("menuMusic2.mp3");

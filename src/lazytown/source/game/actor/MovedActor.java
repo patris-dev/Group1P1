@@ -1,6 +1,5 @@
-package LazyTown.source.game.actor;
+package lazytown.source.game.actor;
 
-import LazyTown.source.game.actor.Actor;
 import javafx.scene.image.Image;
 
 public abstract class MovedActor extends Actor {

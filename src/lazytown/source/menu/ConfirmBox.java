@@ -1,6 +1,6 @@
-package LazyTown.source.menu;
+package lazytown.source.menu;
 
-import LazyTown.source.Main;
+import lazytown.source.Main;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -68,7 +68,7 @@ public class ConfirmBox {
         Scene scene = new Scene(layout);
 
         // Uses the MenuTheme.css style
-        scene.getStylesheets().add("LazyTown/assets/MenuTheme.css");
+        scene.getStylesheets().add("lazytown/assets/MenuTheme.css");
 
         // Sets the scene of our window to scene
         primaryStage.setScene(scene);
