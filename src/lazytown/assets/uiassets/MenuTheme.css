@@ -1,6 +1,6 @@
 /* Imports the Lunchtime font for use in labels, buttons, etc. */
 @font-face {
-    src: url('lunchtime.ttf');
+    src: url('uiassets/lunchtime.ttf');
 }
 
 /* Root refers to all the contents in a scene.
@@ -12,7 +12,7 @@
  */
 .root{
     -fx-background-color: black;
-    -fx-background-image: url('forest.png');
+    -fx-background-image: url('../images/forest.png');
     -fx-background-size: cover;
     -fx-font-family: 'Lunchtime Doubly So';
     -fx-font-size: 20px;

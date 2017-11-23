@@ -87,7 +87,7 @@ public class MainMenu {
         Scene sceneMainMenu = new Scene(borderPane, Main.getWindowWidth(), Main.getWindowHeight());
 
         // Uses the MenuTheme.css style
-        sceneMainMenu.getStylesheets().add("lazytown/assets/MenuTheme.css");
+        sceneMainMenu.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
 
         // Sets the scene of our stage to sceneMainMenu
         primaryStage.setScene(sceneMainMenu);

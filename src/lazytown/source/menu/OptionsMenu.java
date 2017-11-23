@@ -103,7 +103,7 @@ public class OptionsMenu {
         Scene sceneOptions = new Scene(optionsMenu, Main.getWindowWidth(), Main.getWindowHeight());
 
         // Uses the MenuTheme.css style
-        sceneOptions.getStylesheets().add("lazytown/assets/MenuTheme.css");
+        sceneOptions.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
 
         // Sets the scene of our stage to sceneOptions
         primaryStage.setScene(sceneOptions);

@@ -79,7 +79,7 @@ public class Game {
 
     // This method is used for loading in our art assets, audio and visual.
     private static void assetLoading() {
-       playerSprite = new Image("lazytown/assets/PC.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+       playerSprite = new Image("lazytown/assets/images/PC.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                false, true);
        // Loads and plays the background music.
        backgroundMusic.load("menuMusic2.mp3");

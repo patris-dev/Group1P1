@@ -68,7 +68,7 @@ public class ConfirmBox {
         Scene scene = new Scene(layout);
 
         // Uses the MenuTheme.css style
-        scene.getStylesheets().add("lazytown/assets/MenuTheme.css");
+        scene.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
 
         // Sets the scene of our window to scene
         primaryStage.setScene(scene);
