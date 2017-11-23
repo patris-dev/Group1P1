@@ -1,8 +1,8 @@
-package LazyTown;
+package LazyTown.source.game;
 
 import javafx.animation.AnimationTimer;
 
-import static LazyTown.Game.playerOne;
+import static LazyTown.source.game.Game.playerOne;
 
 public class GamePlayLoop extends AnimationTimer{
 

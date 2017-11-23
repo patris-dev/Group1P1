@@ -1,6 +1,11 @@
-package LazyTown;
+package LazyTown.source.game;
 
 
+import LazyTown.source.Main;
+import LazyTown.source.game.actor.MainCharacter;
+import LazyTown.source.game.actor.MovedActor;
+import LazyTown.source.sound.SoundEngine;
+import LazyTown.source.menu.ConfirmBox;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;

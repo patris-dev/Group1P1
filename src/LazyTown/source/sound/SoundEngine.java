@@ -1,4 +1,4 @@
-package LazyTown;
+package LazyTown.source.sound;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -25,7 +25,7 @@ public class SoundEngine {
     // Media is our audio object.
     private Media media;
 
-    static final String SETTINGS_PATH = "src/LazyTown/savedData/settings.txt";
+    public static final String SETTINGS_PATH = "src/LazyTown/savedData/settings.txt";
 
     // A dynamic SoundProperties object for determining properties of a created SoundEngine object.
     // This object will be set to one of our static SoundProperties objects, depending on the type.

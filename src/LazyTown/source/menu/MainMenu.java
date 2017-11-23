@@ -1,6 +1,8 @@
-package LazyTown;
+package LazyTown.source.menu;
 
 
+import LazyTown.source.game.Game;
+import LazyTown.source.Main;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

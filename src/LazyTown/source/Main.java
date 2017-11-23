@@ -1,5 +1,7 @@
-package LazyTown;
+package LazyTown.source;
 
+import LazyTown.source.menu.MainMenu;
+import LazyTown.source.sound.SoundEngine;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
