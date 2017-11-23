@@ -4,6 +4,7 @@ package lazytown.source.game;
 import lazytown.source.Main;
 import lazytown.source.game.actor.MainCharacter;
 import lazytown.source.game.actor.MovedActor;
+import lazytown.source.game.level.Level;
 import lazytown.source.sound.SoundEngine;
 import lazytown.source.menu.ConfirmBox;
 import javafx.scene.Scene;
@@ -40,6 +41,9 @@ public class Game {
 
        // Sets the scene of our stage to sceneGame
        primaryStage.setScene(sceneGame);
+
+       Level level = new Level("map1.png");
+       level.renderMap(root);
 
        // Methods we need to call to make our game work
        eventHandling();
