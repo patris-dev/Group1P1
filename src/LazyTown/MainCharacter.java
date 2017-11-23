@@ -1,29 +1,27 @@
 package LazyTown;
 
 import javafx.scene.image.Image;
-import static LazyTown.Game.up;
-import static LazyTown.Game.down;
-import static LazyTown.Game.left;
-import static LazyTown.Game.right;
 
 
 public class MainCharacter extends MovedActor {
+    Game game;
 
     // Our constructor again calling up to the superclass
-    public MainCharacter(String SVGdata, double xLoc, double yLoc, Image... spriteCels) {
+    public MainCharacter(Game newGame, String SVGdata, double xLoc, double yLoc, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
+        game = newGame;
     }
 
     @Override
     public void update() {
        // for now, all we update is the playable characters movement and position according to key presses
-        if (right)
+        if (game.isRight())
             iX += velX;
-        if (left)
+        if (game.isLeft())
             iX -= velX;
-        if (up)
+        if (game.isUp())
             iY -= velY;
-        if (down)
+        if (game.isDown())
             iY += velY;
         spriteFrame.setTranslateX(iX);
         spriteFrame.setTranslateY(iY);

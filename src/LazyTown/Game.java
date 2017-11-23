@@ -24,9 +24,9 @@ public class Game {
     // Here we declare four booleans which will be the foundation of the player controls, we do not initialize them as
     // they default to false, whenever they are changed to true, logic will happen in another class. Later on, there
     // will be more variables as we give the player character more controls, like interaction, and using items.
-    static boolean up, down, left, right;
+    private boolean up, down, left, right;
 
-   public static void show(Stage primaryStage) {
+   public void show(Stage primaryStage) {
        // Variables
        root = new StackPane();
        sceneGame = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
@@ -47,7 +47,7 @@ public class Game {
     }
 
     // This method does all of our event handling, when the user presses or releases a key, act accordingly.
-    private static void eventHandling() {
+    private void eventHandling() {
         // First we need to listen for key presses, and set the appropriate boolean values accordingly, afterwards, we
         // will do the same for when the key is no longer pressed. We use switch statements for this as that is by far
         // the most compact and elegant way of programming this logic.
@@ -86,8 +86,8 @@ public class Game {
 
     // This method takes care of spawning in our various actors, among those are the player, the guards, the pickups,
     // and whatever the player can interact with, later it could be extended to be more things, like props.
-    private static void spawnActors() {
-       playerOne = new MainCharacter("",0,0,playerSprite);
+    private void spawnActors() {
+       playerOne = new MainCharacter(this,"", 0, 0, playerSprite);
     }
     // This method takes care of rendering our actors to the stackPane object that we have set up
     private static void renderActors() {
@@ -112,5 +112,19 @@ public class Game {
             System.exit(0);
     }
 
+    public boolean isUp() {
+        return up;
+    }
 
+    public boolean isDown() {
+        return down;
+    }
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public boolean isRight() {
+        return right;
+    }
 }
