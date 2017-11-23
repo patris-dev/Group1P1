@@ -1,6 +1,6 @@
 /* Imports the Lunchtime font for use in labels, buttons, etc. */
 @font-face {
-    src: url('uiassets/lunchtime.ttf');
+    src: url('lunchtime.ttf');
 }
 
 /* Root refers to all the contents in a scene.
