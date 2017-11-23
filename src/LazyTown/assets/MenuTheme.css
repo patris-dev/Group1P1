@@ -12,7 +12,7 @@
  */
 .root{
     -fx-background-color: black;
-    -fx-background-image: url('forest.png');
+    -fx-background-image: url('images/forest.png');
     -fx-background-size: cover;
     -fx-font-family: 'Lunchtime Doubly So';
     -fx-font-size: 20px;

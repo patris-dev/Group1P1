@@ -41,6 +41,11 @@ public class Main extends Application {
         // Tells the SoundEngine menuMusic to play the loaded file.
         menuMusic.play();
 
+
+
+        Level level = new Level("map1.png");
+        level.renderMap();
+
     }
 
     public static int getWindowWidth() {
