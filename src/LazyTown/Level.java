@@ -1,5 +1,10 @@
 package LazyTown;
 
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -17,6 +22,8 @@ public class Level {
     private String fullPath;
     // Our image file.
     private BufferedImage image;
+    // Array of rendered tiles.
+    private ImageView[][] tiles;
 
     // Level constructor, takes in the name of our map file.
     Level(String fileName) {
@@ -24,30 +31,49 @@ public class Level {
     }
 
     // Renders the map made from tiles to the user's screen.
-    public void renderMap() {
+    public void renderMap(StackPane root) {
         try {
             // Reads an image as data.
             image = ImageIO.read(getClass().getResource(fullPath));
+
+            Image brick = new Image("/LazyTown/assets/images/bricksorwhatever.png");
+            Image stone = new Image("/LazyTown/assets/images/stone.png");
+            Image sand = new Image("/LazyTown/assets/images/sand.png");
+
+            // Instantiates the array of tiles.
+            tiles = new ImageView[image.getWidth()][image.getHeight()];
 
             // Checks each pixel for it's RGB data, render the map from tiles based on that data.
             for (int y = 0; y < image.getHeight(); y++) {
                 for (int x = 0; x < image.getWidth(); x++) {
                     // Scans the color of a single pixel, returns a String.
                     String tile = this.scanPixel(x, y);
-                    
-                    // ! Temporary - prints the tile string.
-                    System.out.print(tile);
+                    // Sets the current tile based on RGB data.
+                    switch (tile) {
+                        case "B":
+                            tiles[x][y] = new ImageView(brick);
+                            break;
+                        case "W":
+                            tiles[x][y] = new ImageView(stone);
+                            break;
+                        case "r": case "g": case "b":
+                            tiles[x][y] = new ImageView(sand);
+                            break;
+                    }
 
-                    // Render the tiles here:
-                    // ...
+                    // Sets the coordinates of current tile.
+                    tiles[x][y].setTranslateX(x * 50);
+                    tiles[x][y].setTranslateY(y * 50);
+
+                    // Adds the current tile to our StackPane root.
+                    root.getChildren().add(tiles[x][y]);
 
                 }
-                // ! Temporary - prints a new line for tile strings.
-                System.out.println();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     // Checks the data of a pixel at [x y] - returns a String based on it.

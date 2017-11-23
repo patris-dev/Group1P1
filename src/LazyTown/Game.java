@@ -3,6 +3,7 @@ package LazyTown;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -31,10 +32,15 @@ public class Game {
        root = new StackPane();
        sceneGame = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
 
-
-
        // Sets the scene of our stage to sceneGame
        primaryStage.setScene(sceneGame);
+
+       // Renders the map
+       Level level = new Level("map1.png");
+
+
+
+       level.renderMap(root);
 
        // Methods we need to call to make our game work
        eventHandling();
@@ -74,7 +80,7 @@ public class Game {
 
     // This method is used for loading in our art assets, audio and visual.
     private static void assetLoading() {
-       playerSprite = new Image("LazyTown/assets/PC.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+       playerSprite = new Image("LazyTown/assets/images/PC.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                false, true);
        // Loads and plays the background music.
        backgroundMusic.load("menuMusic2.mp3");
