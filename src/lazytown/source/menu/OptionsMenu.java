@@ -37,10 +37,8 @@ public class OptionsMenu {
         root.setAlignment(Pos.CENTER);
 
         // Instantiates sceneOptions which will contain our root and sets the window size
-        // Sets the scene of our stage to sceneOptions
         // Tells all nodes in sceneOptions to use the MenuTheme.css style
         sceneOptions = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
-        primaryStage.setScene(sceneOptions);
         sceneOptions.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
 
 
@@ -111,6 +109,8 @@ public class OptionsMenu {
         showSettings();
         root.getChildren().addAll(backButton, musicLabel, volumeMusic, muteMusic, sfxLabel, volumeSFX, muteSFX);
 
+        // Sets the scene of our stage to sceneOptions
+        primaryStage.setScene(sceneOptions);
 
     }
 

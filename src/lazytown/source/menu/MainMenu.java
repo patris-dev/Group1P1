@@ -34,10 +34,8 @@ public class MainMenu {
         root.setPadding(new Insets(50,10,10,10));
 
         // Instantiates sceneMainMenu which will contain our root and sets the window size
-        // Sets the scene of our stage to sceneMainMenu
         // Tells all nodes in sceneMainMenu to use the MenuTheme.css style
         sceneMainMenu = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
-        primaryStage.setScene(sceneMainMenu);
         sceneMainMenu.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
 
         // VBox lays out the components in a vertical line, spacing is the distance between components inside the VBox
@@ -106,6 +104,8 @@ public class MainMenu {
         // Adds the buttons to our vBox, and puts the vBox in to the center of root
         buttonContainer.getChildren().addAll(buttonNewGame, buttonOptions, buttonExitGame);
 
+        // Sets the scene of our stage to sceneMainMenu
+        primaryStage.setScene(sceneMainMenu);
 
     }
 

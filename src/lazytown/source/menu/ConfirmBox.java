@@ -23,7 +23,7 @@ public class ConfirmBox {
     private static Button yesButton;
     private static Button noButton;
     private static boolean answer;
-    private static final int SMALL_WINDOW_WIDTH = 250;
+    private static final int SMALL_WINDOW_WIDTH = 500;
     private static final int SMALL_WINDOW_HEIGHT = 200;
 
     // ConfirmBox will create a window and return a boolean based on what the user has clicked
@@ -43,10 +43,8 @@ public class ConfirmBox {
         root.setAlignment(Pos.CENTER);
 
         // Instantiates sceneMainMenu which will contain our root and sets the window size
-        // Sets the scene of our stage to scene
         // Tells all nodes in scene to use the MenuTheme.css style
         scene = new Scene(root, SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
-        primaryStage.setScene(scene);
         scene.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
 
 
@@ -77,6 +75,9 @@ public class ConfirmBox {
 
         // Adds all nodes to root
         root.getChildren().addAll(label, yesButton, noButton);
+
+        // Sets the scene of our stage to scene
+        primaryStage.setScene(scene);
 
         // Works together with Modality - shows the window and doesn't allow for other windows to be interacted with
         primaryStage.showAndWait();
