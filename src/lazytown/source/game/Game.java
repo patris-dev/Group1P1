@@ -1,6 +1,7 @@
 package lazytown.source.game;
 
 
+import javafx.scene.Group;
 import lazytown.source.Main;
 import lazytown.source.game.actor.MainCharacter;
 import lazytown.source.game.actor.MovedActor;
@@ -18,7 +19,7 @@ import javafx.stage.Stage;
  * This is the class that represents the Game scene.
  */
 public class Game {
-    private static StackPane root;
+    private static Group root;
     private static Scene sceneGame;
     private static GamePlayLoop gamePlayLoop;
     private static Image playerSprite;
@@ -34,7 +35,7 @@ public class Game {
 
    public void show(Stage primaryStage) {
        // Variables
-       root = new StackPane();
+       root = new Group();
        sceneGame = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
 
 
@@ -96,7 +97,7 @@ public class Game {
     // This method takes care of spawning in our various actors, among those are the player, the guards, the pickups,
     // and whatever the player can interact with, later it could be extended to be more things, like props.
     private void spawnActors() {
-       playerOne = new MainCharacter(this,"", 0, 0, playerSprite);
+       playerOne = new MainCharacter(this,"", (Main.getWindowWidth()/2), (Main.getWindowHeight()/2), playerSprite);
     }
     // This method takes care of rendering our actors to the stackPane object that we have set up
     private static void renderActors() {

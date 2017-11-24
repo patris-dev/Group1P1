@@ -1,5 +1,6 @@
 package lazytown.source.game.level;
 
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -29,7 +30,7 @@ public class Level {
     }
 
     // Renders the map made from tiles to the user's screen.
-    public void renderMap(StackPane root) {
+    public void renderMap(Group root) {
         try {
             // Reads an image as data.
             image = ImageIO.read(getClass().getResource(fullPath));
