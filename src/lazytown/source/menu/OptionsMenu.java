@@ -19,16 +19,33 @@ import java.io.*;
  */
 public class OptionsMenu {
 
+    private static Scene sceneOptions;
+    private static VBox root;
+    private static Button backButton;
+    private static Label musicLabel;
+    private static Label sfxLabel;
     private static Slider volumeMusic;
     private static Slider volumeSFX;
     private static CheckBox muteMusic;
     private static CheckBox muteSFX;
 
-
     public static void show(Stage primaryStage) {
+        // Create our layout in the form of a VBox
+        // Adds padding and sets alignment of all components to center
+        root = new VBox(5);
+        root.setPadding(new Insets(10));
+        root.setAlignment(Pos.CENTER);
+
+        // Instantiates sceneOptions which will contain our root and sets the window size
+        // Sets the scene of our stage to sceneOptions
+        // Tells all nodes in sceneOptions to use the MenuTheme.css style
+        sceneOptions = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
+        primaryStage.setScene(sceneOptions);
+        sceneOptions.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
+
 
         // Creates a button to get back
-        Button backButton = new Button("Back");
+        backButton = new Button("Back");
         backButton.setMinSize(Main.getButtonWidth(), Main.getButtonHeight());
 
         // When the button is clicked, set the scene of our window to MainMenu
@@ -41,9 +58,10 @@ public class OptionsMenu {
             MainMenu.show(primaryStage);
         });
 
-        Label musicLabel = new Label("Music");
+        // Instantiates labels, adds padding
+        musicLabel = new Label("Music");
         musicLabel.setPadding(new Insets(20, 0, 0, 0));
-        Label sfxLabel = new Label("Sound Effects");
+        sfxLabel = new Label("Sound Effects");
         sfxLabel.setPadding(new Insets(20, 0, 0, 0));
 
         // A checkbox which mutes the music everywhere. Also stops/resumes the current music playing.
@@ -88,30 +106,15 @@ public class OptionsMenu {
             Main.getButtonClicks().play();
         });
 
-        // Gets settings from a txt file.
+        // Sets the slider and checkbox visual values to our current settings.
+        // Adds all nodes to the layout.
         showSettings();
+        root.getChildren().addAll(backButton, musicLabel, volumeMusic, muteMusic, sfxLabel, volumeSFX, muteSFX);
 
-        // Create our layout in the form of a VBox
-        VBox optionsMenu = new VBox(5);
-        optionsMenu.setPadding(new Insets(10));
-
-        // Adds our button to the layout, positions it to the center
-        optionsMenu.getChildren().addAll(backButton, musicLabel, volumeMusic, muteMusic, sfxLabel, volumeSFX, muteSFX);
-        optionsMenu.setAlignment(Pos.CENTER);
-
-        // Creates a scene which contains our layout
-        Scene sceneOptions = new Scene(optionsMenu, Main.getWindowWidth(), Main.getWindowHeight());
-
-        // Uses the MenuTheme.css style
-        sceneOptions.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
-
-        // Sets the scene of our stage to sceneOptions
-        primaryStage.setScene(sceneOptions);
 
     }
 
     // This method takes care of showing a graphical representation of our settings so that they can be adjusted
-    // visually
     private static void showSettings() {
         volumeMusic.setValue(SoundEngine.getMusicVolume());
         muteMusic.setSelected(SoundEngine.getMusicMute());

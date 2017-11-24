@@ -93,6 +93,7 @@ public class Level {
             case "000255000": return "g";
             case "000000255": return "b";
 
+
             default: return "X";
         }
     }

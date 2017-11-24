@@ -33,7 +33,8 @@ public class Main extends Application {
         // Sets the default scene as MainMenu
         MainMenu.show(primaryStage);
 
-        // Tells the menuMusic to load the menuMusic file.
+        // Loads in the correct volume and mute settings.
+        // Tells the SoundEngines to load their files.
         SoundEngine.loadSettings();
         menuMusic.load("menuMusic.mp3");
         buttonClicks.load("buttonClick.mp3");

@@ -16,30 +16,65 @@ import javafx.stage.Stage;
  * This is the class that represents the MainMenu scene.
  */
 public class MainMenu {
+
+    private static BorderPane root;
+    private static Scene sceneMainMenu;
+    private static VBox buttonContainer;
+    private static Game newGame;
+    private static Label gameTitle;
+    private static Button buttonNewGame;
+    private static Button buttonOptions;
+    private static Button buttonExitGame;
+
     public static void show(Stage primaryStage) {
-        Game newGame = new Game();
-        BorderPane root = new BorderPane();
+        // Instantiates root, adds padding around it
+        // BorderPane can lay out the components in the top, bottom, left, right or center
+        // Adds padding around the root, extra padding on top
+        root = new BorderPane();
+        root.setPadding(new Insets(50,10,10,10));
 
-        // Title of the game in the main menu, could later on be changed into an image
-        Label gameTitle = new Label("Lazy Town");
-        // Sets the ID of our label to label-title to differentiate it from other labels in CSS
+        // Instantiates sceneMainMenu which will contain our root and sets the window size
+        // Sets the scene of our stage to sceneMainMenu
+        // Tells all nodes in sceneMainMenu to use the MenuTheme.css style
+        sceneMainMenu = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
+        primaryStage.setScene(sceneMainMenu);
+        sceneMainMenu.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
+
+        // VBox lays out the components in a vertical line, spacing is the distance between components inside the VBox
+        // Places buttonContainer in the center of BorderPane root
+        // Aligns components of vBox to the center
+        buttonContainer = new VBox(10);
+        root.setCenter(buttonContainer);
+        buttonContainer.setAlignment(Pos.CENTER);
+
+        // Instantiates newGame
+        newGame = new Game();
+
+
+        // Title of the game in the main menu, could later on be changed into an image.
+        // Sets the ID of our label to label-title to differentiate it from other labels in CSS.
+        // Places gameTitle to the top of BorderPane root
+        // Aligns it to the center
+        gameTitle = new Label("Lazy Town");
         gameTitle.setId("label-title");
+        root.setTop(gameTitle);
+        BorderPane.setAlignment(gameTitle, Pos.CENTER);
 
-        // Adds a bit of padding to the top so the title would be lower
-        gameTitle.setPadding(new Insets(40, 0, 0, 0));
-
-        // Creates buttons
-        Button buttonNewGame = new Button("New Game");
-        Button buttonOptions = new Button("Options");
-        Button buttonExitGame = new Button("Exit Game");
+        // Instantiates buttons
+        buttonNewGame = new Button("New Game");
+        buttonOptions = new Button("Options");
+        buttonExitGame = new Button("Exit Game");
 
         // Sets button sizes
         buttonNewGame.setMinSize(Main.getButtonWidth(),Main.getButtonHeight());
         buttonOptions.setMinSize(Main.getButtonWidth(),Main.getButtonHeight());
         buttonExitGame.setMinSize(Main.getButtonWidth(),Main.getButtonHeight());
 
-        // Shorter version of handling events using a lambda expression, 'e' represents the event
-        // Button.setOnAction(e -> YourCommand);
+
+        // Shorter version of handling events using a lambda expression, 'e' represents the event.
+        // Usage: Button.setOnAction(e -> YourCommand);
+
+        // Sets the actions of a clicked New Game button
         buttonNewGame.setOnAction(e->{
             // Plays the buttonClick sound.
             Main.getButtonClicks().play();
@@ -49,6 +84,7 @@ public class MainMenu {
             newGame.show(primaryStage);
         });
 
+        // Sets the actions of a clicked Options button
         buttonOptions.setOnAction(e->{
             // Plays the buttonClick sound.
             Main.getButtonClicks().play();
@@ -56,6 +92,7 @@ public class MainMenu {
             OptionsMenu.show(primaryStage);
         });
 
+        // Sets the actions of a clicked Exit Game button
         buttonExitGame.setOnAction(e->{
             // Plays the buttonClick sound.
             Main.getButtonClicks().play();
@@ -66,31 +103,9 @@ public class MainMenu {
             }
         });
 
-        // The layout of our contents in the app
-        // BorderPane lays out the components in the top, bottom, left, right or center
-        // VBox lays out the components in a vertical line, spacing is the distance between components inside the VBox
-        VBox vBox = new VBox(10);
-        // Aligns components of vBox to the center
-        vBox.setAlignment(Pos.CENTER);
-
         // Adds the buttons to our vBox, and puts the vBox in to the center of root
-        vBox.getChildren().addAll(buttonNewGame, buttonOptions, buttonExitGame);
-        root.setCenter(vBox);
+        buttonContainer.getChildren().addAll(buttonNewGame, buttonOptions, buttonExitGame);
 
-        // Adds the game title to the top of root, aligns it to the center
-        root.setTop(gameTitle);
-        BorderPane.setAlignment(gameTitle, Pos.CENTER);
-        // Adds padding around the root
-        root.setPadding(new Insets(10,10,10,10));
-
-        // Creates a Scene which contains our layout (which, in this case, is root), sets the window size
-        Scene sceneMainMenu = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
-
-        // Uses the MenuTheme.css style
-        sceneMainMenu.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
-
-        // Sets the scene of our stage to sceneMainMenu
-        primaryStage.setScene(sceneMainMenu);
 
     }
 
