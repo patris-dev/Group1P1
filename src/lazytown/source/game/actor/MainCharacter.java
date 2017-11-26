@@ -5,7 +5,11 @@ import javafx.scene.image.Image;
 
 
 public class MainCharacter extends MovedActor {
-    Game game;
+    protected Game game;
+
+    boolean animation = false;
+    int framecounter = 0;
+    int runningspeed = 8;
 
     // Our constructor again calling up to the superclass
     public MainCharacter(Game newGame, String SVGdata, double xLoc, double yLoc, Image... spriteCels) {
@@ -15,7 +19,13 @@ public class MainCharacter extends MovedActor {
 
     @Override
     public void update() {
-       // for now, all we update is the playable characters movement and position according to key presses
+        setXYLocation();
+        setImageState();
+        moveCharacter();
+        checkCollision();
+    }
+
+    private void setXYLocation() {
         if (game.isRight())
             iX += velX;
         if (game.isLeft())
@@ -24,12 +34,19 @@ public class MainCharacter extends MovedActor {
             iY -= velY;
         if (game.isDown())
             iY += velY;
+    }
 
+    private void setImageState() {
+
+    }
+
+    private void moveCharacter() {
         Game.getBackground().setTranslateX(-iX);
         Game.getBackground().setTranslateY(-iY);
+    }
 
-        //spriteFrame.setTranslateX(iX);
-        //spriteFrame.setTranslateY(iY);
+    private void checkCollision() {
+
     }
 
     // The player characters collision is set to true. This does not actually do anything at the moment other than being
