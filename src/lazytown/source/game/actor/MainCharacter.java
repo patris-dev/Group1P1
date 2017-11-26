@@ -24,8 +24,12 @@ public class MainCharacter extends MovedActor {
             iY -= velY;
         if (game.isDown())
             iY += velY;
-        spriteFrame.setTranslateX(iX);
-        spriteFrame.setTranslateY(iY);
+
+        Game.getBackground().setTranslateX(-iX);
+        Game.getBackground().setTranslateY(-iY);
+
+        //spriteFrame.setTranslateX(iX);
+        //spriteFrame.setTranslateY(iY);
     }
 
     // The player characters collision is set to true. This does not actually do anything at the moment other than being

@@ -30,7 +30,7 @@ public class Level {
     }
 
     // Renders the map made from tiles to the user's screen.
-    public void renderMap(Group root) {
+    public void renderMap(Group background) {
         try {
             // Reads an image as data.
             image = ImageIO.read(getClass().getResource(fullPath));
@@ -65,7 +65,7 @@ public class Level {
                     tiles[x][y].setTranslateY(y * 50);
 
                     // Adds the current tile to our StackPane root.
-                    root.getChildren().add(tiles[x][y]);
+                    background.getChildren().add(tiles[x][y]);
 
                 }
             }

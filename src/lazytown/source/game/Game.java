@@ -19,7 +19,8 @@ import javafx.stage.Stage;
  * This is the class that represents the Game scene.
  */
 public class Game {
-    private static Group root;
+    private static StackPane root;
+    private static Group background;
     private static Scene sceneGame;
     private static GamePlayLoop gamePlayLoop;
     private static Image playerSprite;
@@ -35,7 +36,9 @@ public class Game {
 
    public void show(Stage primaryStage) {
        // Variables
-       root = new Group();
+       root = new StackPane();
+       background = new Group();
+       root.getChildren().add(background);
        sceneGame = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
 
 
@@ -43,8 +46,9 @@ public class Game {
        // Sets the scene of our stage to sceneGame
        primaryStage.setScene(sceneGame);
 
+       // Instantiates a level object, renders the level
        Level level = new Level("map1.png");
-       level.renderMap(root);
+       level.renderMap(background);
 
        // Methods we need to call to make our game work
        eventHandling();
@@ -136,5 +140,9 @@ public class Game {
 
     public boolean isRight() {
         return right;
+    }
+
+    public static Group getBackground() {
+        return background;
     }
 }
