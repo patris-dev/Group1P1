@@ -23,7 +23,7 @@ public class Game {
     private static Group background;
     private static Scene sceneGame;
     private static GamePlayLoop gamePlayLoop;
-    private static Image playerSprite;
+    private static Image playerSprite ,p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14;
     static MovedActor playerOne;
     private static final int SPRITE_WIDTH = 75;
     private static final int SPRITE_HEIGHT = SPRITE_WIDTH;
@@ -90,6 +90,36 @@ public class Game {
     private static void assetLoading() {
        playerSprite = new Image("lazytown/assets/images/PC.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                false, true);
+
+        p0 = new Image("lazytown/assets/images/P0.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+        p1 = new Image("lazytown/assets/images/P1.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+        p2 = new Image("lazytown/assets/images/P2.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+        p3 = new Image("lazytown/assets/images/P3.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+        p4 = new Image("lazytown/assets/images/P4.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+        p5 = new Image("lazytown/assets/images/P5.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+        p6 = new Image("lazytown/assets/images/P6.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+        p7 = new Image("lazytown/assets/images/P7.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+        p8 = new Image("lazytown/assets/images/P8.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+        p9 = new Image("lazytown/assets/images/P9.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+        p10 = new Image("lazytown/assets/images/P10.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+        p11 = new Image("lazytown/assets/images/P11.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+        p12 = new Image("lazytown/assets/images/P12.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+                false, true);
+
+
+
        // Loads and plays the background music.
        backgroundMusic.load("menuMusic2.mp3");
     }
@@ -101,7 +131,7 @@ public class Game {
     // This method takes care of spawning in our various actors, among those are the player, the guards, the pickups,
     // and whatever the player can interact with, later it could be extended to be more things, like props.
     private void spawnActors() {
-       playerOne = new MainCharacter(this,"", (Main.getWindowWidth()/2), (Main.getWindowHeight()/2), playerSprite);
+       playerOne = new MainCharacter(this,"", (Main.getWindowWidth()/2), (Main.getWindowHeight()/2), p5);
     }
     // This method takes care of rendering our actors to the stackPane object that we have set up
     private static void renderActors() {
