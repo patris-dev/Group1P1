@@ -23,7 +23,7 @@ public class Game {
     private static Group background;
     private static Scene sceneGame;
     private static GamePlayLoop gamePlayLoop;
-    private static Image playerSprite ,p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14;
+    private static Image playerSprite ,p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11;
     static MovedActor playerOne;
     private static final int SPRITE_WIDTH = 75;
     private static final int SPRITE_HEIGHT = SPRITE_WIDTH;
@@ -115,8 +115,6 @@ public class Game {
                 false, true);
         p11 = new Image("lazytown/assets/images/P11.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
-        p12 = new Image("lazytown/assets/images/P12.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-                false, true);
 
 
 
@@ -131,7 +129,7 @@ public class Game {
     // This method takes care of spawning in our various actors, among those are the player, the guards, the pickups,
     // and whatever the player can interact with, later it could be extended to be more things, like props.
     private void spawnActors() {
-       playerOne = new MainCharacter(this,"", (Main.getWindowWidth()/2), (Main.getWindowHeight()/2), p5);
+       playerOne = new MainCharacter(this,"", (Main.getWindowWidth()/2), (Main.getWindowHeight()/2), p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11);
     }
     // This method takes care of rendering our actors to the stackPane object that we have set up
     private static void renderActors() {
