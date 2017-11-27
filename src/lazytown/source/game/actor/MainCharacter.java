@@ -1,5 +1,6 @@
 package lazytown.source.game.actor;
 
+import lazytown.source.Main;
 import lazytown.source.game.Game;
 import javafx.scene.image.Image;
 
@@ -12,6 +13,14 @@ public class MainCharacter extends MovedActor {
     boolean facingDown = true;
     boolean facingLeft = false;
     boolean facingRight = false;
+
+
+    boolean leftSide, rightSide, upSide, downSide;
+    int levelWidth = Game.getLevel().getImageWidth() * 50;
+    int levelHeight = Game.getLevel().getImageHeight() * 50;
+    int windowWidth = Main.getWindowWidth();
+    int windowHeight = Main.getWindowHeight();
+
 
     int framecounter = 0;
     int runningspeed = 12;
@@ -59,7 +68,6 @@ public class MainCharacter extends MovedActor {
                 spriteFrame.setScaleX(1);
                 spriteFrame.setImage(imageStates.get(8));
             }
-
 
             animation = false;
             framecounter = 0;
@@ -152,8 +160,24 @@ public class MainCharacter extends MovedActor {
     }
 
     private void moveCharacter() {
-        Game.getBackground().setTranslateX(-iX);
-        Game.getBackground().setTranslateY(-iY);
+
+        if (iX < -levelWidth/2  + windowWidth/2)    leftSide = true;    else leftSide = false;
+        if (iX > levelWidth/2   - windowWidth/2)    rightSide = true;   else rightSide = false;
+        if (iY < -levelHeight/2 + windowHeight/2)   upSide = true;      else upSide = false;
+        if (iY > levelHeight/2  - windowHeight/2)   downSide = true;    else downSide = false;
+
+
+        if (leftSide) spriteFrame.setTranslateX(iX + (levelWidth/2 - windowWidth/2));
+        else if (rightSide) spriteFrame.setTranslateX(iX - (levelWidth/2 - windowWidth/2));
+        else Game.getBackground().setTranslateX(-iX);
+
+        if (upSide) spriteFrame.setTranslateY(iY + (levelHeight/2 - windowHeight/2));
+        else if (downSide) spriteFrame.setTranslateY(iY - (levelHeight/2 - windowHeight/2));
+        else Game.getBackground().setTranslateY(-iY);
+
+
+
+
     }
 
     private void checkCollision() {

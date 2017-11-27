@@ -97,4 +97,12 @@ public class Level {
             default: return "X";
         }
     }
+
+    public int getImageWidth() {
+        return image.getWidth();
+    }
+
+    public int getImageHeight() {
+        return image.getHeight();
+    }
 }

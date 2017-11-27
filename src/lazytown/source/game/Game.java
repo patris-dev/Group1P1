@@ -28,6 +28,7 @@ public class Game {
     private static final int SPRITE_WIDTH = 75;
     private static final int SPRITE_HEIGHT = SPRITE_WIDTH;
     private static SoundEngine backgroundMusic = new SoundEngine("music");
+    private static Level level;
 
     // Here we declare four booleans which will be the foundation of the player controls, we do not initialize them as
     // they default to false, whenever they are changed to true, logic will happen in another class. Later on, there
@@ -47,7 +48,7 @@ public class Game {
        primaryStage.setScene(sceneGame);
 
        // Instantiates a level object, renders the level
-       Level level = new Level("map1.png");
+       level = new Level("map1.png");
        level.renderMap(background);
 
        // Methods we need to call to make our game work
@@ -172,5 +173,9 @@ public class Game {
 
     public static Group getBackground() {
         return background;
+    }
+
+    public static Level getLevel() {
+        return level;
     }
 }
