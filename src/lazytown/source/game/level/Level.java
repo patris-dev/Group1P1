@@ -21,8 +21,8 @@ public class Level {
     private String fullPath;
     // Our image file.
     private BufferedImage image;
-    // Array of rendered tiles.
-    private ImageView[][] tiles;
+    // Array of Tile objects.
+    private Tile[][] tiles;
 
     // Level constructor, takes in the name of our map file.
     public Level(String fileName) {
@@ -39,8 +39,10 @@ public class Level {
             Image stone = new Image("/lazytown/assets/images/stone.png");
             Image sand = new Image("/lazytown/assets/images/sand.png");
 
+            ImageView imageView = null;
+
             // Instantiates the array of tiles.
-            tiles = new ImageView[image.getWidth()][image.getHeight()];
+            tiles = new Tile[image.getWidth()][image.getHeight()];
 
             // Checks each pixel for it's RGB data, render the map from tiles based on that data.
             for (int y = 0; y < image.getHeight(); y++) {
@@ -50,22 +52,25 @@ public class Level {
                     // Sets the current tile based on RGB data.
                     switch (tile) {
                         case "B":
-                            tiles[x][y] = new ImageView(brick);
+                            imageView = new ImageView(brick);
                             break;
                         case "W":
-                            tiles[x][y] = new ImageView(stone);
+                            imageView = new ImageView(stone);
                             break;
                         case "r": case "g": case "b":
-                            tiles[x][y] = new ImageView(sand);
+                            imageView = new ImageView(sand);
                             break;
                     }
+                    
+                    tiles[x][y] = new Tile();
+                    tiles[x][y].setImage(imageView);
 
                     // Sets the coordinates of current tile.
-                    tiles[x][y].setTranslateX(x * 50);
-                    tiles[x][y].setTranslateY(y * 50);
+                    tiles[x][y].getImage().setTranslateX(x * 50);
+                    tiles[x][y].getImage().setTranslateY(y * 50);
 
                     // Adds the current tile to our StackPane root.
-                    background.getChildren().add(tiles[x][y]);
+                    background.getChildren().add(tiles[x][y].getImage());
 
                 }
             }
@@ -92,7 +97,6 @@ public class Level {
             case "255000000": return "r";
             case "000255000": return "g";
             case "000000255": return "b";
-
 
             default: return "X";
         }
