@@ -1,5 +1,6 @@
-package LazyTown;
+package lazytown.source.menu;
 
+import lazytown.source.Main;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * This is a class that calls in a new window with two buttons (Yes/No).
@@ -16,27 +16,44 @@ import javafx.stage.StageStyle;
  */
 public class ConfirmBox {
 
+    private static Stage primaryStage;
+    private static Scene scene;
+    private static VBox root;
+    private static Label label;
+    private static Button yesButton;
+    private static Button noButton;
     private static boolean answer;
+    private static final int SMALL_WINDOW_WIDTH = 500;
+    private static final int SMALL_WINDOW_HEIGHT = 200;
 
     // ConfirmBox will create a window and return a boolean based on what the user has clicked
     public static boolean display(String title, String message) {
-
-        // Creates our new window
-        Stage primaryStage = new Stage();
+        // Instantiates a new Stage
+        // Sets the title, width, resizability
+        // Block input events on other windows until this is one is closed (this property is called Modality)
+        primaryStage = new Stage();
         primaryStage.setTitle(title);
-        primaryStage.setMinWidth(250);
         primaryStage.setResizable(false);
-        // primaryStage.initStyle(StageStyle.TRANSPARENT);
-
-        // Block input events on other windows until this is one is closed
         primaryStage.initModality(Modality.APPLICATION_MODAL);
 
+        // Creates a root (VBox) to store our message and our buttons
+        // Adds padding, sets the alignment of all components to center
+        root = new VBox(10);
+        root.setPadding(new Insets(10, 10, 10, 10));
+        root.setAlignment(Pos.CENTER);
+
+        // Instantiates sceneMainMenu which will contain our root and sets the window size
+        // Tells all nodes in scene to use the MenuTheme.css style
+        scene = new Scene(root, SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
+        scene.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
+
+
         // Creates a label for our message (for example: "Are you sure you want to quit?")
-        Label label = new Label(message);
+        label = new Label(message);
 
         // Creates the yes and no buttons
-        Button yesButton = new Button("Yes");
-        Button noButton = new Button("No");
+        yesButton = new Button("Yes");
+        noButton = new Button("No");
         yesButton.setMinWidth(100);
         noButton.setMinWidth(100);
 
@@ -56,21 +73,10 @@ public class ConfirmBox {
             primaryStage.close();
         });
 
-        // Creates a layout (VBox) to store our message and our buttons
-        VBox layout = new VBox(10);
-        layout.setPadding(new Insets(10, 10, 10, 10));
-        layout.getChildren().addAll(label, yesButton, noButton);
+        // Adds all nodes to root
+        root.getChildren().addAll(label, yesButton, noButton);
 
-        // Aligns all contents to the center
-        layout.setAlignment(Pos.CENTER);
-
-        // Creates a scene which contains our layout
-        Scene scene = new Scene(layout);
-
-        // Uses the MenuTheme.css style
-        scene.getStylesheets().add("LazyTown/assets/MenuTheme.css");
-
-        // Sets the scene of our window to scene
+        // Sets the scene of our stage to scene
         primaryStage.setScene(scene);
 
         // Works together with Modality - shows the window and doesn't allow for other windows to be interacted with

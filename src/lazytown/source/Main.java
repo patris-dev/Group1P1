@@ -1,5 +1,7 @@
-package LazyTown;
+package lazytown.source;
 
+import lazytown.source.menu.MainMenu;
+import lazytown.source.sound.SoundEngine;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -25,13 +27,15 @@ public class Main extends Application {
 
         // Stage is the window
         // Sets the title of the window
-        primaryStage.setTitle("LazyTown");
+        primaryStage.setTitle("lazytown");
         // Prevents the window from being resized
         primaryStage.setResizable(false);
         // Sets the default scene as MainMenu
         MainMenu.show(primaryStage);
 
-        // Tells the menuMusic to load the menuMusic file.
+        // Loads in the correct volume and mute settings.
+        // Tells the SoundEngines to load their files.
+        SoundEngine.loadSettings();
         menuMusic.load("menuMusic.mp3");
         buttonClicks.load("buttonClick.mp3");
 

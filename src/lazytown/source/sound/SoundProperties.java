@@ -1,4 +1,4 @@
-package LazyTown;
+package lazytown.source.sound;
 
 /**
  * This class is used for the sound properties used in SoundEngine for volume and muting.

@@ -1,4 +1,4 @@
-package LazyTown;
+package lazytown.source.game.actor;
 
 import javafx.scene.image.Image;
 

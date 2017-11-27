@@ -1,4 +1,4 @@
-package LazyTown;
+package lazytown.source.game.actor;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,7 +12,7 @@ public abstract class Actor {
     // The first object we declare is a new array list of images, this is for animation
     protected List<Image> imageStates = new ArrayList<>();
     // Then we make an ImageView object to view the images from
-    protected ImageView spriteFrame;
+    public ImageView spriteFrame;
     // Then we create an SVGPath object, which defines our bounds around the sprite, this is done for collision
     protected SVGPath spriteBoundary;
     // Variables for x and y coordinates in our scene
