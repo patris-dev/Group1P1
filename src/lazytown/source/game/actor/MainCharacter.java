@@ -1,5 +1,7 @@
 package lazytown.source.game.actor;
 
+import javafx.scene.shape.SVGPath;
+import javafx.scene.shape.Shape;
 import lazytown.source.Main;
 import lazytown.source.game.Game;
 import javafx.scene.image.Image;
@@ -181,10 +183,36 @@ public class MainCharacter extends MovedActor {
     }
 
     private void checkCollision() {
-
+        // When we check for collision we cycle through the list of all of our actors
+        for (int i = 0; i < game.director.getCurrentActors().size(); i++) {
+            // And as we do that we set them up in a temporary object
+            Actor object = game.director.getCurrentActors().get(i);
+            // This object is then being parsed and tested in our collide method
+            if (collide(object)) {
+                // If collision has been detected, this code runs, in it's current state, it plays a sound, adds the
+                // object to another list, removes the sprite graphically and then removes it from existence by
+                // resetting the list of removed actors. Finally we call the scoringEngine() method on our object.
+                game.director.addToRemovedActors(object);
+                game.root.getChildren().remove(object.getSpriteFrame());
+                game.director.resetRemovedActors();
+            }
+        }
     }
 
     // The player characters collision is set to true. This does not actually do anything at the moment other than being
     // a placeholder stating that the player character can collide.
-    public boolean collide(Actor object){return true;}
+    public boolean collide(Actor object){
+        // We check for collision in a two stage process, this is to save resources, as checking for collision can be
+        // quite costly. The way we do this is by first using an if statement to check if two imageView nodes intersect
+        // with each other, if they do we create a new Shape object from the two intersecting ImageView nodes, the width
+        // of which we measure. If this width is not negative 1, we return true, else we return false.
+        if (game.playerOne.spriteFrame.getBoundsInParent().intersects(
+                object.getSpriteFrame().getBoundsInParent())) {
+            Shape intersection = SVGPath.intersect(game.playerOne.getSpriteBoundary(), object.getSpriteBoundary());
+            if (intersection.getBoundsInLocal().getWidth() != -1) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

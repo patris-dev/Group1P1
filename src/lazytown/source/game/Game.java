@@ -3,6 +3,7 @@ package lazytown.source.game;
 
 import javafx.scene.Group;
 import lazytown.source.Main;
+import lazytown.source.game.actor.Director;
 import lazytown.source.game.actor.MainCharacter;
 import lazytown.source.game.actor.MovedActor;
 import lazytown.source.game.level.Level;
@@ -19,16 +20,17 @@ import javafx.stage.Stage;
  * This is the class that represents the Game scene.
  */
 public class Game {
-    private static StackPane root;
+    public static StackPane root;
     private static Group background;
     private static Scene sceneGame;
     private static GamePlayLoop gamePlayLoop;
     private static Image playerSprite ,p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11;
-    static MovedActor playerOne;
+    public static MovedActor playerOne;
     private static final int SPRITE_WIDTH = 75;
     private static final int SPRITE_HEIGHT = SPRITE_WIDTH;
     private static SoundEngine backgroundMusic = new SoundEngine("music");
     private static Level level;
+    public static Director director;
 
     // Here we declare four booleans which will be the foundation of the player controls, we do not initialize them as
     // they default to false, whenever they are changed to true, logic will happen in another class. Later on, there
@@ -140,7 +142,9 @@ public class Game {
     // This method is in charge of handling our actors. For now this is an empty method, but it will load a role when we
     // need to do collision detection and clean up actors in our scene that are no longer valid.
     private static void actorHandler() {
-       // This is a bit more advanced functionality, and will be implemented after the actor and its subclasses
+        director = new Director();
+        // Here we add the objects we want to check collision with
+        director.addCurrentActors();
     }
 
     // This method starts our game loop, so what we have here is actually a dynamic game.

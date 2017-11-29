@@ -17,7 +17,7 @@ public class Director {
 
 
     // Our constructor to start with, so that it's being initialized correctly
-    public Director(List<Actor> collide_checklist, Set<Actor> removed_actors) {
+    public Director() {
         this.CURRENT_ACTORS = new ArrayList<Actor>();
         COLLIDE_CHECKLIST = new ArrayList<Actor>();
         REMOVED_ACTORS = new HashSet<Actor>();
