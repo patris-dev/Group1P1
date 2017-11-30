@@ -1,7 +1,11 @@
 package lazytown.source.game;
 
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import lazytown.source.Main;
 import lazytown.source.game.actor.Director;
 import lazytown.source.game.actor.MainCharacter;
@@ -38,6 +42,7 @@ public class Game {
     private boolean up, down, left, right;
 
    public void show(Stage primaryStage) {
+
        // Variables
        root = new StackPane();
        background = new Group();
@@ -45,15 +50,9 @@ public class Game {
        sceneGame = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
 
 
-
-       // Sets the scene of our stage to sceneGame
-       primaryStage.setScene(sceneGame);
-
-       // Instantiates a level object, renders the level
-       level = new Level("map1.png");
-       level.renderMap(background);
-
        // Methods we need to call to make our game work
+       showLoadingScreen(primaryStage);
+       loadLevel();
        eventHandling();
        assetLoading();
        playMusic();
@@ -61,6 +60,31 @@ public class Game {
        renderActors();
        actorHandler();
        startGameLoop();
+       renderUI();
+
+       // Sets the scene of our stage to sceneGame
+       primaryStage.setScene(sceneGame);
+    }
+
+    // This method renders a loading screen.
+    private void showLoadingScreen(Stage primaryStage) {
+
+        BorderPane loadingScreen = new BorderPane();
+        loadingScreen.setPadding(new Insets(10));
+
+        Label loadingLabel = new Label("Loading...");
+        loadingScreen.setBottom(loadingLabel);
+
+        Scene loadingScene = new Scene(loadingScreen, Main.getWindowWidth(), Main.getWindowHeight());
+        loadingScene.getStylesheets().add("lazytown/assets/uiassets/LoadingScreenTheme.css");
+        primaryStage.setScene(loadingScene);
+    }
+
+    // This method is used to render the level from a map.
+    private void loadLevel() {
+        // Instantiates a level object, renders the level
+        level = new Level("map1.png");
+        level.renderMap(background);
     }
 
     // This method does all of our event handling, when the user presses or releases a key, act accordingly.
@@ -134,6 +158,7 @@ public class Game {
     private void spawnActors() {
        playerOne = new MainCharacter(this,"", (Main.getWindowWidth()/2), (Main.getWindowHeight()/2), p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11);
     }
+
     // This method takes care of rendering our actors to the stackPane object that we have set up
     private static void renderActors() {
        root.getChildren().add(playerOne.spriteFrame);
@@ -154,6 +179,12 @@ public class Game {
 
     }
 
+    // This method renders the in-game user interface.
+    private void renderUI() {
+        root.getChildren().add(UI.getUI());
+    }
+
+    // This method renders a new window to exit the game.
     private static void exitGame(){
         if(ConfirmBox.display("Exit Game","Are you sure you want to exit?"))
             System.exit(0);

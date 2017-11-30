@@ -1,0 +1,41 @@
+/* Imports the Lunchtime font for use in labels, buttons, etc. */
+@font-face {
+    src: url('lunchtime.ttf');
+}
+
+#character-info{
+    -fx-background-image: url('../images/UIcharacterInfo.png');
+    -fx-background-size: 200px;
+    -fx-padding: 10px;
+    -fx-background-repeat: no-repeat;
+}
+
+#counters{
+    -fx-background-image: url('../images/UIcounters.png');
+    -fx-background-size: 70px;
+    -fx-background-repeat: no-repeat;
+}
+
+.label{
+    -fx-font-family: 'Lunchtime Doubly So';
+    -fx-text-fill: black;
+    -fx-font-size: 25px;
+}
+
+.progress-bar > .track{
+    -fx-background-color: aliceblue;
+    -fx-border-width: 3px;
+    -fx-border-color: black;
+    -fx-background-insets: 100%;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+.progress-bar > .bar{
+    -fx-padding: 5px;
+    -fx-background-color: green;
+    -fx-background-insets: 3px;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+

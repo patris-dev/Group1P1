@@ -8,9 +8,10 @@ public class Tile {
 
     private ImageView image;
     private static SVGPath tileBoundary = new SVGPath();
+    private static String boundaryShape = "M0 0 H 50 V 50 H 0 Z";
 
     public Tile() {
-        tileBoundary.setContent("M0 0 H 50 V 50 H 0 Z");
+        tileBoundary.setContent(boundaryShape);
     }
 
     public ImageView getImage() {

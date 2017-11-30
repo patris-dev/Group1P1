@@ -61,7 +61,7 @@ public class Level {
                             imageView = new ImageView(sand);
                             break;
                     }
-                    
+
                     tiles[x][y] = new Tile();
                     tiles[x][y].setImage(imageView);
 
