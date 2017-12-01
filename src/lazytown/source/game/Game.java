@@ -2,7 +2,6 @@ package lazytown.source.game;
 
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -115,32 +114,30 @@ public class Game {
 
     // This method is used for loading in our art assets, audio and visual.
     private static void assetLoading() {
-       playerSprite = new Image("lazytown/assets/images/PC.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-               false, true);
 
-        p0 = new Image("lazytown/assets/images/P0.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+        p0 = new Image("lazytown/assets/images/animationsprites/playercharacter/P0.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
-        p1 = new Image("lazytown/assets/images/P1.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+        p1 = new Image("lazytown/assets/images/animationsprites/playercharacter/P1.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
-        p2 = new Image("lazytown/assets/images/P2.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+        p2 = new Image("lazytown/assets/images/animationsprites/playercharacter/P2.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
-        p3 = new Image("lazytown/assets/images/P3.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+        p3 = new Image("lazytown/assets/images/animationsprites/playercharacter/P3.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
-        p4 = new Image("lazytown/assets/images/P4.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+        p4 = new Image("lazytown/assets/images/animationsprites/playercharacter/P4.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
-        p5 = new Image("lazytown/assets/images/P5.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+        p5 = new Image("lazytown/assets/images/animationsprites/playercharacter/P5.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
-        p6 = new Image("lazytown/assets/images/P6.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+        p6 = new Image("lazytown/assets/images/animationsprites/playercharacter/P6.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
-        p7 = new Image("lazytown/assets/images/P7.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+        p7 = new Image("lazytown/assets/images/animationsprites/playercharacter/P7.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
-        p8 = new Image("lazytown/assets/images/P8.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+        p8 = new Image("lazytown/assets/images/animationsprites/playercharacter/P8.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
-        p9 = new Image("lazytown/assets/images/P9.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+        p9 = new Image("lazytown/assets/images/animationsprites/playercharacter/P9.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
-        p10 = new Image("lazytown/assets/images/P10.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+        p10 = new Image("lazytown/assets/images/animationsprites/playercharacter/P10.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
-        p11 = new Image("lazytown/assets/images/P11.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
+        p11 = new Image("lazytown/assets/images/animationsprites/playercharacter/P11.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
                 false, true);
 
 

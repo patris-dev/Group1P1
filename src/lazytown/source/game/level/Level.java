@@ -3,7 +3,6 @@ package lazytown.source.game.level;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -15,8 +14,8 @@ import javax.imageio.ImageIO;
  */
 public class Level {
 
-    // Path of the folder which holds all image assets.
-    private String path = "/lazytown/assets/images/";
+    // Path of the folder which holds all level map assets.
+    private String path = "/lazytown/assets/images/levels/";
     // Full path of the file (path + fileName).
     private String fullPath;
     // Our image file.
@@ -35,9 +34,9 @@ public class Level {
             // Reads an image as data.
             image = ImageIO.read(getClass().getResource(fullPath));
 
-            Image brick = new Image("/lazytown/assets/images/bricksorwhatever.png");
-            Image stone = new Image("/lazytown/assets/images/stone.png");
-            Image sand = new Image("/lazytown/assets/images/sand.png");
+            Image brick = new Image("/lazytown/assets/images/tiles/bricksorwhatever.png");
+            Image stone = new Image("/lazytown/assets/images/tiles/stone.png");
+            Image sand = new Image("/lazytown/assets/images/tiles/sand.png");
 
             ImageView imageView = null;
 

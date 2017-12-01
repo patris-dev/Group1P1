@@ -1,7 +1,6 @@
 package lazytown.source.game;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -51,7 +50,7 @@ public class UI {
         characterInfo = new GridPane();
         characterInfo.setId("character-info");
 
-        ImageView characterIcon = new ImageView(new Image("/lazytown/assets/images/P5.png"));
+        ImageView characterIcon = new ImageView(new Image("/lazytown/assets/images/animationsprites/playercharacter/P5.png"));
 
         ImageView healthIcon = new ImageView(new Image("/lazytown/assets/images/UI/full_heart.png"));
         ImageView hungerIcon = new ImageView(new Image("/lazytown/assets/images/UI/stomach.png"));
