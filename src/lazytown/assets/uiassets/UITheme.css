@@ -2,26 +2,35 @@
 @font-face {
     src: url('lunchtime.ttf');
 }
-
+/*
+ * Character info refers to the UI section meant for health, hunger and thirst.
+ */
 #character-info{
-    -fx-background-image: url('../images/UIcharacterInfo.png');
+    -fx-background-image: url('../images/UI/UIcharacterInfo.png');
     -fx-background-size: 200px;
     -fx-padding: 10px;
     -fx-background-repeat: no-repeat;
 }
-
+/*
+ * Counters refers to the UI section meant for amount of food and drink items held.
+ */
 #counters{
-    -fx-background-image: url('../images/UIcounters.png');
-    -fx-background-size: 70px;
+    -fx-background-image: url('../images/UI/UIcounters.png');
+    -fx-background-size: 100px;
     -fx-background-repeat: no-repeat;
 }
-
+/*
+ * Label refers to all labels.
+ */
 .label{
     -fx-font-family: 'Lunchtime Doubly So';
     -fx-text-fill: black;
     -fx-font-size: 25px;
 }
-
+/*
+ * Progress bar refers to the bars meant for health/hunger/thirst.
+ * Track is the outline, bar is the inside.
+ */
 .progress-bar > .track{
     -fx-background-color: aliceblue;
     -fx-border-width: 3px;
@@ -31,7 +40,7 @@
     -fx-background-radius: 0;
 }
 .progress-bar > .bar{
-    -fx-padding: 5px;
+    -fx-padding: 7px;
     -fx-background-color: green;
     -fx-background-insets: 3px;
     -fx-border-radius: 0;

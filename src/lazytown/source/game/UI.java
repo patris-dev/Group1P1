@@ -28,8 +28,8 @@ public class UI {
         counters.setId("counters");
         counters.setPadding(new Insets(0, 27, 0, 0));
 
-        ImageView pizzaIcon = new ImageView(new Image("/lazytown/assets/images/icon10.png"));
-        ImageView beerIcon  = new ImageView(new Image("/lazytown/assets/images/icon10.png"));
+        ImageView pizzaIcon = new ImageView(new Image("/lazytown/assets/images/UI/pizza_slice.png"));
+        ImageView beerIcon  = new ImageView(new Image("/lazytown/assets/images/UI/can_of_soda.png"));
 
         Label pizzaCounter = new Label("0");
         Label beerCounter  = new Label("0");
@@ -39,19 +39,23 @@ public class UI {
         counters.add(pizzaCounter, 1, 0);
         counters.add(beerCounter, 1, 1);
 
-        counters.setHgap(18);
-        counters.setVgap(4);
+        counters.setHgap(10);
+        counters.setVgap(0);
+
+        GridPane.setMargin(pizzaIcon, new Insets(5, 0, -5, 5));
+        GridPane.setMargin(beerIcon, new Insets(0, 0, 0, 3));
+        GridPane.setMargin(pizzaCounter, new Insets(4, 0, 0, 0));
 
         // UI section for character info.
         // Includes an image of our main character, small icons for health/hunger/thirst bars and the bars themselves.
         characterInfo = new GridPane();
         characterInfo.setId("character-info");
 
-        ImageView characterIcon = new ImageView(new Image("/lazytown/assets/images/icon50.png"));
+        ImageView characterIcon = new ImageView(new Image("/lazytown/assets/images/P5.png"));
 
-        ImageView healthIcon = new ImageView(new Image("/lazytown/assets/images/icon10.png"));
-        ImageView hungerIcon = new ImageView(new Image("/lazytown/assets/images/icon10.png"));
-        ImageView thirstIcon = new ImageView(new Image("/lazytown/assets/images/icon10.png"));
+        ImageView healthIcon = new ImageView(new Image("/lazytown/assets/images/UI/full_heart.png"));
+        ImageView hungerIcon = new ImageView(new Image("/lazytown/assets/images/UI/stomach.png"));
+        ImageView thirstIcon = new ImageView(new Image("/lazytown/assets/images/UI/water_drop.png"));
 
         ProgressBar healthBar = new ProgressBar(0.6);
         ProgressBar hungerBar = new ProgressBar(0.8);
@@ -66,7 +70,11 @@ public class UI {
         characterInfo.add(thirstBar, 2, 2);
 
         characterInfo.setHgap(10);
-        characterInfo.setVgap(11);
+        characterInfo.setVgap(7);
+
+        GridPane.setMargin(healthIcon, new Insets(-5, 0, 0, 0));
+        GridPane.setMargin(healthBar, new Insets(-5, 0, 0, 0));
+
 
 
         // Lays out all UI sections inside root.
