@@ -2,9 +2,11 @@ package lazytown.source.game.actor;
 
 import java.util.*;
 
+/**
+ * This class' main function is to keep a list of all active actors in our game, actors such as our character,
+ * enemies as well as pickups and other props.
+ */
 public class Director {
-    // This class main function is to keep a list of all active actors in our game, actors such as our character,
-    // enemies as well as pickuos and other props
 
     // The first list we make is a list of all of our active actors
     private final List<Actor> CURRENT_ACTORS;

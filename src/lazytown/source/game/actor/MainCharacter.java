@@ -6,7 +6,9 @@ import lazytown.source.Main;
 import lazytown.source.game.Game;
 import javafx.scene.image.Image;
 
-
+/**
+ * A class used for the main character, extends MovedActor class.
+ */
 public class MainCharacter extends MovedActor {
     protected Game game;
 

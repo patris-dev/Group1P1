@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 
 /**
  * This class is used for rendering levels from tiles.
+ * The method renderMap(Group background) renders a level from a map on the background.
  */
 public class Level {
 
@@ -22,6 +23,9 @@ public class Level {
     private BufferedImage image;
     // Array of Tile objects.
     private Tile[][] tiles;
+    // Determines whether the tile should collide with the player.
+    private boolean collides;
+
 
     // Level constructor, takes in the name of our map file.
     public Level(String fileName) {
@@ -52,16 +56,19 @@ public class Level {
                     switch (tile) {
                         case "B":
                             imageView = new ImageView(brick);
+                            collides = true;
                             break;
                         case "W":
                             imageView = new ImageView(stone);
+                            collides = false;
                             break;
                         case "r": case "g": case "b":
                             imageView = new ImageView(sand);
+                            collides = false;
                             break;
                     }
 
-                    tiles[x][y] = new Tile();
+                    tiles[x][y] = new Tile(collides);
                     tiles[x][y].setImage(imageView);
 
                     // Sets the coordinates of current tile.

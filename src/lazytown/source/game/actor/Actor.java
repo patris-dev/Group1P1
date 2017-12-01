@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * An abstract class for all Actors (entities).
+ */
 public abstract class Actor {
     // The first object we declare is a new array list of images, this is for animation
     protected List<Image> imageStates = new ArrayList<>();

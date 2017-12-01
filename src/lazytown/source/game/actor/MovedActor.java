@@ -2,6 +2,9 @@ package lazytown.source.game.actor;
 
 import javafx.scene.image.Image;
 
+/**
+ * An abstract class extending Actor used for moving entities.
+ */
 public abstract class MovedActor extends Actor {
 
     // First we add some variables that set our moved actor class apart from the other actors, which are static in

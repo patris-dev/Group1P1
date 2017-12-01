@@ -7,6 +7,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+/**
+ * This class is used for displaying the in-game User Interface.
+ * The method getUI() returns a BorderPane containing all of the User Interface.
+ */
 public class UI {
 
     public static BorderPane getUI() {

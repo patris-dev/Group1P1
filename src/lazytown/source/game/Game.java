@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 /**
  * This is the class that represents the Game scene.
+ * It is responsible for loading in everything and starting the game loop.
  */
 public class Game {
     public static StackPane root;
