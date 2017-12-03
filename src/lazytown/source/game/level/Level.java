@@ -94,15 +94,15 @@ public class Level {
 
                     // Sets the current tile based on RG data.
                     switch (tile) {
-                        case 'A':
+                        case 'B':
                             imageView = new ImageView(brick);
                             collides = true;
                             break;
-                        case 'B':
+                        case 'I':
                             imageView = new ImageView(stone);
                             collides = false;
                             break;
-                        case 'C':
+                        case 'V':
                             imageView = new ImageView(sand);
                             collides = false;
                             break;
@@ -157,30 +157,69 @@ public class Level {
         // "0" stands for empty data.
         switch (rg) {
             case "000000": spawnString += "A"; break;
-            case "000100": spawnString += "B"; break;
-            case "000200": spawnString += "C"; break;
-            case "000255": spawnString += "D"; break;
-            case "100000": spawnString += "E"; break;
-            case "100100": spawnString += "F"; break;
-            case "100200": spawnString += "G"; break;
-            case "100255": spawnString += "H"; break;
-            case "200000": spawnString += "I"; break;
-            case "200100": spawnString += "J"; break;
-            case "200200": spawnString += "K"; break;
-            case "200255": spawnString += "L"; break;
-            case "255000": spawnString += "M"; break;
-            case "255100": spawnString += "N"; break;
-            case "255200": spawnString += "O"; break;
-            case "255255": spawnString += "P"; break;
+            case "000050": spawnString += "B"; break;
+            case "000100": spawnString += "C"; break;
+            case "000150": spawnString += "D"; break;
+            case "000200": spawnString += "E"; break;
+            case "000250": spawnString += "F"; break;
+            case "000255": spawnString += "G"; break;
+            case "050000": spawnString += "H"; break;
+            case "050050": spawnString += "I"; break;
+            case "050100": spawnString += "J"; break;
+            case "050150": spawnString += "K"; break;
+            case "050200": spawnString += "L"; break;
+            case "055250": spawnString += "M"; break;
+            case "050255": spawnString += "N"; break;
+            case "100000": spawnString += "O"; break;
+            case "100050": spawnString += "P"; break;
+            case "100100": spawnString += "Q"; break;
+            case "100150": spawnString += "R"; break;
+            case "100200": spawnString += "S"; break;
+            case "100250": spawnString += "T"; break;
+            case "100255": spawnString += "U"; break;
+            case "150000": spawnString += "V"; break;
+            case "150050": spawnString += "W"; break;
+            case "150100": spawnString += "X"; break;
+            case "150150": spawnString += "Y"; break;
+            case "150200": spawnString += "Z"; break;
+            case "150250": spawnString += "a"; break;
+            case "150255": spawnString += "b"; break;
+            case "200000": spawnString += "c"; break;
+            case "200050": spawnString += "d"; break;
+            case "200100": spawnString += "e"; break;
+            case "200150": spawnString += "f"; break;
+            case "200200": spawnString += "g"; break;
+            case "200250": spawnString += "h"; break;
+            case "200255": spawnString += "i"; break;
+            case "250000": spawnString += "j"; break;
+            case "250050": spawnString += "k"; break;
+            case "250100": spawnString += "l"; break;
+            case "250150": spawnString += "m"; break;
+            case "250200": spawnString += "n"; break;
+            case "250250": spawnString += "o"; break;
+            case "250255": spawnString += "p"; break;
+            case "255000": spawnString += "q"; break;
+            case "255050": spawnString += "r"; break;
+            case "255100": spawnString += "s"; break;
+            case "255150": spawnString += "t"; break;
+            case "255200": spawnString += "u"; break;
+            case "255250": spawnString += "v"; break;
+            case "255255": spawnString += "w"; break;
             default: spawnString += "0";
         }
         switch (b) {
             case "000": spawnString += "0"; break;
-            case "050": spawnString += "A"; break;
-            case "100": spawnString += "B"; break;
-            case "150": spawnString += "C"; break;
-            case "200": spawnString += "D"; break;
-            case "250": spawnString += "E"; break;
+            case "025": spawnString += "A"; break;
+            case "050": spawnString += "B"; break;
+            case "075": spawnString += "C"; break;
+            case "100": spawnString += "D"; break;
+            case "125": spawnString += "E"; break;
+            case "150": spawnString += "F"; break;
+            case "175": spawnString += "G"; break;
+            case "200": spawnString += "H"; break;
+            case "225": spawnString += "I"; break;
+            case "250": spawnString += "J"; break;
+            case "255": spawnString += "K"; break;
             default: spawnString += "0";
         }
 
