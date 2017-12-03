@@ -1,6 +1,7 @@
 package lazytown.source.game;
 
 import javafx.animation.AnimationTimer;
+import lazytown.source.game.actor.Actor;
 
 import static lazytown.source.game.Game.playerOne;
 
@@ -16,6 +17,14 @@ public class GamePlayLoop extends AnimationTimer{
     public void handle(long now) {
         // Applying updates to the player character
         playerOne.update();
+
+        // Applying updates to all level-rendered actors (items, guards, etc.)
+        Actor[][] actors = Game.level.getActors();
+        for (int y = 0; y < 50; y++) {
+            for (int x = 0; x < 50; x++) {
+                if (actors[x][y] != null) actors[x][y].update();
+            }
+        }
     }
 
     @Override

@@ -165,11 +165,12 @@ public class MainCharacter extends MovedActor {
 
     private void moveCharacter() {
 
+        // Checks if the player character is on a side of the map;
+        // If so, then instead of moving the tiled background, move the player character.
         if (iX < -levelWidth/2  + windowWidth/2)    leftSide = true;    else leftSide = false;
         if (iX > levelWidth/2   - windowWidth/2)    rightSide = true;   else rightSide = false;
         if (iY < -levelHeight/2 + windowHeight/2)   upSide = true;      else upSide = false;
         if (iY > levelHeight/2  - windowHeight/2)   downSide = true;    else downSide = false;
-
 
         if (leftSide) spriteFrame.setTranslateX(iX + (levelWidth/2 - windowWidth/2));
         else if (rightSide) spriteFrame.setTranslateX(iX - (levelWidth/2 - windowWidth/2));
@@ -178,9 +179,6 @@ public class MainCharacter extends MovedActor {
         if (upSide) spriteFrame.setTranslateY(iY + (levelHeight/2 - windowHeight/2));
         else if (downSide) spriteFrame.setTranslateY(iY - (levelHeight/2 - windowHeight/2));
         else Game.getBackground().setTranslateY(-iY);
-
-
-
 
     }
 
