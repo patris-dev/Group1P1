@@ -12,8 +12,8 @@ import java.io.File;
  */
 public class AssetManager {
 
-    private static String imagePath = "/lazytown/assets/images/";
-    private static String animationSpritesPath = imagePath + "animationsprites/";
+    private static String imagesPath = "/lazytown/assets/images/";
+    private static String animationSpritesPath = imagesPath + "animationsprites/";
 
     private static String soundPath = "src/lazytown/assets/sounds/";
 
@@ -40,16 +40,20 @@ public class AssetManager {
         return guardSprites;
     }
 
+    public static Image getItem(String fileName) {
+        return new Image(imagesPath + "items/" + fileName);
+    }
+
     public static String getMap(int index) {
-        return imagePath + "levels/" + index;
+        return imagesPath + "levels/map" + index + ".png";
     }
 
     public static Image getTile(String fileName) {
-        return new Image(imagePath + "tiles/" + fileName);
+        return new Image(imagesPath + "tiles/" + fileName);
     }
 
     public static Image getUI(String fileName) {
-        return new Image(imagePath + "UI/" + fileName);
+        return new Image(imagesPath + "UI/" + fileName);
     }
 
     public static Media getSound(String fileName) {

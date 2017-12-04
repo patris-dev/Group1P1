@@ -80,7 +80,7 @@ public class Game {
     // This method is used to render the level from a map.
     private void loadLevel() {
         // Instantiates a level object, renders the level
-        level = new Level("map1.png");
+        level = new Level(1);
         level.renderMap(background);
     }
 

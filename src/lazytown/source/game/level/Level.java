@@ -21,9 +21,7 @@ import javax.imageio.ImageIO;
 public class Level {
 
     // Path of the folder which holds all level map assets.
-    private String path = "/lazytown/assets/images/levels/";
-    // Full path of the file (path + fileName).
-    private String fullPath;
+    private int levelNumber;
     // Our image file.
     private BufferedImage image;
     // Array of Tile objects.
@@ -33,24 +31,30 @@ public class Level {
     // Array of actors for rendering items, guards, etc.
     private Actor[][] actors;
 
-    // Array of guard sprites.
-    Image[] gSprites = AssetManager.getGuardSprites();
-
     // Level constructor, takes in the name of our map file.
-    public Level(String fileName) {
-        fullPath = path + fileName;
+    public Level(int levelNumber) {
+        this.levelNumber = levelNumber;
     }
 
     // Renders the map made from tiles to the user's screen.
     public void renderMap(Group background) {
         try {
             // Reads an image as data.
-            image = ImageIO.read(getClass().getResource(fullPath));
+            image = ImageIO.read(getClass().getResource(AssetManager.getMap(levelNumber)));
 
+            // Tile images.
             Image brick = AssetManager.getTile("bricksorwhatever.png");
             Image stone = AssetManager.getTile("stone.png");
             Image sand  = AssetManager.getTile("sand.png");
 
+            // Item images.
+            Image pizza = AssetManager.getItem("pizza_slice.png");
+            Image canOfSoda = AssetManager.getItem("can_of_soda.png");
+
+            // Array of guard sprites.
+            Image[] gSprites = AssetManager.getGuardSprites();
+
+            // ImageView object to render a selected image.
             ImageView imageView = null;
 
             // Instantiates the arrays of tiles and actors.
@@ -60,9 +64,9 @@ public class Level {
             // Checks each pixel for it's RGB data, render the map from tiles based on that data.
             for (int y = 0; y < image.getHeight(); y++) {
                 for (int x = 0; x < image.getWidth(); x++) {
+
                     // Scans the color of a single pixel, returns a String.
                     String render = this.scanPixel(x, y);
-
                     // The returned string consists of two chars - one for tiles, one for entities.
                     char tile = render.charAt(0);
                     char entity = render.charAt(1);
@@ -97,10 +101,10 @@ public class Level {
                     // Renders them externally later on (in Game.java renderActors() method) so it goes on top of tiles.
                     switch (entity) {
                         case 'A':
-                            actors[x][y] = new Item("", x*50, y*50, "050", new Image("/lazytown/assets/images/UI/pizza_slice.png"));
+                            actors[x][y] = new Item("", x*50, y*50, "050", pizza);
                             break;
                         case 'B':
-                            actors[x][y] = new Item("", x*50, y*50, "100", new Image("/lazytown/assets/images/UI/can_of_soda.png"));
+                            actors[x][y] = new Item("", x*50, y*50, "100", canOfSoda);
                             break;
                         case 'C':
                             actors[x][y] = new Guard("", x*50, y*50, gSprites);
