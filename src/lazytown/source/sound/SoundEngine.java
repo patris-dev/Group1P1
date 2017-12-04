@@ -3,6 +3,7 @@ package lazytown.source.sound;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import lazytown.assets.AssetManager;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,10 +17,6 @@ import java.io.IOException;
  */
 public class SoundEngine {
 
-    // path specifies the path of our sound files. Later on, a file name is appended.
-    private String path = "src/lazytown/assets/sounds/";
-    // filename specifies the name of our file which will be appended to the end of the path.
-    private String filename = "";
     // MediaPlayer is required to play the audio to our user.
     private MediaPlayer mediaPlayer;
     // Media is our audio object.
@@ -51,12 +48,8 @@ public class SoundEngine {
     // Loads in a sound file.
     // mp3FileName - a string specifying the name of the file, located in the package specified in the path variable.
     public void load(String mp3FileName) {
-        // Sets the filename to mp3FileName.
-        filename = mp3FileName;
-        // Creates a fullPath string which is composed of our path and filename strings.
-        String fullPath = path + filename;
-        // Sets the location of our media file to fullPath.
-        media = new Media(new File(fullPath).toURI().toString());
+        // Calls the AssetManager class to find the sound.
+        media = AssetManager.getSound(mp3FileName);
         // Initializes the mediaPlayer to load the media file.
         mediaPlayer = new MediaPlayer(media);
     }
@@ -155,12 +148,15 @@ public class SoundEngine {
     public static double getMusicVolume() {
         return SoundEngine.PROPERTIES_MUSIC.getVolume();
     }
+
     public static boolean getMusicMute() {
         return SoundEngine.PROPERTIES_MUSIC.isMuted();
     }
+
     public static double getSFXVolume() {
         return SoundEngine.PROPERTIES_SFX.getVolume();
     }
+
     public static boolean getSFXMute() {
         return SoundEngine.PROPERTIES_SFX.isMuted();
     }

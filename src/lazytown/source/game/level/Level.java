@@ -3,6 +3,7 @@ package lazytown.source.game.level;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import lazytown.assets.AssetManager;
 import lazytown.source.game.Game;
 import lazytown.source.game.actor.Actor;
 import lazytown.source.game.actor.Guard;
@@ -32,34 +33,8 @@ public class Level {
     // Array of actors for rendering items, guards, etc.
     private Actor[][] actors;
 
-    // Guard sprite data.
-    private static final int SPRITE_WIDTH = 75;
-    private static final int SPRITE_HEIGHT = SPRITE_WIDTH;
-
-    Image p0 = new Image("lazytown/assets/images/animationsprites/guard/P0.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-            false, true);
-    Image p1 = new Image("lazytown/assets/images/animationsprites/guard/P1.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-            false, true);
-    Image p2 = new Image("lazytown/assets/images/animationsprites/guard/P2.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-            false, true);
-    Image p3 = new Image("lazytown/assets/images/animationsprites/guard/P3.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-            false, true);
-    Image p4 = new Image("lazytown/assets/images/animationsprites/guard/P4.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-            false, true);
-    Image p5 = new Image("lazytown/assets/images/animationsprites/guard/P5.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-            false, true);
-    Image p6 = new Image("lazytown/assets/images/animationsprites/guard/P6.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-            false, true);
-    Image p7 = new Image("lazytown/assets/images/animationsprites/guard/P7.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-            false, true);
-    Image p8 = new Image("lazytown/assets/images/animationsprites/guard/P8.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-            false, true);
-    Image p9 = new Image("lazytown/assets/images/animationsprites/guard/P9.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-            false, true);
-    Image p10 = new Image("lazytown/assets/images/animationsprites/guard/P10.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-            false, true);
-    Image p11 = new Image("lazytown/assets/images/animationsprites/guard/P11.png", SPRITE_WIDTH, SPRITE_HEIGHT, true,
-            false, true);
+    // Array of guard sprites.
+    Image[] gSprites = AssetManager.getGuardSprites();
 
     // Level constructor, takes in the name of our map file.
     public Level(String fileName) {
@@ -72,9 +47,9 @@ public class Level {
             // Reads an image as data.
             image = ImageIO.read(getClass().getResource(fullPath));
 
-            Image brick = new Image("/lazytown/assets/images/tiles/bricksorwhatever.png");
-            Image stone = new Image("/lazytown/assets/images/tiles/stone.png");
-            Image sand = new Image("/lazytown/assets/images/tiles/sand.png");
+            Image brick = AssetManager.getTile("bricksorwhatever.png");
+            Image stone = AssetManager.getTile("stone.png");
+            Image sand  = AssetManager.getTile("sand.png");
 
             ImageView imageView = null;
 
@@ -128,7 +103,7 @@ public class Level {
                             actors[x][y] = new Item("", x*50, y*50, "100", new Image("/lazytown/assets/images/UI/can_of_soda.png"));
                             break;
                         case 'C':
-                            actors[x][y] = new Guard("", x*50, y*50, p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11);
+                            actors[x][y] = new Guard("", x*50, y*50, gSprites);
                             break;
                         default: actors[x][y] = null;
                     }
