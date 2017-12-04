@@ -39,6 +39,7 @@ public class MainMenu {
         sceneMainMenu = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
         sceneMainMenu.getStylesheets().add(AssetManager.getTheme("MenuTheme.css"));
 
+
         // VBox lays out the components in a vertical line, spacing is the distance between components inside the VBox
         // Places buttonContainer in the center of BorderPane root
         // Aligns components of vBox to the center

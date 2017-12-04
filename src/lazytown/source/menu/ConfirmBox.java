@@ -46,7 +46,7 @@ public class ConfirmBox {
         // Instantiates sceneMainMenu which will contain our root and sets the window size
         // Tells all nodes in scene to use the MenuTheme.css style
         scene = new Scene(root, SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
-        scene.getStylesheets().add(AssetManager.getTheme("MenuTheme.css"));
+        scene.getStylesheets().add(AssetManager.getTheme("LoadingScreenTheme.css"));
 
 
         // Creates a label for our message (for example: "Are you sure you want to quit?")

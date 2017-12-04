@@ -31,6 +31,7 @@ public class Main extends Application {
         primaryStage.setTitle("lazytown");
         // Prevents the window from being resized
         primaryStage.setResizable(false);
+        primaryStage.sizeToScene();
         // Sets the default scene as MainMenu
         MainMenu.show(primaryStage);
 

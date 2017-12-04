@@ -12,7 +12,7 @@
  */
 .root{
     -fx-background-color: black;
-    -fx-background-image: url('../images/UI/forest.png');
+    -fx-background-image: url('../images/UI/background.png');
     -fx-background-size: cover;
     -fx-font-family: 'Lunchtime Doubly So';
     -fx-font-size: 20px;
@@ -25,12 +25,12 @@
  * Sets the width of button border to 5px and makes it black.
  */
 .button{
-    -fx-text-fill: black;
+    -fx-text-fill: white;
     -fx-font-size: 25px;
     -fx-background-radius: 0;
-    -fx-background-color: #C1FFAF;
+    -fx-background-color: transparent;
     -fx-border-width: 5px;
-    -fx-border-color: black;
+    -fx-border-color: white;
     -fx-background-insets: 100%;
 
 }
@@ -38,8 +38,7 @@
  * Lightens up the color of our button.
  */
 .button:hover{
-    -fx-background-color: #DBFFD1;
-
+    -fx-background-color: #383838;
 }
 
 /* Label-title refers to a specific label which is used for titles.
@@ -47,14 +46,14 @@
  * Makes the font bigger than the generic label.
  */
 #label-title{
-    -fx-text-fill: black;
+    -fx-text-fill: white;
     -fx-font-size: 50px;
 }
 /* Label refers to all labels.
  * Basic labels will have smaller font than the title ones.
  */
 .label{
-    -fx-text-fill: black;
+    -fx-text-fill: white;
     -fx-font-size: 25px;
 }
 
@@ -62,14 +61,14 @@
  * Sets the text color to black.
  */
 .check-box{
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 /*
  * Box refers to the part of a checkbox which is clickable
  */
 .check-box .box{
-    -fx-background-color: aliceblue;
-    -fx-border-color: black;
+    -fx-background-color: transparent;
+    -fx-border-color: white;
     -fx-border-radius: 0;
     -fx-border-width: 3px;
     -fx-background-insets: 100%;
@@ -78,7 +77,7 @@
  * Mark refers to the symbol that appears when a checkbox is selected.
  */
 .check-box:selected .mark{
-    -fx-background-color: black;
+    -fx-background-color: white;
 }
 
 /*
@@ -87,18 +86,18 @@
  */
 .slider .track{
     -fx-pref-height: 20;
-    -fx-background-color: aliceblue;
+    -fx-background-color: transparent;
     -fx-border-width: 3px;
-    -fx-border-color: black;
+    -fx-border-color: white;
     -fx-background-insets: 100%;
 }
 /*
  * Thumb refers to the moving part of the slider.
  */
 .slider .thumb{
-    -fx-background-color: #C1FFAF;
+    -fx-background-color: black;
     -fx-border-width: 3px;
-    -fx-border-color: black;
+    -fx-border-color: white;
     -fx-border-radius: 0;
     -fx-background-insets: 100%;
     -fx-background-radius: 0;
