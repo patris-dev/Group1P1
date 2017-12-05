@@ -42,13 +42,13 @@ public class Main extends Application {
         buttonClicks.load("buttonClick.mp3");
 
         // An event that happens if the close (X) button is pressed.
-        primaryStage.setOnCloseRequest(e -> {
-            //consume cancels out the CloseRequest
-            e.consume();
-            if(ConfirmBox.display("Exit Game","Are you sure you want to exit?")){
-                primaryStage.close();
-            }
-        });
+//        primaryStage.setOnCloseRequest(e -> {
+//            //consume cancels out the CloseRequest
+//            e.consume();
+//            if(ConfirmBox.display("Exit Game","Are you sure you want to exit?")){
+//                primaryStage.close();
+//            }
+//        });
 
         // Shows the Stage on our screen
         primaryStage.show();

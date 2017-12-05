@@ -184,9 +184,9 @@ public class MainCharacter extends MovedActor {
 
     private void checkCollision() {
         // When we check for collision we cycle through the list of all of our actors
-        for (int i = 0; i < game.director.getCurrentActors().size(); i++) {
+        for (int i = 0; i < Game.director.getCurrentActors().size(); i++) {
             // And as we do that we set them up in a temporary object
-            Actor object = game.director.getCurrentActors().get(i);
+            Actor object = Game.director.getCurrentActors().get(i);
             // This object is then being parsed and tested in our collide method
             if (collide(object)) {
                 // If collision has been detected, this code runs, in it's current state, it plays a sound, adds the
@@ -207,9 +207,9 @@ public class MainCharacter extends MovedActor {
         // quite costly. The way we do this is by first using an if statement to check if two imageView nodes intersect
         // with each other, if they do we create a new Shape object from the two intersecting ImageView nodes, the width
         // of which we measure. If this width is not negative 1, we return true, else we return false.
-        if (game.playerOne.spriteFrame.getBoundsInParent().intersects(
+        if (Game.playerOne.spriteFrame.getBoundsInParent().intersects(
                 object.getSpriteFrame().getBoundsInParent())) {
-            Shape intersection = SVGPath.intersect(game.playerOne.getSpriteBoundary(), object.getSpriteBoundary());
+            Shape intersection = SVGPath.intersect(Game.playerOne.getSpriteBoundary(), object.getSpriteBoundary());
             if (intersection.getBoundsInLocal().getWidth() != -1) {
                 return true;
             }

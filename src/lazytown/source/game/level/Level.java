@@ -57,7 +57,8 @@ public class Level {
             Image[] gSprites = AssetManager.getGuardSprites();
 
             // ImageView object to render a selected image.
-            ImageView imageView = null;
+            ImageView imageView;
+            Image tileImage = null;
 
             // Instantiates the arrays of tiles and actors.
             tiles = new Tile[image.getWidth()][image.getHeight()];
@@ -76,20 +77,21 @@ public class Level {
                     // Sets the current tile based on RG data.
                     switch (tile) {
                         case 'B':
-                            imageView = new ImageView(brick);
+                            tileImage = brick;
                             collides = true;
                             break;
                         case 'I':
-                            imageView = new ImageView(stone);
+                            tileImage = stone;
                             collides = false;
                             break;
                         case 'V':
-                            imageView = new ImageView(sand);
+                            tileImage = sand;
                             collides = false;
                             break;
                     }
 
-                    tiles[x][y] = new Tile(collides);
+                    imageView = new ImageView(tileImage);
+                    tiles[x][y] = new Tile(collides, x, y, tileImage);
                     tiles[x][y].setImage(imageView);
 
                     // Sets the coordinates of current tile.
@@ -100,8 +102,10 @@ public class Level {
                     background.getChildren().add(tiles[x][y].getImage());
 
                     // If collides is true, then add the current tile to our director for collision
-                    if (collides)
+                    if (collides) {
                         director.addCurrentActors(tiles[x][y]);
+                    }
+
 
                     // Creates an array of actors (items, guards, etc.)
                     // Renders them externally later on (in Game.java renderActors() method) so it goes on top of tiles.

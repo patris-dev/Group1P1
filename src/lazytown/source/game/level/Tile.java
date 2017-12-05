@@ -1,8 +1,10 @@
 package lazytown.source.game.level;
 
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.SVGPath;
+import lazytown.assets.AssetManager;
 import lazytown.source.game.actor.Actor;
 
 /**
@@ -17,8 +19,8 @@ public class Tile extends Actor{
     private static SVGPath tileBoundary = new SVGPath();
     private static String boundaryShape = "M0 0 H 50 V 50 H 0 Z";
 
-    public Tile(boolean collides) {
-        super();
+    public Tile(boolean collides, int x, int y, Image image) {
+        super("M0 0 H 50 V 50 H 0 Z", x*50, y*50, image);
         tileBoundary.setContent(boundaryShape);
         this.collides = collides;
     }
