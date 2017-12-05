@@ -73,7 +73,7 @@ public class Game {
         loadingScreen.setBottom(loadingLabel);
 
         Scene loadingScene = new Scene(loadingScreen, Main.getWindowWidth(), Main.getWindowHeight());
-        loadingScene.getStylesheets().add(AssetManager.getTheme("loadingScreenTheme.css"));
+        loadingScene.getStylesheets().add(AssetManager.getTheme("LoadingScreenTheme.css"));
         primaryStage.setScene(loadingScene);
     }
 
@@ -154,7 +154,6 @@ public class Game {
     private static void startGameLoop() {
         gamePlayLoop = new GamePlayLoop();
         gamePlayLoop.start();
-
     }
 
     // This method renders the in-game user interface.
@@ -162,7 +161,7 @@ public class Game {
         root.getChildren().add(UI.getUI());
         UI.loadTextWindow("Welcome to LazyTown! Press E to continue.",
                                     "Use W A S D to move around.",
-                                    "This is the last message.");
+                                    "This is the last message. \n It is split into two lines.");
         UI.displayTextWindow();
     }
 

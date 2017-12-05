@@ -18,6 +18,7 @@ public class UI {
     private static Text textArea;
     private static int textCounter = 0;
     private static String[] text;
+    private static HBox textBorder;
 
     public static BorderPane getUI() {
 
@@ -87,11 +88,14 @@ public class UI {
 
         // UI section for the text window, meant for displaying text to our user.
         // Placed inside the same grid as the character info.
+        textBorder = new HBox();
+        textBorder.setId("text-border");
         textArea = new Text();
         textArea.setVisible(false);
         textArea.getStyleClass().add("text-id");
+        textBorder.getChildren().add(textArea);
         //textArea.setVisible(false);
-        characterInfo.add(textArea, 4, 0, 3, 3);
+        characterInfo.add(textBorder, 4, 0, 3, 3);
 
 
         // Lays out all UI sections inside root.
@@ -101,10 +105,12 @@ public class UI {
         return root;
     }
 
+    // Loads in an array of Strings that will be later on displayed.
     public static void loadTextWindow(String... textLines) {
         text = textLines;
     }
 
+    // Displays a text window with a single line. Bumps up the line index each time the method is called.
     public static void displayTextWindow() {
         if(text != null && textCounter < text.length) {
             textArea.setText(text[textCounter]);
@@ -114,13 +120,10 @@ public class UI {
         else hideTextWindow();
     }
 
-    public static void hideTextWindow() {
+    // Once the counter has reached the limit, make the text box invisible and clear the text array.
+    private static void hideTextWindow() {
         text = null;
-        textArea.setVisible(false);
+        textBorder.setVisible(false);
         textCounter = 0;
-    }
-
-    public static void bumpTextCounter() {
-        textCounter++;
     }
 }
