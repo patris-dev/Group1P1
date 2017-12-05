@@ -46,6 +46,7 @@ public class Level {
             Image brick = AssetManager.getTile("bricksorwhatever.png");
             Image stone = AssetManager.getTile("stone.png");
             Image sand  = AssetManager.getTile("sand.png");
+            Image nullTile = AssetManager.getTile("null.png");
 
             // Item images.
             Image pizza = AssetManager.getItem("pizza_slice.png");
@@ -83,6 +84,10 @@ public class Level {
                             break;
                         case 'V':
                             imageView = new ImageView(sand);
+                            collides = false;
+                            break;
+                        default:
+                            imageView = new ImageView(nullTile);
                             collides = false;
                             break;
                     }

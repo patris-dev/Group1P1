@@ -47,4 +47,11 @@
     -fx-background-radius: 0;
 }
 
+.text-id{
+    -fx-fill: black;
+    -fx-font-size: 15pt;
+    -fx-font-family: 'Lunchtime Doubly So';
+
+}
+
 
