@@ -3,13 +3,14 @@ package lazytown.source.game.level;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.SVGPath;
+import lazytown.source.game.actor.Actor;
 
 /**
  * This class is used for tiles which are displayed in the background of a level.
  * It includes an ImageView for the tile which is being rendered, an SVGPath object for collision and a boolean for
  * determining whether collision with the player should occur.
  */
-public class Tile {
+public class Tile extends Actor{
 
     private ImageView image;
     private boolean collides;
@@ -17,6 +18,7 @@ public class Tile {
     private static String boundaryShape = "M0 0 H 50 V 50 H 0 Z";
 
     public Tile(boolean collides) {
+        super();
         tileBoundary.setContent(boundaryShape);
         this.collides = collides;
     }
@@ -31,5 +33,10 @@ public class Tile {
 
     public static SVGPath getTileBoundary() {
         return tileBoundary;
+    }
+
+    @Override
+    public void update() {
+
     }
 }

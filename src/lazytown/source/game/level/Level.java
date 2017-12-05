@@ -14,6 +14,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import static lazytown.source.game.Game.director;
+
 /**
  * This class is used for rendering levels from tiles.
  * The method renderMap(Group background) renders a level from a map on the background.
@@ -96,6 +98,10 @@ public class Level {
 
                     // Adds the current tile to our StackPane root.
                     background.getChildren().add(tiles[x][y].getImage());
+
+                    // If collides is true, then add the current tile to our director for collision
+                    if (collides)
+                        director.addCurrentActors(tiles[x][y]);
 
                     // Creates an array of actors (items, guards, etc.)
                     // Renders them externally later on (in Game.java renderActors() method) so it goes on top of tiles.

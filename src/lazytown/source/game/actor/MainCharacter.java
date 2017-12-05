@@ -192,9 +192,10 @@ public class MainCharacter extends MovedActor {
                 // If collision has been detected, this code runs, in it's current state, it plays a sound, adds the
                 // object to another list, removes the sprite graphically and then removes it from existence by
                 // resetting the list of removed actors. Finally we call the scoringEngine() method on our object.
-                game.director.addToRemovedActors(object);
-                game.root.getChildren().remove(object.getSpriteFrame());
-                game.director.resetRemovedActors();
+                System.out.println("Collision");
+//                game.director.addToRemovedActors(object);
+//                game.root.getChildren().remove(object.getSpriteFrame());
+//                game.director.resetRemovedActors();
             }
         }
     }

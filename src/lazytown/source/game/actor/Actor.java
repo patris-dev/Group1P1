@@ -44,6 +44,10 @@ public abstract class Actor {
         isFlipH = false;
     }
 
+    public Actor() {
+
+    }
+
     // We declare here that every actor object in our game, no matter what kind, needs to have an update method,
     // this one is essential for our game, since it tells the gameplay loop that logic has to be executed with every
     // pulse in our game. We enforce the implementation of this method in any subclasses by also making it abstract.
