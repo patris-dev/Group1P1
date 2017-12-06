@@ -112,8 +112,10 @@ public class Level {
                             actors[x][y] = new Item("", x*50, y*50, "100", canOfSoda);
                             break;
                         case 'C':
-                            actors[x][y] = new Guard("", x*50, y*50, gSprites);
+                            actors[x][y] = new Guard("", x*50, y*50, true, gSprites);
                             break;
+                        case 'H':
+
                         default: actors[x][y] = null;
                     }
                 }
@@ -221,5 +223,9 @@ public class Level {
 
     public Actor[][] getActors() {
         return actors;
+    }
+
+    public Tile[][] getTiles() {
+        return tiles;
     }
 }

@@ -32,4 +32,8 @@ public class Tile {
     public static SVGPath getTileBoundary() {
         return tileBoundary;
     }
+
+    public boolean isCollides() {
+        return collides;
+    }
 }

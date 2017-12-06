@@ -41,14 +41,14 @@ public class Main extends Application {
         menuMusic.load("menuMusic.mp3");
         buttonClicks.load("buttonClick.mp3");
 
-        // An event that happens if the close (X) button is pressed.
-        primaryStage.setOnCloseRequest(e -> {
-            //consume cancels out the CloseRequest
-            e.consume();
-            if(ConfirmBox.display("Exit Game","Are you sure you want to exit?")){
-                primaryStage.close();
-            }
-        });
+//        // An event that happens if the close (X) button is pressed.
+//        primaryStage.setOnCloseRequest(e -> {
+//            //consume cancels out the CloseRequest
+//            e.consume();
+//            if(ConfirmBox.display("Exit Game","Are you sure you want to exit?")){
+//                primaryStage.close();
+//            }
+//        });
 
         // Shows the Stage on our screen
         primaryStage.show();
