@@ -187,7 +187,7 @@ public class MainCharacter extends MovedActor {
                 // If collision has been detected, this code runs, in it's current state, it plays a sound, adds the
                 // object to another list, removes the sprite graphically and then removes it from existence by
                 // resetting the list of removed actors. Finally we call the scoringEngine() method on our object.
-                System.out.println("Collision with tile at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + Game.playerOne.spriteFrame.getTranslateX() + " " + Game.playerOne.spriteFrame.getTranslateY());
+                System.out.println("Collision with tile at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
 //                game.director.addToRemovedActors(object);
 //                game.root.getChildren().remove(object.getSpriteFrame());
 //                game.director.resetRemovedActors();
@@ -202,8 +202,8 @@ public class MainCharacter extends MovedActor {
         // quite costly. The way we do this is by first using an if statement to check if two imageView nodes intersect
         // with each other, if they do we create a new Shape object from the two intersecting ImageView nodes, the width
         // of which we measure. If this width is not negative 1, we return true, else we return false.
-        if (Game.playerOne.spriteFrame.getBoundsInParent().intersects(
-                object.getSpriteFrame().getBoundsInParent())) {
+        if (object.getSpriteFrame().getBoundsInParent().intersects(
+                iX+levelWidth/2, iY+levelHeight/2, 50, 50)) {
             Shape intersection = SVGPath.intersect(Game.playerOne.getSpriteBoundary(), object.getSpriteBoundary());
             if (intersection.getBoundsInLocal().getWidth() != -1) {
                 return true;
