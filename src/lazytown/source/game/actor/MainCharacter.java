@@ -188,9 +188,11 @@ public class MainCharacter extends MovedActor {
                 // object to another list, removes the sprite graphically and then removes it from existence by
                 // resetting the list of removed actors. Finally we call the scoringEngine() method on our object.
                 System.out.println("Collision with tile at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
-//                game.director.addToRemovedActors(object);
-//                game.root.getChildren().remove(object.getSpriteFrame());
-//                game.director.resetRemovedActors();
+                if (object.isPickup) {
+                game.director.addToRemovedActors(object);
+                game.getBackground().getChildren().remove(object.getSpriteFrame());
+                game.director.resetRemovedActors();
+                }
             }
         }
     }

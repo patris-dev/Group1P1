@@ -9,6 +9,8 @@ public class Item extends Actor {
 
     private String id;
 
+
+
     // Our constructor, which calls the Actor constructor with the super keyword.
     // Id is used to differentiate items from each other.
     // (for example, based on the id, we can know which item counter in inventory to bump up when picking it up.)
@@ -16,7 +18,7 @@ public class Item extends Actor {
     public Item(String SVGdata, double xLoc, double yLoc, String id, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
         this.id = id;
-
+        isPickup = true;
         spriteFrame.setTranslateX(xLoc);
         spriteFrame.setTranslateY(yLoc);
     }
@@ -27,7 +29,6 @@ public class Item extends Actor {
         // update for items.
         // might likely be empty, except for animating certain items.
     }
-
 
 
 }

@@ -108,16 +108,20 @@ public class Level {
                     // Renders them externally later on (in Game.java renderActors() method) so it goes on top of tiles.
                     switch (entity) {
                         case 'A':
-                            actors[x][y] = new Item("", x*50, y*50, "050", pizza);
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "050", pizza);
                             break;
                         case 'B':
-                            actors[x][y] = new Item("", x*50, y*50, "100", canOfSoda);
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "100", canOfSoda);
                             break;
                         case 'C':
-                            actors[x][y] = new Guard("", x*50, y*50, gSprites);
+                            actors[x][y] = new Guard("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, gSprites);
                             break;
                         default: actors[x][y] = null;
                     }
+                    if (actors[x][y] != null) {
+                        director.addCurrentActors(actors[x][y]);
+                    }
+
                 }
             }
         } catch (IOException e) {
