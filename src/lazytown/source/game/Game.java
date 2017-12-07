@@ -126,19 +126,20 @@ public class Game {
     // This method takes care of spawning in our various actors, among those are the player, the guards, the pickups,
     // and whatever the player can interact with, later it could be extended to be more things, like props.
     private void spawnActors() {
-       playerOne = new MainCharacter(this,"M0 0 H 50 V 50 H 0 Z", (level.getImageWidth()/2), (level.getImageHeight()/2), pSprites);
+       playerOne = new MainCharacter(this,"M0 0 H 50 V 50 H 0 Z", 0, 0, pSprites);
     }
 
     // This method takes care of rendering our actors to the stackPane object that we have set up
     private static void renderActors() {
-       root.getChildren().add(playerOne.spriteFrame);
 
         Actor[][] actors = level.getActors();
-       for (int y = 0; y < level.getImageHeight(); y++) {
-           for (int x = 0; x < level.getImageWidth(); x++) {
-               if (actors[x][y] != null) background.getChildren().add(actors[x][y].spriteFrame);
-           }
-       }
+        for (int y = 0; y < level.getImageHeight(); y++) {
+            for (int x = 0; x < level.getImageWidth(); x++) {
+                if (actors[x][y] != null) background.getChildren().add(actors[x][y].spriteFrame);
+            }
+        }
+
+        root.getChildren().add(playerOne.spriteFrame);
     }
 
     // This method is in charge of handling our actors. For now this is an empty method, but it will load a role when we

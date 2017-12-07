@@ -72,7 +72,6 @@ public class MainCharacter extends MovedActor {
                 spriteFrame.setScaleX(1);
                 spriteFrame.setImage(imageStates.get(8));
             }
-
             animation = false;
             framecounter = 0;
         }
@@ -96,7 +95,6 @@ public class MainCharacter extends MovedActor {
             }
             facingLeft = true;
             facingDown = facingRight = facingUp = false;
-
         }
 
         // Moving right
@@ -118,7 +116,6 @@ public class MainCharacter extends MovedActor {
             }
             facingRight = true;
             facingDown = facingLeft = facingUp = false;
-
         }
 
         // Moving down
@@ -140,7 +137,6 @@ public class MainCharacter extends MovedActor {
             facingUp = facingRight = facingLeft = false;
         }
 
-
         // Moving up
         if (game.isUp()) {
             if (!animation && (!game.isLeft() && !game.isRight())) {
@@ -158,7 +154,6 @@ public class MainCharacter extends MovedActor {
             }
             facingUp = true;
             facingDown = facingRight = facingLeft = false;
-
         }
 
     }
@@ -192,7 +187,7 @@ public class MainCharacter extends MovedActor {
                 // If collision has been detected, this code runs, in it's current state, it plays a sound, adds the
                 // object to another list, removes the sprite graphically and then removes it from existence by
                 // resetting the list of removed actors. Finally we call the scoringEngine() method on our object.
-                System.out.println("Collision");
+                System.out.println("Collision with tile at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + Game.playerOne.spriteFrame.getTranslateX() + " " + Game.playerOne.spriteFrame.getTranslateY());
 //                game.director.addToRemovedActors(object);
 //                game.root.getChildren().remove(object.getSpriteFrame());
 //                game.director.resetRemovedActors();

@@ -56,8 +56,7 @@ public class Level {
             // Array of guard sprites.
             Image[] gSprites = AssetManager.getGuardSprites();
 
-            // ImageView object to render a selected image.
-            ImageView imageView;
+            // Image object to render a selected tile.
             Image tileImage = null;
 
             // Instantiates the arrays of tiles and actors.
@@ -86,20 +85,18 @@ public class Level {
                             break;
                         case 'V':
                             tileImage = sand;
-                            collides = false;
+                            collides = true;
                             break;
                     }
 
-                    imageView = new ImageView(tileImage);
                     tiles[x][y] = new Tile(collides, x, y, tileImage);
-                    tiles[x][y].setImage(imageView);
 
                     // Sets the coordinates of current tile.
-                    tiles[x][y].getImage().setTranslateX(x * 50);
-                    tiles[x][y].getImage().setTranslateY(y * 50);
+                    tiles[x][y].spriteFrame.setTranslateX(x * 50);
+                    tiles[x][y].spriteFrame.setTranslateY(y * 50);
 
                     // Adds the current tile to our StackPane root.
-                    background.getChildren().add(tiles[x][y].getImage());
+                    background.getChildren().add(tiles[x][y].spriteFrame);
 
                     // If collides is true, then add the current tile to our director for collision
                     if (collides) {
