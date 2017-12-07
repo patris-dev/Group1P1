@@ -5,6 +5,7 @@ import javafx.scene.shape.Shape;
 import lazytown.source.Main;
 import lazytown.source.game.Game;
 import javafx.scene.image.Image;
+import lazytown.source.game.level.Tile;
 
 /**
  * A class used for the main character, extends MovedActor class.
@@ -17,6 +18,7 @@ public class MainCharacter extends MovedActor {
     boolean facingDown = true;
     boolean facingLeft = false;
     boolean facingRight = false;
+    boolean canMove = true;
 
 
     boolean leftSide, rightSide, upSide, downSide;
@@ -44,14 +46,16 @@ public class MainCharacter extends MovedActor {
     }
 
     private void setXYLocation() {
-        if (game.isRight())
-            iX += velX;
-        if (game.isLeft())
-            iX -= velX;
-        if (game.isUp())
-            iY -= velY;
-        if (game.isDown())
-            iY += velY;
+        if (canMove) {
+            if (game.isRight())
+                iX += velX;
+            if (game.isLeft())
+                iX -= velX;
+            if (game.isUp())
+                iY -= velY;
+            if (game.isDown())
+                iY += velY;
+        }
     }
 
     private void setImageState() {
@@ -167,12 +171,12 @@ public class MainCharacter extends MovedActor {
         if (iY < -levelHeight/2 + windowHeight/2)   upSide = true;      else upSide = false;
         if (iY > levelHeight/2  - windowHeight/2)   downSide = true;    else downSide = false;
 
-        if (leftSide) spriteFrame.setTranslateX(iX + (levelWidth/2 - windowWidth/2));
-        else if (rightSide) spriteFrame.setTranslateX(iX - (levelWidth/2 - windowWidth/2));
+        if (leftSide) spriteFrame.setTranslateX(iX + (levelWidth / 2 - windowWidth / 2));
+        else if (rightSide) spriteFrame.setTranslateX(iX - (levelWidth / 2 - windowWidth / 2));
         else Game.getBackground().setTranslateX(-iX);
 
-        if (upSide) spriteFrame.setTranslateY(iY + (levelHeight/2 - windowHeight/2));
-        else if (downSide) spriteFrame.setTranslateY(iY - (levelHeight/2 - windowHeight/2));
+        if (upSide) spriteFrame.setTranslateY(iY + (levelHeight / 2 - windowHeight / 2));
+        else if (downSide) spriteFrame.setTranslateY(iY - (levelHeight / 2 - windowHeight / 2));
         else Game.getBackground().setTranslateY(-iY);
 
     }
@@ -189,9 +193,23 @@ public class MainCharacter extends MovedActor {
                 // resetting the list of removed actors. Finally we call the scoringEngine() method on our object.
                 System.out.println("Collision with tile at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
                 if (object instanceof Item) {
-                Game.director.addToRemovedActors(object);
-                Game.getBackground().getChildren().remove(object.getSpriteFrame());
-                Game.director.resetRemovedActors();
+                    Game.director.addToRemovedActors(object);
+                    Game.getBackground().getChildren().remove(object.getSpriteFrame());
+                    Game.director.resetRemovedActors();
+                }
+                if (object instanceof Tile) {
+                    if (game.isDown()) {
+                        iY -= velY;
+                    }
+                    else if (game.isUp()) {
+                        iY += velY;
+                    }
+                    if (game.isRight()) {
+                        iX -= velX;
+                    }
+                    else if (game.isLeft()) {
+                        iX += velX;
+                    }
                 }
             }
         }

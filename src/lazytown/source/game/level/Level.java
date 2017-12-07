@@ -85,7 +85,7 @@ public class Level {
                             break;
                         case 'V':
                             tileImage = sand;
-                            collides = true;
+                            collides = false;
                             break;
                     }
 
