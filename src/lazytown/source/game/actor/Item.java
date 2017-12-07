@@ -18,7 +18,6 @@ public class Item extends Actor {
     public Item(String SVGdata, double xLoc, double yLoc, String id, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
         this.id = id;
-        isPickup = true;
         spriteFrame.setTranslateX(xLoc);
         spriteFrame.setTranslateY(yLoc);
     }

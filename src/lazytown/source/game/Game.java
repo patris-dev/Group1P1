@@ -55,7 +55,6 @@ public class Game {
        playMusic();
        spawnActors();
        renderActors();
-       actorHandler();
        startGameLoop();
        renderUI();
 
@@ -126,9 +125,7 @@ public class Game {
     // This method takes care of spawning in our various actors, among those are the player, the guards, the pickups,
     // and whatever the player can interact with, later it could be extended to be more things, like props.
     private void spawnActors() {
-       playerOne = new MainCharacter(this,"M0 0 H 50 V 50 H 0 Z", 50, 50, pSprites);
-       Image pizzaSprite = AssetManager.getItem("pizza_slice.png");
-       pizza1 = new Item("M0,0 L 50,0 50,50 0,50 Z",1000,1000,"050", pizzaSprite);
+       playerOne = new MainCharacter(this,"M0 0 H 50 V 50 H 0 Z", 0, 0, pSprites);
     }
 
     // This method takes care of rendering our actors to the stackPane object that we have set up
@@ -142,15 +139,6 @@ public class Game {
         }
 
         root.getChildren().add(playerOne.spriteFrame);
-        background.getChildren().addAll(pizza1.spriteFrame);
-    }
-
-    // This method is in charge of handling our actors. For now this is an empty method, but it will load a role when we
-    // need to do collision detection and clean up actors in our scene that are no longer valid.
-    private static void actorHandler() {
-        //director = new Director();
-        // Here we add the objects we want to check collision with
-        director.addCurrentActors(pizza1);
     }
 
     // This method starts our game loop, so what we have here is actually a dynamic game.

@@ -25,7 +25,6 @@ public abstract class Actor {
     protected boolean isFixed;
     protected boolean isFlipV;
     protected boolean isFlipH;
-    protected boolean isPickup;
 
     // The constructor that ensures that these variables are all set appropriately.
     public Actor(String SVGdata, double xLoc, double yLoc, Image... spriteCels){
