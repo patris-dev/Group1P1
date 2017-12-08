@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import lazytown.assets.AssetManager;
 import lazytown.source.game.Game;
 import lazytown.source.game.actor.Actor;
+import lazytown.source.game.actor.Door;
 import lazytown.source.game.actor.Guard;
 import lazytown.source.game.actor.Item;
 
@@ -45,13 +46,26 @@ public class Level {
             image = ImageIO.read(getClass().getResource(AssetManager.getMap(levelNumber)));
 
             // Tile images.
-            Image brick = AssetManager.getTile("bricksorwhatever.png");
-            Image stone = AssetManager.getTile("stone.png");
-            Image sand  = AssetManager.getTile("sand.png");
+            Image voidTile = AssetManager.getTile("void.png");
+            Image nullTile = AssetManager.getTile("null.png");
+            Image wall = AssetManager.getTile("wall.png");
+            Image grayFloor = AssetManager.getTile("gray_floor.png");
+            Image grayCarpet = AssetManager.getTile("gray_carpet.png");
+            Image redCarpet  = AssetManager.getTile("red_carpet.png");
 
             // Item images.
             Image pizza = AssetManager.getItem("pizza_slice.png");
             Image canOfSoda = AssetManager.getItem("can_of_soda.png");
+
+            // Furniture images.
+            Image tableTop = AssetManager.getFurniture("table_top.png");
+            Image tableBottom = AssetManager.getFurniture("table_bottom.png");
+            Image glassDoor = AssetManager.getFurniture("glass_door.png");
+            Image whiteDoor = AssetManager.getFurniture("white_door.png");
+//            Image chairUp = AssetManager.getFurniture("chair_up.png");
+//            Image chairRight = AssetManager.getFurniture("chair_right.png");
+//            Image chairDown = AssetManager.getFurniture("chair_down.png");
+//            Image chairLeft = AssetManager.getFurniture("chair_left.png");
 
             // Array of guard sprites.
             Image[] gSprites = AssetManager.getGuardSprites();
@@ -75,16 +89,28 @@ public class Level {
 
                     // Sets the current tile based on RG data.
                     switch (tile) {
+                        case 'A':
+                            tileImage = voidTile;
+                            collides = false;
+                            break;
                         case 'B':
-                            tileImage = brick;
+                            tileImage = wall;
                             collides = true;
                             break;
                         case 'I':
-                            tileImage = stone;
+                            tileImage = grayFloor;
                             collides = false;
                             break;
                         case 'V':
-                            tileImage = sand;
+                            tileImage = grayCarpet;
+                            collides = false;
+                            break;
+                        case 'j':
+                            tileImage = redCarpet;
+                            collides = false;
+                            break;
+                        default:
+                            tileImage = nullTile;
                             collides = false;
                             break;
                     }
@@ -103,21 +129,50 @@ public class Level {
                         director.addCurrentActors(tiles[x][y]);
                     }
 
-
                     // Creates an array of actors (items, guards, etc.)
                     // Renders them externally later on (in Game.java renderActors() method) so it goes on top of tiles.
                     switch (entity) {
-                        case 'A':
-                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "050", pizza);
+                        case 'E':
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "pizza", pizza);
                             break;
-                        case 'B':
-                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "100", canOfSoda);
+                        case 'F':
+                            actors[x][y] = new Tile(true, x, y, tableTop);
                             break;
-                        case 'C':
+                        case 'G':
+                            actors[x][y] = new Tile(true, x, y, tableBottom);
+                            break;
+                        case 'J':
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "can", canOfSoda);
+                            break;
+//                        case 'K':
+//                            actors[x][y] = new Tile(true, x, y, chairUp);
+//                            break;
+//                        case 'L':
+//                            actors[x][y] = new Tile(true, x, y, chairRight);
+//                            break;
+//                        case 'M':
+//                            actors[x][y] = new Tile(true, x, y, chairDown);
+//                            break;
+//                        case 'N':
+//                            actors[x][y] = new Tile(true, x, y, chairLeft);
+//                            break;
+                        case 'O':
                             actors[x][y] = new Guard("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, true, gSprites);
                             break;
-                        case 'H':
+                        case 'd':
+                            actors[x][y] = new Door("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "1", glassDoor);
+                            break;
+                        case 'e':
+                            actors[x][y] = new Door("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "1", rotate(glassDoor));
+                            break;
+                        case 'n':
                             actors[x][y] = new Guard("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, false, gSprites);
+                            break;
+                        case 'v':
+                            actors[x][y] = new Door("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "0", whiteDoor);
+                            break;
+                        case 'w':
+                            actors[x][y] = new Door("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "0", rotate(whiteDoor));
                             break;
                         default: actors[x][y] = null;
                     }
@@ -202,22 +257,68 @@ public class Level {
         }
         switch (b) {
             case "000": spawnString += "0"; break;
-            case "025": spawnString += "A"; break;
-            case "050": spawnString += "B"; break;
-            case "075": spawnString += "C"; break;
-            case "100": spawnString += "D"; break;
-            case "125": spawnString += "E"; break;
-            case "150": spawnString += "F"; break;
-            case "175": spawnString += "G"; break;
-            case "200": spawnString += "H"; break;
-            case "225": spawnString += "I"; break;
-            case "250": spawnString += "J"; break;
-            case "255": spawnString += "K"; break;
+            case "005": spawnString += "A"; break;
+            case "010": spawnString += "B"; break;
+            case "015": spawnString += "C"; break;
+            case "020": spawnString += "D"; break;
+            case "025": spawnString += "E"; break;
+            case "030": spawnString += "F"; break;
+            case "035": spawnString += "G"; break;
+            case "040": spawnString += "H"; break;
+            case "045": spawnString += "I"; break;
+            case "050": spawnString += "J"; break;
+            case "055": spawnString += "K"; break;
+            case "060": spawnString += "L"; break;
+            case "065": spawnString += "M"; break;
+            case "070": spawnString += "N"; break;
+            case "075": spawnString += "O"; break;
+            case "080": spawnString += "P"; break;
+            case "085": spawnString += "Q"; break;
+            case "090": spawnString += "R"; break;
+            case "095": spawnString += "S"; break;
+            case "100": spawnString += "T"; break;
+            case "105": spawnString += "U"; break;
+            case "110": spawnString += "V"; break;
+            case "115": spawnString += "W"; break;
+            case "120": spawnString += "X"; break;
+            case "125": spawnString += "Y"; break;
+            case "130": spawnString += "Z"; break;
+            case "135": spawnString += "a"; break;
+            case "140": spawnString += "b"; break;
+            case "145": spawnString += "c"; break;
+            case "150": spawnString += "d"; break;
+            case "155": spawnString += "e"; break;
+            case "160": spawnString += "f"; break;
+            case "165": spawnString += "g"; break;
+            case "170": spawnString += "h"; break;
+            case "175": spawnString += "i"; break;
+            case "180": spawnString += "j"; break;
+            case "185": spawnString += "k"; break;
+            case "190": spawnString += "l"; break;
+            case "195": spawnString += "m"; break;
+            case "200": spawnString += "n"; break;
+            case "205": spawnString += "o"; break;
+            case "210": spawnString += "p"; break;
+            case "215": spawnString += "q"; break;
+            case "220": spawnString += "r"; break;
+            case "225": spawnString += "s"; break;
+            case "230": spawnString += "t"; break;
+            case "235": spawnString += "u"; break;
+            case "240": spawnString += "v"; break;
+            case "245": spawnString += "w"; break;
+            case "250": spawnString += "x"; break;
+            case "255": spawnString += "y"; break;
             default: spawnString += "0";
         }
 
         return spawnString;
 
+    }
+
+    private Image rotate(Image image) {
+        ImageView rotated = new ImageView(image);
+        rotated.setRotate(90);
+        return rotated.getImage();
     }
 
     public int getImageWidth() {

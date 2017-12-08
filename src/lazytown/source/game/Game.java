@@ -27,7 +27,7 @@ public class Game {
     private static Scene sceneGame;
     private static GamePlayLoop gamePlayLoop;
     private static Image[] pSprites;
-    public static Actor playerOne, pizza1;
+    public static Actor playerOne;
     private static SoundEngine backgroundMusic = new SoundEngine("music");
     public static Level level;
     public static Director director = new Director();
@@ -36,7 +36,7 @@ public class Game {
     // Here we declare four booleans which will be the foundation of the player controls, we do not initialize them as
     // they default to false, whenever they are changed to true, logic will happen in another class. Later on, there
     // will be more variables as we give the player character more controls, like interaction, and using items.
-    private boolean up, down, left, right, keyE;
+    private boolean up, down, left, right;
 
    public void show(Stage primaryStage) {
 
@@ -56,7 +56,7 @@ public class Game {
        spawnActors();
        renderActors();
        startGameLoop();
-       renderUI();
+       renderUI(primaryStage);
 
        // Sets the scene of our stage to sceneGame
        primaryStage.setScene(sceneGame);
@@ -149,8 +149,8 @@ public class Game {
     }
 
     // This method renders the in-game user interface.
-    private void renderUI() {
-        root.getChildren().add(UI.getUI());
+    private void renderUI(Stage primaryStage) {
+        root.getChildren().add(UI.getUI(primaryStage));
         UI.loadTextWindow("Welcome to LazyTown! Press E to continue.",
                                     "Use W A S D to move around.",
                                     "This is the last message. \n It is split into two lines.");
@@ -185,5 +185,9 @@ public class Game {
 
     public static Level getLevel() {
         return level;
+    }
+
+    public static GamePlayLoop getGamePlayLoop() {
+        return gamePlayLoop;
     }
 }

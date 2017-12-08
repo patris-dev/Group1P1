@@ -8,6 +8,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import lazytown.assets.AssetManager;
+import lazytown.source.menu.ConfirmBox;
+import lazytown.source.menu.MainMenu;
 
 /**
  * This class is used for displaying the in-game User Interface.
@@ -15,23 +19,33 @@ import javafx.scene.text.Text;
  */
 public class UI {
 
+    private static Stage primaryStage;
+
     private static Text textArea;
     private static int textCounter = 0;
     private static String[] text;
     private static HBox textBorder;
 
-    public static BorderPane getUI() {
+    private static Label pizzaCounter;
+    private static Label beerCounter;
+
+    private static ProgressBar healthBar;
+    private static ProgressBar hungerBar;
+    private static ProgressBar thirstBar;
+
+
+    public static BorderPane getUI(Stage pS) {
+        primaryStage = pS;
 
         // BorderPane for our UI overlay.
         // Most of the layouts inside will be GridPanes.
         // GridPanes allow us to organize nodes in columns and rows.
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(10));
-        root.getStylesheets().add("lazytown/assets/uiassets/UITheme.css");
+        root.getStylesheets().add(AssetManager.getTheme("UITheme.css"));
 
         GridPane counters;
         GridPane characterInfo;
-
 
         // UI section for item counters.
         // Includes item icons and counter indexes, which should change accordingly to the amount of items held.
@@ -39,11 +53,11 @@ public class UI {
         counters.setId("counters");
         counters.setPadding(new Insets(0, 27, 0, 0));
 
-        ImageView pizzaIcon = new ImageView(new Image("/lazytown/assets/images/UI/pizza_slice.png"));
-        ImageView beerIcon  = new ImageView(new Image("/lazytown/assets/images/UI/can_of_soda.png"));
+        ImageView pizzaIcon = new ImageView(AssetManager.getItem("pizza_slice.png"));
+        ImageView beerIcon  = new ImageView(AssetManager.getItem("can_of_soda.png"));
 
-        Label pizzaCounter = new Label("0");
-        Label beerCounter  = new Label("0");
+        pizzaCounter = new Label("0");
+        beerCounter  = new Label("0");
 
         counters.add(pizzaIcon, 0, 0);
         counters.add(beerIcon, 0, 1);
@@ -68,9 +82,9 @@ public class UI {
         ImageView hungerIcon = new ImageView(new Image("/lazytown/assets/images/UI/stomach.png"));
         ImageView thirstIcon = new ImageView(new Image("/lazytown/assets/images/UI/water_drop.png"));
 
-        ProgressBar healthBar = new ProgressBar(0.6);
-        ProgressBar hungerBar = new ProgressBar(0.8);
-        ProgressBar thirstBar = new ProgressBar(0.7);
+        healthBar = new ProgressBar(0.6);
+        hungerBar = new ProgressBar(0.1);
+        thirstBar = new ProgressBar(0.2);
 
         characterInfo.add(characterIcon, 0, 0, 1, 3);
         characterInfo.add(healthIcon, 1, 0);
@@ -125,5 +139,41 @@ public class UI {
         text = null;
         textBorder.setVisible(false);
         textCounter = 0;
+    }
+
+    // Bumps a counter according to which item was found.
+    public static void bumpItem(String id) {
+        switch (id) {
+            case "pizza":
+                pizzaCounter.setText(Integer.toString(Integer.parseInt(pizzaCounter.getText()) + 1));
+                break;
+            case "can":
+                beerCounter.setText(Integer.toString(Integer.parseInt(beerCounter.getText()) + 1));
+                break;
+        }
+    }
+
+    // Reduce our hp value based on damage taken/
+    public static void takeDamage(double damage) {
+        if (healthBar.getProgress() > damage) healthBar.setProgress(healthBar.getProgress()-damage);
+        else {
+            healthBar.setProgress(0);
+                Game.getGamePlayLoop().stop();
+                MainMenu.show(primaryStage);
+        }
+    }
+
+    // Update our stats.
+    // Health slowly regenerates.
+    // Hunger and Thirst will slowly go down. If one reaches 0, our Health will stop regenerating;
+    // If both reach 0, our Health will start to go down.
+    public static void updateStats() {
+        double rate = 0.0001;
+        if (healthBar.getProgress() > rate) healthBar.setProgress(healthBar.getProgress()+rate);
+
+        if (hungerBar.getProgress() > rate) hungerBar.setProgress(hungerBar.getProgress()-rate/10);
+        else takeDamage(rate);
+        if (thirstBar.getProgress() > rate) thirstBar.setProgress(thirstBar.getProgress()-rate/10);
+        else takeDamage(rate);
     }
 }

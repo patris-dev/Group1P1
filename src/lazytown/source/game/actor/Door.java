@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 /**
  * An abstract class extending Actor used for moving entities.
  */
-public class Item extends Actor {
+public class Door extends Actor {
 
     private String id;
 
@@ -15,7 +15,7 @@ public class Item extends Actor {
     // Id is used to differentiate items from each other.
     // (for example, based on the id, we can know which item counter in inventory to bump up when picking it up.)
 
-    public Item(String SVGdata, double xLoc, double yLoc, String id, Image... spriteCels) {
+    public Door(String SVGdata, double xLoc, double yLoc, String id, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
         this.id = id;
         spriteFrame.setTranslateX(xLoc);

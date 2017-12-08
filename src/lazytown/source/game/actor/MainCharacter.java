@@ -5,6 +5,7 @@ import javafx.scene.shape.Shape;
 import lazytown.source.Main;
 import lazytown.source.game.Game;
 import javafx.scene.image.Image;
+import lazytown.source.game.UI;
 import lazytown.source.game.level.Tile;
 
 /**
@@ -43,6 +44,7 @@ public class MainCharacter extends MovedActor {
         setImageState();
         moveCharacter();
         checkCollision();
+        UI.updateStats();
     }
 
     private void setXYLocation() {
@@ -193,6 +195,11 @@ public class MainCharacter extends MovedActor {
                 // resetting the list of removed actors. Finally we call the scoringEngine() method on our object.
                 if (object instanceof Item) {
                     System.out.println("Collision with item at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
+
+                    // Bumps up the counter, symbolizing that the player picked up the item.
+                    UI.bumpItem(((Item) object).getId());
+
+                    // Removes the item from the director and the background.
                     Game.director.addToRemovedActors(object);
                     Game.getBackground().getChildren().remove(object.getSpriteFrame());
                     Game.director.resetRemovedActors();
@@ -214,6 +221,10 @@ public class MainCharacter extends MovedActor {
                 }
                 if (object instanceof Guard) {
                     System.out.println("Collision with guard at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
+                    UI.takeDamage(0.01);
+                }
+                if (object instanceof Door) {
+                    // Go to another level or something
                 }
             }
         }
