@@ -26,4 +26,8 @@ public class Tile extends Actor{
     public void update() {
 
     }
+
+    public boolean isCollides() {
+        return collides;
+    }
 }

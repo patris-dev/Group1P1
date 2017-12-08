@@ -3,9 +3,11 @@ package lazytown.source.game;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 
 /**
  * This class is used for displaying the in-game User Interface.
@@ -13,7 +15,13 @@ import javafx.scene.layout.*;
  */
 public class UI {
 
+    private static Text textArea;
+    private static int textCounter = 0;
+    private static String[] text;
+    private static HBox textBorder;
+
     public static BorderPane getUI() {
+
         // BorderPane for our UI overlay.
         // Most of the layouts inside will be GridPanes.
         // GridPanes allow us to organize nodes in columns and rows.
@@ -78,6 +86,16 @@ public class UI {
         GridPane.setMargin(healthIcon, new Insets(-5, 0, 0, 0));
         GridPane.setMargin(healthBar, new Insets(-5, 0, 0, 0));
 
+        // UI section for the text window, meant for displaying text to our user.
+        // Placed inside the same grid as the character info.
+        textBorder = new HBox();
+        textBorder.setId("text-border");
+        textArea = new Text();
+        textArea.setVisible(false);
+        textArea.getStyleClass().add("text-id");
+        textBorder.getChildren().add(textArea);
+        //textArea.setVisible(false);
+        characterInfo.add(textBorder, 4, 0, 3, 3);
 
 
         // Lays out all UI sections inside root.
@@ -85,5 +103,27 @@ public class UI {
         root.setBottom(characterInfo);
 
         return root;
+    }
+
+    // Loads in an array of Strings that will be later on displayed.
+    public static void loadTextWindow(String... textLines) {
+        text = textLines;
+    }
+
+    // Displays a text window with a single line. Bumps up the line index each time the method is called.
+    public static void displayTextWindow() {
+        if(text != null && textCounter < text.length) {
+            textArea.setText(text[textCounter]);
+            textArea.setVisible(true);
+            textCounter++;
+        }
+        else hideTextWindow();
+    }
+
+    // Once the counter has reached the limit, make the text box invisible and clear the text array.
+    private static void hideTextWindow() {
+        text = null;
+        textBorder.setVisible(false);
+        textCounter = 0;
     }
 }

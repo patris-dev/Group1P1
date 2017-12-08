@@ -36,7 +36,7 @@ public class Game {
     // Here we declare four booleans which will be the foundation of the player controls, we do not initialize them as
     // they default to false, whenever they are changed to true, logic will happen in another class. Later on, there
     // will be more variables as we give the player character more controls, like interaction, and using items.
-    private boolean up, down, left, right;
+    private boolean up, down, left, right, keyE;
 
    public void show(Stage primaryStage) {
 
@@ -72,7 +72,7 @@ public class Game {
         loadingScreen.setBottom(loadingLabel);
 
         Scene loadingScene = new Scene(loadingScreen, Main.getWindowWidth(), Main.getWindowHeight());
-        loadingScene.getStylesheets().add(AssetManager.getTheme("loadingScreenTheme.css"));
+        loadingScene.getStylesheets().add(AssetManager.getTheme("LoadingScreenTheme.css"));
         primaryStage.setScene(loadingScene);
     }
 
@@ -94,6 +94,7 @@ public class Game {
                 case A:         left    = true; break;
                 case S:         down    = true; break;
                 case D:         right   = true; break;
+                case E:         UI.displayTextWindow(); break;
                 case ESCAPE:    exitGame();
             }
         });
@@ -145,12 +146,15 @@ public class Game {
     private static void startGameLoop() {
         gamePlayLoop = new GamePlayLoop();
         gamePlayLoop.start();
-
     }
 
     // This method renders the in-game user interface.
     private void renderUI() {
         root.getChildren().add(UI.getUI());
+        UI.loadTextWindow("Welcome to LazyTown! Press E to continue.",
+                                    "Use W A S D to move around.",
+                                    "This is the last message. \n It is split into two lines.");
+        UI.displayTextWindow();
     }
 
     // This method renders a new window to exit the game.
