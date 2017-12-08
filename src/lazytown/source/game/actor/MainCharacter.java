@@ -192,13 +192,13 @@ public class MainCharacter extends MovedActor {
                 // object to another list, removes the sprite graphically and then removes it from existence by
                 // resetting the list of removed actors. Finally we call the scoringEngine() method on our object.
                 if (object instanceof Item) {
-                    System.out.println("Collision with item at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
+                    // System.out.println("Collision with item at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
                     Game.director.addToRemovedActors(object);
                     Game.getBackground().getChildren().remove(object.getSpriteFrame());
                     Game.director.resetRemovedActors();
                 }
                 if (object instanceof Tile) {
-                    System.out.println("Collision with tile at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
+                    // System.out.println("Collision with tile at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
                     if (game.isDown()) {
                         iY -= velY;
                     }
@@ -213,7 +213,7 @@ public class MainCharacter extends MovedActor {
                     }
                 }
                 if (object instanceof Guard) {
-                    System.out.println("Collision with guard at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
+                    // System.out.println("Collision with guard at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
                 }
             }
         }

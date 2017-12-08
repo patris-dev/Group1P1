@@ -27,7 +27,7 @@ public class Game {
     private static Scene sceneGame;
     private static GamePlayLoop gamePlayLoop;
     private static Image[] pSprites;
-    public static Actor playerOne, pizza1;
+    public static Actor playerOne;
     private static SoundEngine backgroundMusic = new SoundEngine("music");
     public static Level level;
     public static Director director = new Director();
@@ -126,7 +126,7 @@ public class Game {
     // This method takes care of spawning in our various actors, among those are the player, the guards, the pickups,
     // and whatever the player can interact with, later it could be extended to be more things, like props.
     private void spawnActors() {
-       playerOne = new MainCharacter(this,"M0 0 H 50 V 50 H 0 Z", 0, 0, pSprites);
+       playerOne = new MainCharacter(this,"M 17,0 L 13,4 12,22 14,36 17,44 32,44 37,35 35,0 Z", 0, 0, pSprites);
     }
 
     // This method takes care of rendering our actors to the stackPane object that we have set up
