@@ -19,7 +19,7 @@ public class MainCharacter extends MovedActor {
     boolean facingDown = true;
     boolean facingLeft = false;
     boolean facingRight = false;
-    boolean canMove = true;
+    boolean isDead = false;
 
 
     boolean leftSide, rightSide, upSide, downSide;
@@ -48,7 +48,7 @@ public class MainCharacter extends MovedActor {
     }
 
     private void setXYLocation() {
-        if (canMove) {
+        if (!isDead) {
             if (game.isRight())
                 iX += velX;
             if (game.isLeft())
@@ -189,20 +189,22 @@ public class MainCharacter extends MovedActor {
             // And as we do that we set them up in a temporary object
             Actor object = Game.director.getCurrentActors().get(i);
             // This object is then being parsed and tested in our collide method
-            if (collide(object)) {
+            if (collide(object) && !isDead) {
                 // If collision has been detected, this code runs, in it's current state, it plays a sound, adds the
                 // object to another list, removes the sprite graphically and then removes it from existence by
                 // resetting the list of removed actors. Finally we call the scoringEngine() method on our object.
                 if (object instanceof Item) {
 //                    System.out.println("Collision with item at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
 
-                    // Bumps up the counter, symbolizing that the player picked up the item.
-                    UI.bumpItem(((Item) object).getId());
-
-                    // Removes the item from the director and the background.
-                    Game.director.addToRemovedActors(object);
-                    Game.getBackground().getChildren().remove(object.getSpriteFrame());
-                    Game.director.resetRemovedActors();
+                    if (!(((Item) object).getId().equals("pizza") && !UI.isBackpack() && UI.getPizza() == 2) &&
+                            !(((Item) object).getId().equals("can") && !UI.isBackpack() && UI.getBeer() == 2)) {
+                        // Bumps up the counter, symbolizing that the player picked up the item.
+                        UI.bumpItem(((Item) object).getId());
+                        // Removes the item from the director and the background.
+                        Game.director.addToRemovedActors(object);
+                        Game.getBackground().getChildren().remove(object.getSpriteFrame());
+                        Game.director.resetRemovedActors();
+                    }
                 }
                 if (object instanceof Tile || object instanceof InteractiveActor) {
 //                    System.out.println("Collision with tile at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
@@ -228,31 +230,36 @@ public class MainCharacter extends MovedActor {
                     if (game.isKeyE()) {
                         switch (id) {
                             case "key0":
-                                System.out.println("Door 0");
+                                UI.loadTextWindow("This door is locked.");
                                 break;
                             case "key1":
-                                System.out.println("Door 1");
+                                if (!UI.getKeycard(1)) UI.loadTextWindow("This door requires a keycard with ID 1 to unlock.");
+                                else UI.loadTextWindow("Door unlocked.");
                                 break;
                             case "key2":
-                                System.out.println("Door 2");
+                                if (!UI.getKeycard(2)) UI.loadTextWindow("This door requires a keycard with ID 2 to unlock.");
+                                else UI.loadTextWindow("Door unlocked.");
                                 break;
                             case "key3":
-                                System.out.println("Door 3");
+                                if (!UI.getKeycard(3)) UI.loadTextWindow("This door requires a keycard with ID 3 to unlock.");
+                                else UI.loadTextWindow("Door unlocked.");
                                 break;
                             case "key4":
-                                System.out.println("Door 4");
+                                if (!UI.getKeycard(4)) UI.loadTextWindow("This door requires a keycard with ID 4 to unlock.");
+                                else UI.loadTextWindow("Door unlocked.");
                                 break;
                             case "key5":
-                                System.out.println("Door 5");
+                                if (!UI.getKeycard(5)) UI.loadTextWindow("This door requires a keycard with ID 5 to unlock.");
+                                else UI.loadTextWindow("Door unlocked.");
                                 break;
                             case "water":
-                                System.out.println("Water tap");
+                                UI.loadTextWindow("You drink some water.");
                                 break;
                             case "locker":
-                                System.out.println("Locker");
+                                UI.loadTextWindow("This locker is empty.");
                                 break;
                             default:
-                                System.out.println("Other interactive object");
+                                UI.loadTextWindow("Unidentified interactive object.");
                                 break;
                         }
                         game.setKeyE(false);
@@ -277,5 +284,13 @@ public class MainCharacter extends MovedActor {
             }
         }
         return false;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 }

@@ -27,7 +27,7 @@ public class Game {
     private static Scene sceneGame;
     private static GamePlayLoop gamePlayLoop;
     private static Image[] pSprites;
-    public static Actor playerOne;
+    public static MainCharacter playerOne;
     private static SoundEngine backgroundMusic = new SoundEngine("music");
     public static Level level;
     public static Director director = new Director();
@@ -95,6 +95,8 @@ public class Game {
                 case S:         down    = true; break;
                 case D:         right   = true; break;
                 case E:         keyE    = true; UI.displayTextWindow(); break;
+                case DIGIT1:    UI.consumePizza(); break;
+                case DIGIT2:    UI.consumeBeer(); break;
                 case ESCAPE:    exitGame();
             }
         });
@@ -153,9 +155,10 @@ public class Game {
     private void renderUI(Stage primaryStage) {
         root.getChildren().add(UI.getUI(primaryStage));
         UI.loadTextWindow("Welcome to LazyTown! Press E to continue.",
-                                    "Use W A S D to move around.",
-                                    "This is the last message. \n It is split into two lines.");
-        UI.displayTextWindow();
+                                    "Use W A S D to move around.\nE is also used to interact with items, such as doors, lockers and water taps.",
+                                    "Scavenge around for some food and drinks. Currently you can hold 2 of each.\nPress 1 to eat, and 2 to drink.",
+                                    "Once you find your backpack, your food and drink inventory will increase.",
+                                    "Press ESC at any time to check the controls.\nGood luck!");
     }
 
     // This method renders a new window to exit the game.

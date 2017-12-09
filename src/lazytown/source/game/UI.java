@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lazytown.assets.AssetManager;
+import lazytown.source.game.actor.MainCharacter;
 import lazytown.source.menu.ConfirmBox;
 import lazytown.source.menu.MainMenu;
 
@@ -32,6 +33,9 @@ public class UI {
     private static ProgressBar healthBar;
     private static ProgressBar hungerBar;
     private static ProgressBar thirstBar;
+
+    private static boolean[] keycard = new boolean[6];
+    private static boolean backpack = false;
 
 
     public static BorderPane getUI(Stage pS) {
@@ -119,16 +123,20 @@ public class UI {
         return root;
     }
 
-    // Loads in an array of Strings that will be later on displayed.
+    // Loads in an array of Strings and displays the first one.
     public static void loadTextWindow(String... textLines) {
+        textCounter = 0;
         text = textLines;
+        textBorder.setVisible(true);
+        textArea.setVisible(true);
+        textArea.setText(text[textCounter]);
+        textCounter++;
     }
 
     // Displays a text window with a single line. Bumps up the line index each time the method is called.
     public static void displayTextWindow() {
         if(text != null && textCounter < text.length) {
             textArea.setText(text[textCounter]);
-            textArea.setVisible(true);
             textCounter++;
         }
         else hideTextWindow();
@@ -138,7 +146,6 @@ public class UI {
     private static void hideTextWindow() {
         text = null;
         textBorder.setVisible(false);
-        textCounter = 0;
     }
 
     // Bumps a counter according to which item was found.
@@ -150,16 +157,57 @@ public class UI {
             case "can":
                 beerCounter.setText(Integer.toString(Integer.parseInt(beerCounter.getText()) + 1));
                 break;
+            case "backpack":
+                backpack = true;
+                UI.loadTextWindow("You found your backpack! Inventory increased.");
+                break;
+            case "key1":
+                keycard[1] = true;
+                break;
+            case "key2":
+                keycard[2] = true;
+                break;
+            case "key3":
+                keycard[3] = true;
+                break;
+            case "key4":
+                keycard[4] = true;
+                break;
+            case "key5":
+                keycard[5] = true;
+                break;
         }
     }
 
-    // Reduce our hp value based on damage taken/
+    public static void consumePizza() {
+        if (!pizzaCounter.getText().equals("0")) {
+            pizzaCounter.setText(Integer.toString(Integer.parseInt(pizzaCounter.getText()) - 1));
+            hungerBar.setProgress(hungerBar.getProgress()+0.5);
+        }
+    }
+
+    public static void consumeBeer() {
+        if (!beerCounter.getText().equals("0")) {
+            beerCounter.setText(Integer.toString(Integer.parseInt(beerCounter.getText()) - 1));
+            thirstBar.setProgress(thirstBar.getProgress()+0.5);
+        }
+    }
+
+    // Reduce our hp value based on damage taken.
     public static void takeDamage(double damage) {
         if (healthBar.getProgress() > damage) healthBar.setProgress(healthBar.getProgress()-damage);
         else {
+            Game.playerOne.setDead(true);
+            Game.root.getChildren().remove(Game.playerOne.spriteFrame);
+            UI.loadTextWindow("You died! Congrats!\nPress E to restart.",
+                                        "Whoops, seems like restarting isn't implemented yet, huh.",
+                                        "It's a pretty lame game anyways, were you playing it because we asked you to?",
+                                        "Well, now we're here. How was your day so far?",
+                                        "Ours was pretty stressed, needed to finish up a game and stuff.",
+                                        "But you don't really care about that, do you?",
+                                        "By the way, there might or might not be an easter egg involving the\nKonami code.",
+                                        "Anyways, if you want to restart, right now you would need to exit the game\nand start it again. Yup. Sorry!");
             healthBar.setProgress(0);
-                Game.getGamePlayLoop().stop();
-                MainMenu.show(primaryStage);
         }
     }
 
@@ -175,5 +223,21 @@ public class UI {
         else takeDamage(rate);
         if (thirstBar.getProgress() > rate) thirstBar.setProgress(thirstBar.getProgress()-rate/10);
         else takeDamage(rate);
+    }
+
+    public static boolean isBackpack() {
+        return backpack;
+    }
+
+    public static boolean getKeycard(int id) {
+        return keycard[id];
+    }
+
+    public static int getPizza() {
+        return Integer.parseInt(pizzaCounter.getText());
+    }
+
+    public static int getBeer() {
+        return Integer.parseInt(beerCounter.getText());
     }
 }
