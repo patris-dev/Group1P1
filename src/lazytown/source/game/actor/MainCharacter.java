@@ -277,7 +277,7 @@ public class MainCharacter extends MovedActor {
         // with each other, if they do we create a new Shape object from the two intersecting ImageView nodes, the width
         // of which we measure. If this width is not negative 1, we return true, else we return false.
         if (object.getSpriteFrame().getBoundsInParent().intersects(
-                iX+levelWidth/2-37.5, iY+levelHeight/2-37.5, 75, 75)) {
+                iX+levelWidth/2-20, iY+levelHeight/2-37.5, 40, 75)) {
             Shape intersection = SVGPath.intersect(Game.playerOne.getSpriteBoundary(), object.getSpriteBoundary());
             if (intersection.getBoundsInLocal().getWidth() != -1) {
                 return true;
