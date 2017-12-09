@@ -44,6 +44,10 @@ public class AssetManager {
         return new Image(imagesPath + "items/" + fileName);
     }
 
+    public static Image getFurniture(String fileName) {
+        return new Image(imagesPath + "furniture/" + fileName);
+    }
+
     public static String getMap(int index) {
         return imagesPath + "levels/map" + index + ".png";
     }
