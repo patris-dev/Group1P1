@@ -129,7 +129,9 @@ public class Game {
     // This method takes care of spawning in our various actors, among those are the player, the guards, the pickups,
     // and whatever the player can interact with, later it could be extended to be more things, like props.
     private void spawnActors() {
-       playerOne = new MainCharacter(this,"M0 0 H 50 V 50 H 0 Z", 0, 0, pSprites);
+       playerOne = new MainCharacter(this,"M 17,0 L 13,4 12,22 14,36 17,44 32,44 37,35 35,0 Z", 0, 0, pSprites);
+//       Testing out a 75x75 SVG path, does not seem to make a difference.
+//       playerOne = new MainCharacter(this,"M 25,0 L 15,20 25,70 50,70 60,20 50,0 Z", 0, 0, pSprites);
     }
 
     // This method takes care of rendering our actors to the stackPane object that we have set up
