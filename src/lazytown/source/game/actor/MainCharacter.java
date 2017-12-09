@@ -194,7 +194,7 @@ public class MainCharacter extends MovedActor {
                 // object to another list, removes the sprite graphically and then removes it from existence by
                 // resetting the list of removed actors. Finally we call the scoringEngine() method on our object.
                 if (object instanceof Item) {
-                    System.out.println("Collision with item at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
+//                    System.out.println("Collision with item at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
 
                     // Bumps up the counter, symbolizing that the player picked up the item.
                     UI.bumpItem(((Item) object).getId());
@@ -204,8 +204,8 @@ public class MainCharacter extends MovedActor {
                     Game.getBackground().getChildren().remove(object.getSpriteFrame());
                     Game.director.resetRemovedActors();
                 }
-                if (object instanceof Tile) {
-                    System.out.println("Collision with tile at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
+                if (object instanceof Tile || object instanceof InteractiveActor) {
+//                    System.out.println("Collision with tile at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
                     if (game.isDown()) {
                         iY -= velY;
                     }
@@ -220,11 +220,43 @@ public class MainCharacter extends MovedActor {
                     }
                 }
                 if (object instanceof Guard) {
-                    System.out.println("Collision with guard at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
+//                    System.out.println("Collision with guard at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
                     UI.takeDamage(0.01);
                 }
-                if (object instanceof Door) {
-                    // Go to another level or something
+                if (object instanceof InteractiveActor) {
+                    String id = ((InteractiveActor) object).getId();
+                    if (game.isKeyE()) {
+                        switch (id) {
+                            case "key0":
+                                System.out.println("Door 0");
+                                break;
+                            case "key1":
+                                System.out.println("Door 1");
+                                break;
+                            case "key2":
+                                System.out.println("Door 2");
+                                break;
+                            case "key3":
+                                System.out.println("Door 3");
+                                break;
+                            case "key4":
+                                System.out.println("Door 4");
+                                break;
+                            case "key5":
+                                System.out.println("Door 5");
+                                break;
+                            case "water":
+                                System.out.println("Water tap");
+                                break;
+                            case "locker":
+                                System.out.println("Locker");
+                                break;
+                            default:
+                                System.out.println("Other interactive object");
+                                break;
+                        }
+                        game.setKeyE(false);
+                    }
                 }
             }
         }

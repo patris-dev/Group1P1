@@ -3,19 +3,17 @@ package lazytown.source.game.actor;
 import javafx.scene.image.Image;
 
 /**
- * An abstract class extending Actor used for moving entities.
+ * An abstract class extending Actor used for interactive objects.
  */
-public class Door extends Actor {
+public class InteractiveActor extends Actor {
 
     private String id;
-
-
 
     // Our constructor, which calls the Actor constructor with the super keyword.
     // Id is used to differentiate items from each other.
     // (for example, based on the id, we can know which item counter in inventory to bump up when picking it up.)
 
-    public Door(String SVGdata, double xLoc, double yLoc, String id, Image... spriteCels) {
+    public InteractiveActor(String SVGdata, double xLoc, double yLoc, String id, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
         this.id = id;
         spriteFrame.setTranslateX(xLoc);

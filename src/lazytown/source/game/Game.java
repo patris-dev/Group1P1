@@ -36,7 +36,7 @@ public class Game {
     // Here we declare four booleans which will be the foundation of the player controls, we do not initialize them as
     // they default to false, whenever they are changed to true, logic will happen in another class. Later on, there
     // will be more variables as we give the player character more controls, like interaction, and using items.
-    private boolean up, down, left, right;
+    private boolean up, down, left, right, keyE;
 
    public void show(Stage primaryStage) {
 
@@ -94,7 +94,7 @@ public class Game {
                 case A:         left    = true; break;
                 case S:         down    = true; break;
                 case D:         right   = true; break;
-                case E:         UI.displayTextWindow(); break;
+                case E:         keyE    = true; UI.displayTextWindow(); break;
                 case ESCAPE:    exitGame();
             }
         });
@@ -105,6 +105,7 @@ public class Game {
                 case A:     left    = false; break;
                 case S:     down    = false; break;
                 case D:     right   = false; break;
+                case E:     keyE    = false; break;
             }
         });
 
@@ -177,6 +178,14 @@ public class Game {
 
     public boolean isRight() {
         return right;
+    }
+
+    public boolean isKeyE() {
+        return keyE;
+    }
+
+    public void setKeyE(boolean keyE) {
+        this.keyE = keyE;
     }
 
     public static Group getBackground() {
