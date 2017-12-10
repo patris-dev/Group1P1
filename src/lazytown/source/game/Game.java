@@ -97,6 +97,7 @@ public class Game {
                 case E:         keyE    = true; UI.displayTextWindow(); break;
                 case DIGIT1:    UI.consumePizza(); break;
                 case DIGIT2:    UI.consumeBeer(); break;
+                case DIGIT3:    playerOne.setSpawnLocation(100, 100); break;
                 case ESCAPE:    exitGame();
             }
         });

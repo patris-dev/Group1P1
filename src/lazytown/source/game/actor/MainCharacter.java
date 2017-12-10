@@ -173,6 +173,11 @@ public class MainCharacter extends MovedActor {
         if (iY < -levelHeight/2 + windowHeight/2)   upSide = true;      else upSide = false;
         if (iY > levelHeight/2  - windowHeight/2)   downSide = true;    else downSide = false;
 
+        if (!leftSide && !rightSide && !upSide && !downSide) {
+            spriteFrame.setTranslateX(0);
+            spriteFrame.setTranslateY(0);
+        }
+
         if (leftSide) spriteFrame.setTranslateX(iX + (levelWidth / 2 - windowWidth / 2));
         else if (rightSide) spriteFrame.setTranslateX(iX - (levelWidth / 2 - windowWidth / 2));
         else Game.getBackground().setTranslateX(-iX);
@@ -194,7 +199,6 @@ public class MainCharacter extends MovedActor {
                 // object to another list, removes the sprite graphically and then removes it from existence by
                 // resetting the list of removed actors. Finally we call the scoringEngine() method on our object.
                 if (object instanceof Item) {
-//                    System.out.println("Collision with item at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
 
                     if (!(((Item) object).getId().equals("pizza") && !UI.isBackpack() && UI.getPizza() == 2) &&
                             !(((Item) object).getId().equals("can") && !UI.isBackpack() && UI.getBeer() == 2)) {
@@ -207,7 +211,6 @@ public class MainCharacter extends MovedActor {
                     }
                 }
                 if (object instanceof Tile || object instanceof InteractiveActor) {
-//                    System.out.println("Collision with tile at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
                     if (game.isDown()) {
                         iY -= velY;
                     }
@@ -222,7 +225,6 @@ public class MainCharacter extends MovedActor {
                     }
                 }
                 if (object instanceof Guard) {
-//                    System.out.println("Collision with guard at " + object.spriteFrame.getTranslateX() + " " + object.spriteFrame.getTranslateY() + " and " + iX + " " + iY);
                     UI.takeDamage(0.01);
                 }
                 if (object instanceof InteractiveActor) {
@@ -284,6 +286,21 @@ public class MainCharacter extends MovedActor {
             }
         }
         return false;
+    }
+
+    // Moves the player to specific coordinates.
+    // 0, 0 point is the top left corner of the level.
+    // To spawn the player in the center of a level, X and Y values would be level.getImageWidth()*50/2
+    // and level.getImageWidth()*50/2.
+    public void setSpawnLocation(int X, int Y) {
+        iX = X-levelWidth/2;
+        iY = Y-levelHeight/2;
+
+        if (iX < -levelWidth/2  + windowWidth/2)  Game.getBackground().setTranslateX(levelWidth/2   - windowWidth/2);
+        if (iX > levelWidth/2   - windowWidth/2)  Game.getBackground().setTranslateX(windowWidth/2  - levelWidth/2);
+        if (iY < -levelHeight/2 + windowHeight/2) Game.getBackground().setTranslateY(levelHeight/2  - windowHeight/2);
+        if (iY > levelHeight/2  - windowHeight/2) Game.getBackground().setTranslateY(windowHeight/2 - levelHeight/2);
+
     }
 
     public boolean isDead() {
