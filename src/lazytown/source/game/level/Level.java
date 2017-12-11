@@ -18,6 +18,7 @@ import static lazytown.source.game.Game.director;
 /**
  * This class is used for rendering levels from tiles.
  * The method renderMap(Group background) renders a level from a map on the background.
+ *
  */
 public class Level {
 
@@ -374,6 +375,14 @@ public class Level {
 
         return spawnString;
 
+    }
+
+    public void renderActors(Group background) {
+        for (int y = 0; y < image.getHeight(); y++) {
+            for (int x = 0; x < image.getWidth(); x++) {
+                if (actors[x][y] != null) background.getChildren().add(actors[x][y].spriteFrame);
+            }
+        }
     }
 
     public int getImageWidth() {

@@ -29,6 +29,7 @@ public class Game {
     private static Image[] pSprites;
     public static MainCharacter playerOne;
     private static SoundEngine backgroundMusic = new SoundEngine("music");
+    public static Level[] levels;
     public static Level level;
     public static Director director = new Director();
 
@@ -78,8 +79,13 @@ public class Game {
 
     // This method is used to render the level from a map.
     private void loadLevel() {
+       levels = new Level[6];
+       for (int i = 1; i < 5; i++) {
+           levels[i] = new Level(i);
+       }
+
         // Instantiates a level object, renders the level
-        level = new Level(1);
+        level = levels[4];
         level.renderMap(background);
     }
 
@@ -138,13 +144,7 @@ public class Game {
     // This method takes care of rendering our actors to the stackPane object that we have set up
     private static void renderActors() {
 
-        Actor[][] actors = level.getActors();
-        for (int y = 0; y < level.getImageHeight(); y++) {
-            for (int x = 0; x < level.getImageWidth(); x++) {
-                if (actors[x][y] != null) background.getChildren().add(actors[x][y].spriteFrame);
-            }
-        }
-
+        level.renderActors(background);
         root.getChildren().add(playerOne.spriteFrame);
     }
 

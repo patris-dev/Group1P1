@@ -1,7 +1,9 @@
 package lazytown.source.game.actor;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.Shape;
+import lazytown.assets.AssetManager;
 import lazytown.source.Main;
 import lazytown.source.game.Game;
 import javafx.scene.image.Image;
@@ -236,7 +238,20 @@ public class MainCharacter extends MovedActor {
                                 break;
                             case "key1":
                                 if (!UI.getKeycard(1)) UI.loadTextWindow("This door requires a keycard with ID 1 to unlock.");
-                                else UI.loadTextWindow("Door unlocked.");
+                                else {
+
+                                    Game.director.resetCurrentActors();
+                                    Game.getBackground().getChildren().clear();
+                                    Game.level = Game.levels[1];
+                                    Game.level.renderMap(Game.getBackground());
+                                    Game.level.renderActors(Game.getBackground());
+                                    Game.playerOne.setSpawnLocation(100, 100);
+                                    ImageView n = new ImageView(AssetManager.getTile("null.png"));
+                                    n.setTranslateX(0);
+                                    n.setTranslateY(0);
+                                    Game.getBackground().getChildren().add(n);
+
+                                }
                                 break;
                             case "key2":
                                 if (!UI.getKeycard(2)) UI.loadTextWindow("This door requires a keycard with ID 2 to unlock.");
@@ -300,7 +315,6 @@ public class MainCharacter extends MovedActor {
         if (iX > levelWidth/2   - windowWidth/2)  Game.getBackground().setTranslateX(windowWidth/2  - levelWidth/2);
         if (iY < -levelHeight/2 + windowHeight/2) Game.getBackground().setTranslateY(levelHeight/2  - windowHeight/2);
         if (iY > levelHeight/2  - windowHeight/2) Game.getBackground().setTranslateY(windowHeight/2 - levelHeight/2);
-
     }
 
     public boolean isDead() {

@@ -20,8 +20,8 @@ public class GamePlayLoop extends AnimationTimer{
 
         // Applying updates to all level-rendered actors (items, guards, etc.)
         Actor[][] actors = Game.level.getActors();
-        for (int y = 0; y < 50; y++) {
-            for (int x = 0; x < 50; x++) {
+        for (int y = 0; y < Game.getLevel().getImageHeight(); y++) {
+            for (int x = 0; x < Game.getLevel().getImageWidth(); x++) {
                 if (actors[x][y] != null) actors[x][y].update();
             }
         }
