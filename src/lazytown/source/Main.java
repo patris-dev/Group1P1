@@ -1,5 +1,6 @@
 package lazytown.source;
 
+import lazytown.source.menu.ConfirmBox;
 import lazytown.source.menu.MainMenu;
 import lazytown.source.sound.SoundEngine;
 import javafx.application.Application;
@@ -21,6 +22,7 @@ public class Main extends Application {
     // A SoundEngine object to load the button click sounds. Specifies that this engine will be used for sfx.
     private static SoundEngine buttonClicks = new SoundEngine("sfx");
 
+
     // The main function of a JavaFX application
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -30,6 +32,7 @@ public class Main extends Application {
         primaryStage.setTitle("lazytown");
         // Prevents the window from being resized
         primaryStage.setResizable(false);
+        primaryStage.sizeToScene();
         // Sets the default scene as MainMenu
         MainMenu.show(primaryStage);
 
@@ -38,6 +41,15 @@ public class Main extends Application {
         SoundEngine.loadSettings();
         menuMusic.load("menuMusic.mp3");
         buttonClicks.load("buttonClick.mp3");
+
+        // An event that happens if the close (X) button is pressed.
+//        primaryStage.setOnCloseRequest(e -> {
+//            //consume cancels out the CloseRequest
+//            e.consume();
+//            if(ConfirmBox.display("Exit Game","Are you sure you want to exit?")){
+//                primaryStage.close();
+//            }
+//        });
 
         // Shows the Stage on our screen
         primaryStage.show();
@@ -70,5 +82,6 @@ public class Main extends Application {
     public static SoundEngine getButtonClicks() {
         return buttonClicks;
     }
+
 }
 

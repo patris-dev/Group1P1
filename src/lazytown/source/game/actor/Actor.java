@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * An abstract class for all Actors (entities).
+ */
 public abstract class Actor {
     // The first object we declare is a new array list of images, this is for animation
     protected List<Image> imageStates = new ArrayList<>();
@@ -39,6 +42,10 @@ public abstract class Actor {
         // Boolean values to check if our actor needs to be flipped vertically or horizontally
         isFlipV = false;
         isFlipH = false;
+    }
+
+    public Actor() {
+
     }
 
     // We declare here that every actor object in our game, no matter what kind, needs to have an update method,

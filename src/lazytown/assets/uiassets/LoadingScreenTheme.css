@@ -1,0 +1,49 @@
+/* Imports the Lunchtime font for use in labels, buttons, etc. */
+@font-face {
+    src: url('lunchtime.ttf');
+}
+
+/* Root refers to all the contents in a scene.
+ * Changes the background color to black (in case the image isn't found);
+ * Changes the background image to forest.png;
+ * Makes the image cover the whole scene;
+ * Makes all components use the Lunchtime font;
+ * Sets the default font size to 20px.
+ */
+.root{
+    -fx-background-color: black;
+    -fx-font-family: 'Lunchtime Doubly So';
+    -fx-font-size: 20px;
+}
+/* Button refers to all the buttons.
+ * Sets the text color to black, sets the text size to 25px;
+ * Makes the button square (rounding is reduced to 0);
+ * Sets the background color of the button to green;
+ * Sets the width of button border to 5px and makes it black.
+ */
+.button{
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+    -fx-background-radius: 0;
+    -fx-background-color: black;
+    -fx-border-width: 5px;
+    -fx-border-color: white;
+    -fx-background-insets: 100%;
+
+}
+/* Button:hover refers to all the buttons which have a mouse cursor on top of them.
+ * Lightens up the color of our button.
+ */
+.button:hover{
+    -fx-background-color: #383838;
+}
+
+/* Label refers to all labels.
+ * Basic labels will have smaller font than the title ones.
+ */
+.label{
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+}
+
+

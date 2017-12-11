@@ -1,6 +1,7 @@
 package lazytown.source.menu;
 
 
+import lazytown.assets.AssetManager;
 import lazytown.source.game.Game;
 import lazytown.source.Main;
 import javafx.geometry.Insets;
@@ -36,7 +37,8 @@ public class MainMenu {
         // Instantiates sceneMainMenu which will contain our root and sets the window size
         // Tells all nodes in sceneMainMenu to use the MenuTheme.css style
         sceneMainMenu = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
-        sceneMainMenu.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
+        sceneMainMenu.getStylesheets().add(AssetManager.getTheme("MenuTheme.css"));
+
 
         // VBox lays out the components in a vertical line, spacing is the distance between components inside the VBox
         // Places buttonContainer in the center of BorderPane root

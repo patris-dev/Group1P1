@@ -1,5 +1,6 @@
 package lazytown.source.menu;
 
+import lazytown.assets.AssetManager;
 import lazytown.source.Main;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -45,7 +46,7 @@ public class ConfirmBox {
         // Instantiates sceneMainMenu which will contain our root and sets the window size
         // Tells all nodes in scene to use the MenuTheme.css style
         scene = new Scene(root, SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
-        scene.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
+        scene.getStylesheets().add(AssetManager.getTheme("LoadingScreenTheme.css"));
 
 
         // Creates a label for our message (for example: "Are you sure you want to quit?")
@@ -78,6 +79,15 @@ public class ConfirmBox {
 
         // Sets the scene of our stage to scene
         primaryStage.setScene(scene);
+
+        // Returns true if the Enter key or Y is pressed, simulating the yes button being pressed.
+        // Returns false if the Escape key or N is pressed, simulating the no button being pressed.
+        root.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case ENTER:  case Y: answer = true;  primaryStage.close(); break;
+                case ESCAPE: case N: answer = false; primaryStage.close(); break;
+            }
+        });
 
         // Works together with Modality - shows the window and doesn't allow for other windows to be interacted with
         primaryStage.showAndWait();

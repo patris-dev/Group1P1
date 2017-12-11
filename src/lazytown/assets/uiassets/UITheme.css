@@ -1,0 +1,66 @@
+/* Imports the Lunchtime font for use in labels, buttons, etc. */
+@font-face {
+    src: url('lunchtime.ttf');
+}
+/*
+ * Character info refers to the UI section meant for health, hunger and thirst.
+ */
+#character-info{
+    -fx-background-image: url('../images/UI/UIcharacterInfo.png');
+    -fx-background-size: 200px;
+    -fx-padding: 10px;
+    -fx-background-repeat: no-repeat;
+}
+/*
+ * Counters refers to the UI section meant for amount of food and drink items held.
+ */
+#counters{
+    -fx-background-image: url('../images/UI/UIcounters.png');
+    -fx-background-size: 100px;
+    -fx-background-repeat: no-repeat;
+}
+/*
+ * Label refers to all labels.
+ */
+.label{
+    -fx-font-family: 'Lunchtime Doubly So';
+    -fx-text-fill: black;
+    -fx-font-size: 25px;
+}
+/*
+ * Progress bar refers to the bars meant for health/hunger/thirst.
+ * Track is the outline, bar is the inside.
+ */
+.progress-bar > .track{
+    -fx-background-color: aliceblue;
+    -fx-border-width: 3px;
+    -fx-border-color: black;
+    -fx-background-insets: 100%;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+.progress-bar > .bar{
+    -fx-padding: 7px;
+    -fx-background-color: green;
+    -fx-background-insets: 3px;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+#text-border {
+    -fx-padding: 2px;
+    -fx-border-color: #351c0d;
+    -fx-background-color: #e8d9d0;
+    -fx-border-width: 5px;
+    -fx-pref-width: 800px;
+    -fx-pref-height: 44px;
+}
+
+.text-id{
+    -fx-fill: black;
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Lunchtime Doubly So';
+
+}
+
+

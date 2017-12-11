@@ -1,5 +1,6 @@
 package lazytown.source.menu;
 
+import lazytown.assets.AssetManager;
 import lazytown.source.Main;
 import lazytown.source.sound.SoundEngine;
 import javafx.geometry.Insets;
@@ -39,7 +40,7 @@ public class OptionsMenu {
         // Instantiates sceneOptions which will contain our root and sets the window size
         // Tells all nodes in sceneOptions to use the MenuTheme.css style
         sceneOptions = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
-        sceneOptions.getStylesheets().add("lazytown/assets/uiassets/MenuTheme.css");
+        sceneOptions.getStylesheets().add(AssetManager.getTheme("MenuTheme.css"));
 
 
         // Creates a button to get back
