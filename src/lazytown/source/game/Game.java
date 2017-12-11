@@ -79,13 +79,13 @@ public class Game {
 
     // This method is used to render the level from a map.
     private void loadLevel() {
-       levels = new Level[6];
-       for (int i = 1; i < 5; i++) {
+       levels = new Level[5];
+       for (int i = 0; i < 5; i++) {
            levels[i] = new Level(i);
        }
 
         // Instantiates a level object, renders the level
-        level = levels[4];
+        level = levels[1];
         level.renderMap(background);
     }
 
@@ -146,6 +146,7 @@ public class Game {
 
         level.renderActors(background);
         root.getChildren().add(playerOne.spriteFrame);
+        playerOne.setSpawnLocation(1550, 1550);
     }
 
     // This method starts our game loop, so what we have here is actually a dynamic game.
@@ -162,6 +163,16 @@ public class Game {
                                     "Scavenge around for some food and drinks. Currently you can hold 2 of each.\nPress 1 to eat, and 2 to drink.",
                                     "Once you find your backpack, your food and drink inventory will increase.",
                                     "Press ESC at any time to check the controls.\nGood luck!");
+    }
+
+    public static void changeLevel(int changeTo, int spawnX, int spawnY) {
+        background.getChildren().clear();
+        director.resetCurrentActors();
+        level = levels[changeTo];
+        level.renderMap(Game.getBackground());
+        playerOne.updateLevelSize();
+        level.renderActors(Game.getBackground());
+        playerOne.setSpawnLocation(spawnX, spawnY);
     }
 
     // This method renders a new window to exit the game.

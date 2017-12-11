@@ -1,5 +1,6 @@
 package lazytown.source.game.actor;
 
+import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.Shape;
@@ -239,27 +240,26 @@ public class MainCharacter extends MovedActor {
                             case "key1":
                                 if (!UI.getKeycard(1)) UI.loadTextWindow("This door requires a keycard with ID 1 to unlock.");
                                 else {
-
-                                    Game.director.resetCurrentActors();
-                                    Game.getBackground().getChildren().clear();
-                                    Game.level = Game.levels[1];
-                                    Game.level.renderMap(Game.getBackground());
-                                    Game.level.renderActors(Game.getBackground());
-                                    Game.playerOne.setSpawnLocation(100, 100);
-                                    ImageView n = new ImageView(AssetManager.getTile("null.png"));
-                                    n.setTranslateX(0);
-                                    n.setTranslateY(0);
-                                    Game.getBackground().getChildren().add(n);
-
+                                    int levelNumber = Game.level.getLevelNumber();
+                                    if (levelNumber == 1) Game.changeLevel(2, 175, 3300);
+                                    else if (levelNumber == 2) Game.changeLevel(1, 2925, 2100);
                                 }
                                 break;
                             case "key2":
                                 if (!UI.getKeycard(2)) UI.loadTextWindow("This door requires a keycard with ID 2 to unlock.");
-                                else UI.loadTextWindow("Door unlocked.");
+                                else {
+                                    int levelNumber = Game.level.getLevelNumber();
+                                    if (levelNumber == 2) Game.changeLevel(3, 675, 500);
+                                    else if (levelNumber == 3) Game.changeLevel(2, 725, 300);
+                                }
                                 break;
                             case "key3":
                                 if (!UI.getKeycard(3)) UI.loadTextWindow("This door requires a keycard with ID 3 to unlock.");
-                                else UI.loadTextWindow("Door unlocked.");
+                                else {
+                                    int levelNumber = Game.level.getLevelNumber();
+                                    if (levelNumber == 3) Game.changeLevel(4, 75, 1600);
+                                    else if (levelNumber == 4) Game.changeLevel(3, 1275, 1600);
+                                }
                                 break;
                             case "key4":
                                 if (!UI.getKeycard(4)) UI.loadTextWindow("This door requires a keycard with ID 4 to unlock.");
@@ -315,6 +315,11 @@ public class MainCharacter extends MovedActor {
         if (iX > levelWidth/2   - windowWidth/2)  Game.getBackground().setTranslateX(windowWidth/2  - levelWidth/2);
         if (iY < -levelHeight/2 + windowHeight/2) Game.getBackground().setTranslateY(levelHeight/2  - windowHeight/2);
         if (iY > levelHeight/2  - windowHeight/2) Game.getBackground().setTranslateY(windowHeight/2 - levelHeight/2);
+    }
+
+    public void updateLevelSize() {
+        levelWidth = Game.getLevel().getImageWidth() * 50;
+        levelHeight = Game.getLevel().getImageHeight() * 50;
     }
 
     public boolean isDead() {

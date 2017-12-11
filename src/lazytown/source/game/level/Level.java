@@ -400,4 +400,8 @@ public class Level {
     public Tile[][] getTiles() {
         return tiles;
     }
+
+    public int getLevelNumber() {
+        return levelNumber;
+    }
 }
