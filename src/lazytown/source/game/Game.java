@@ -90,10 +90,10 @@ public class Game {
         // the most compact and elegant way of programming this logic.
         sceneGame.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case W:         up      = true; break;
-                case A:         left    = true; break;
-                case S:         down    = true; break;
-                case D:         right   = true; break;
+                case W:         up      = true; down    = false;  break;
+                case A:         left    = true; right   = false; break;
+                case S:         down    = true; up      = false; break;
+                case D:         right   = true; left    = false; break;
                 case E:         keyE    = true; UI.displayTextWindow(); break;
                 case DIGIT1:    UI.consumePizza(); break;
                 case DIGIT2:    UI.consumeBeer(); break;
