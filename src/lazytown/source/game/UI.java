@@ -37,6 +37,8 @@ public class UI {
     private static boolean[] keycard = new boolean[6];
     private static boolean backpack = false;
 
+    private static ImageView map;
+
 
     public static BorderPane getUI(Stage pS) {
         primaryStage = pS;
@@ -74,6 +76,10 @@ public class UI {
         GridPane.setMargin(pizzaIcon, new Insets(5, 0, -5, 5));
         GridPane.setMargin(beerIcon, new Insets(0, 0, 0, 3));
         GridPane.setMargin(pizzaCounter, new Insets(4, 0, 0, 0));
+
+        //Kris
+        map = new ImageView(new Image("/lazytown/assets/images/levels/fullmap.png"));
+        map.setVisible(false);
 
         // UI section for character info.
         // Includes an image of our main character, small icons for health/hunger/thirst bars and the bars themselves.
@@ -119,6 +125,7 @@ public class UI {
         // Lays out all UI sections inside root.
         root.setRight(counters);
         root.setBottom(characterInfo);
+        root.setCenter(map); //Kris
 
         return root;
     }
@@ -177,6 +184,13 @@ public class UI {
                 keycard[5] = true;
                 break;
         }
+    }
+
+    public static void showMap(){
+        map.setVisible(true);
+    }
+    public static void hideMap(){
+        map.setVisible(false);
     }
 
     public static void consumePizza() {

@@ -105,6 +105,7 @@ public class Game {
                 case DIGIT2:    UI.consumeBeer(); break;
                 case DIGIT3:    playerOne.setSpawnLocation(100, 100); break;
                 case ESCAPE:    exitGame();
+                case M:         UI.showMap(); break;
             }
         });
 
@@ -115,6 +116,7 @@ public class Game {
                 case S:     down    = false; break;
                 case D:     right   = false; break;
                 case E:     keyE    = false; break;
+                case M:         UI.hideMap(); break;
             }
         });
 
