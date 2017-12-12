@@ -195,6 +195,7 @@ public class UI {
 
     public static void consumePizza() {
         if (!pizzaCounter.getText().equals("0")) {
+            Game.getBackgroundsfx().play("eatingSound.mp3");
             pizzaCounter.setText(Integer.toString(Integer.parseInt(pizzaCounter.getText()) - 1));
             hungerBar.setProgress(hungerBar.getProgress()+0.5);
         }
@@ -202,6 +203,7 @@ public class UI {
 
     public static void consumeBeer() {
         if (!beerCounter.getText().equals("0")) {
+            Game.getBackgroundsfx().play("drinkingSound.mp3");
             beerCounter.setText(Integer.toString(Integer.parseInt(beerCounter.getText()) - 1));
             thirstBar.setProgress(thirstBar.getProgress()+0.5);
         }
