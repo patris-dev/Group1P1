@@ -26,7 +26,13 @@ public abstract class Actor {
     protected boolean isFlipV;
     protected boolean isFlipH;
 
-    // The constructor that ensures that these variables are all set appropriately.
+    /**
+     * The constructor that ensures that these variables are all set appropriately.
+     * @param SVGdata a string which determines vector data for the collision area.
+     * @param xLoc x coordinate of the rendered Actor.
+     * @param yLoc y coordinate of the rendered Actor.
+     * @param spriteCels an array of images for animating the Actor.
+     */
     public Actor(String SVGdata, double xLoc, double yLoc, Image... spriteCels){
         // Set up our boundaries around the sprite, this is done through a string command !!! More Research is Needed !!!
         spriteBoundary = new SVGPath();
@@ -44,13 +50,11 @@ public abstract class Actor {
         isFlipH = false;
     }
 
-    public Actor() {
-
-    }
-
-    // We declare here that every actor object in our game, no matter what kind, needs to have an update method,
-    // this one is essential for our game, since it tells the gameplay loop that logic has to be executed with every
-    // pulse in our game. We enforce the implementation of this method in any subclasses by also making it abstract.
+    /**
+     * We declare here that every Actor object in our game, no matter what kind, needs to have an update method,
+     * this one is essential for our game, since it tells the gameplay loop that logic has to be executed with every
+     * pulse in our game. We enforce the implementation of this method in any subclasses by also making it abstract.
+     */
     public abstract void update();
 
 

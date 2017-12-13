@@ -1,4 +1,4 @@
-package lazytown.assets;
+package lazytown.source;
 
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
@@ -34,7 +34,7 @@ public class AssetManager {
     public static Image[] getGuardSprites() {
         Image[] guardSprites = new Image[12];
         for (int i = 0; i < guardSprites.length; i++) {
-            guardSprites[i] = new Image(animationSpritesPath + "guard/P" + i + ".png",
+            guardSprites[i] = new Image(animationSpritesPath + "guard/G" + i + ".png",
                     SPRITE_WIDTH, SPRITE_HEIGHT, true, false, true);
         }
         return guardSprites;

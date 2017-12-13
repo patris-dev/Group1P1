@@ -3,10 +3,9 @@ package lazytown.source.sound;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import lazytown.assets.AssetManager;
+import lazytown.source.AssetManager;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -45,8 +44,10 @@ public class SoundEngine {
         }
     }
 
-    // Loads in a sound file.
-    // mp3FileName - a string specifying the name of the file, located in the package specified in the path variable.
+    /**
+     * Loads in a sound file.
+     * @param mp3FileName a string specifying the name of the file, located in the package specified in the AssetManager.
+     */
     public void load(String mp3FileName) {
         // Calls the AssetManager class to find the sound.
         media = AssetManager.getSound(mp3FileName);
@@ -54,15 +55,17 @@ public class SoundEngine {
         mediaPlayer = new MediaPlayer(media);
     }
 
-    // Stops the sound file.
-    // If there are several sounds playing at once, stops the most recently played one.
+    /**
+     * Stops the sound file.
+     */
     public void stop() {
         mediaPlayer.stop();
     }
 
-    // Plays the loaded sound file.
-    // Sets the volume of audio to our volume variable.
-    // Checks if the audio is muted. If not, plays the sound from the beginning.
+    /**
+     * Plays the loaded sound asset but only when it is not muted by the player.
+     * We ensure that the asset plays from the beginning.
+     */
     public void play() {
         updateVolume();
         if (!soundProperties.isMuted()) {
@@ -71,18 +74,25 @@ public class SoundEngine {
         }
     }
 
-    // Overloaded play method that loads and plays an audio track, in one method call.
+    /**
+     * Overloaded play method that loads and plays an audio track, in one method call.
+     * @param mp3FileName a string specifying the name of the file, located in the package specified in the AssetManager.
+     */
     public void play(String mp3FileName) {
         load(mp3FileName);
         play();
     }
 
-    // Pauses the track so it can be played again (resumed) afterwards.
+    /**
+     * Pauses the track so it can be played again (resumed) afterwards.
+     */
     public void pause() {
         mediaPlayer.pause();
     }
 
-    // Resumes playing a track from the time it was paused.
+    /**
+     * Resumes the played track.
+     */
     public void resume() {
         updateVolume();
         if (!soundProperties.isMuted()) {
@@ -90,6 +100,10 @@ public class SoundEngine {
         }
     }
 
+    /**
+     * Loads the audio settings - changes the static values to the saved ones.
+     * This is also necessary for graphically displaying these settings in the options menu.
+     */
     public static void loadSettings() {
         String line;
         try {
@@ -123,7 +137,9 @@ public class SoundEngine {
         catch(IOException ignored) { }
     }
 
-    // Updates the volume.
+    /**
+     * Updates the volume.
+     */
     public void updateVolume() {
         mediaPlayer.setVolume(soundProperties.getVolume());
     }
