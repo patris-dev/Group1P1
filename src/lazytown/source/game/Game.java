@@ -230,4 +230,8 @@ public class Game {
     public static SoundEngine getBackgroundSfx() {
         return backgroundSfx;
     }
+
+    public static SoundEngine getFootsteps() {
+        return footsteps;
+    }
 }

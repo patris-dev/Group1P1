@@ -166,27 +166,34 @@ public class UI {
     public static void bumpItem(String id) {
         switch (id) {
             case "pizza":
+                Game.getBackgroundSfx().play("pizzaPickup.mp3");
                 pizzaCounter.setText(Integer.toString(Integer.parseInt(pizzaCounter.getText()) + 1));
                 break;
             case "can":
+                Game.getBackgroundSfx().play("beerPickup.mp3");
                 beerCounter.setText(Integer.toString(Integer.parseInt(beerCounter.getText()) + 1));
                 break;
             case "backpack":
+                Game.getBackgroundSfx().play("backpackPickup.mp3");
                 backpack = true;
                 keycard[1] = true;
                 keycard[4] = true;
                 UI.loadTextWindow("You found your backpack! Inventory increased.\nThere's also your keycard inside! You now have access to building A.");
                 break;
             case "key1":
+                Game.getBackgroundSfx().play("keycardPickup.mp3");
                 keycard[1] = true;
                 break;
             case "key2":
+                Game.getBackgroundSfx().play("keycardPickup.mp3");
                 keycard[2] = true;
                 break;
             case "key3":
+                Game.getBackgroundSfx().play("keycardPickup.mp3");
                 keycard[3] = true;
                 break;
             case "key4":
+                Game.getBackgroundSfx().play("keycardPickup.mp3");
                 keycard[4] = true;
                 break;
             case "key5":
@@ -252,7 +259,8 @@ public class UI {
                                         "Ours was pretty stressed, needed to finish up a game and stuff.",
                                         "But you don't really care about that, do you?",
                                         "By the way, there might or might not be an easter egg involving the\nKonami code.",
-                                        "Anyways, if you want to restart, right now you would need to exit the game\nand start it again. Yup. Sorry!");
+                                        "Anyways, if you want to restart, right now you would need to exit the game\n"
+                                                + "and start it again. Yup. Sorry!");
             healthBar.setProgress(0);
         }
     }
