@@ -1,6 +1,6 @@
 package lazytown.source.menu;
 
-import lazytown.assets.AssetManager;
+import lazytown.source.AssetManager;
 import lazytown.source.Main;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,8 +12,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * This is a class that calls in a new window with two buttons (Yes/No).
- * The method display will return a boolean based on the button that you click.
+ * This is a class that is used for calling in new windows with buttons.
  */
 public class ConfirmBox {
 
@@ -27,7 +26,12 @@ public class ConfirmBox {
     private static final int SMALL_WINDOW_WIDTH = 500;
     private static final int SMALL_WINDOW_HEIGHT = 200;
 
-    // ConfirmBox will create a window and return a boolean based on what the user has clicked
+    /**
+     * This method calls in a window with two buttons (Yes/No).
+     * @param title the title of called in window.
+     * @param message the label text inside the called in window.
+     * @return returns a boolean value based on the button pressed.
+     */
     public static boolean display(String title, String message) {
         // Instantiates a new Stage
         // Sets the title, width, resizability

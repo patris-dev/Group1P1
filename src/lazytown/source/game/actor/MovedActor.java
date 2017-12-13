@@ -19,23 +19,28 @@ public abstract class MovedActor extends Actor {
     // gimmick.
     protected float boundScale, boundRotation, friction;
 
-    // Our constructor, which calls the Actor constructor with the super keyword. We also set some default values for
-    // some of our variables. Health to 100 and movement speed to 2
+    /**
+     * Our constructor, which calls the Actor constructor with the super keyword. We also set some default values for
+     * some of our variables. Health is set to 100 and movement speed to 4.
+     * @param SVGdata a string which determines vector data for the collision area.
+     * @param xLoc x coordinate of the rendered MovedActor.
+     * @param yLoc y coordinate of the rendered MovedActor.
+     * @param spriteCels an array of images for animating the MovedActor.
+     */
     public MovedActor(String SVGdata, double xLoc, double yLoc, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
         health = 100;
-        velX = velY = 6;
+        velX = velY = 4;
     }
 
+    /**
+     * MovedActor is a subclass of Actor, therefore we need to implement the update() method, we don't use it in this
+     * class however.
+     */
     @Override
-    // Here we carry our update method over from the actor superclass
     public abstract void update();
 
-    // We add a new method here for our collision, it is defaulted to false, as this class can also be used for particle
-    // effects, which we don't want to collide with anything else in the world.
-    public boolean collide(Actor object) {return false;}
-
-    // Finally we have our getters and setters
+    // Finally we have our getters and setters.
     public double getVelX() {
         return velX;
     }

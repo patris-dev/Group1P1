@@ -1,4 +1,4 @@
-package lazytown.assets;
+package lazytown.source;
 
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;

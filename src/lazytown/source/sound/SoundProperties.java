@@ -6,7 +6,7 @@ package lazytown.source.sound;
  * Since it is an object, we can bind it's values to another SoundProperties object; This is useful while trying to mute
  * all tracks at once, or to change the volume of all tracks.
  */
-class SoundProperties {
+public class SoundProperties {
     private boolean isMuted;
     private double volume;
 

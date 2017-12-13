@@ -5,7 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import lazytown.assets.AssetManager;
+import lazytown.source.AssetManager;
 import lazytown.source.Main;
 import lazytown.source.game.actor.*;
 import lazytown.source.game.level.Level;
@@ -15,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 
 /**
  * This is the class that represents the Game scene.
@@ -29,6 +28,9 @@ public class Game {
     private static Image[] pSprites;
     public static MainCharacter playerOne;
     private static SoundEngine backgroundMusic = new SoundEngine("music");
+    private static SoundEngine backgroundSfx = new SoundEngine("sfx");
+    private static SoundEngine footsteps = new SoundEngine("sfx");
+    public static Level[] levels;
     public static Level level;
     public static Director director = new Director();
 
@@ -38,28 +40,35 @@ public class Game {
     // will be more variables as we give the player character more controls, like interaction, and using items.
     private boolean up, down, left, right, keyE;
 
-   public void show(Stage primaryStage) {
+    /**
+     * The method that takes care of nearly everything within our game world, this is being run from the main menu
+     * and is the core of our game, in this method we do just about everything from putting up loading
+     * screens, and loading assets, to rendering everything and initializing the game loop.
+     * Finally, it changes the scene of our window to the game scene, where all of this is contained.
+     * @param primaryStage our primary stage (window).
+     */
+    public void show(Stage primaryStage) {
 
-       // Variables
-       root = new StackPane();
-       background = new Group();
-       root.getChildren().add(background);
-       sceneGame = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
+        // Variables
+        root = new StackPane();
+        background = new Group();
+        root.getChildren().add(background);
+        sceneGame = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
 
 
-       // Methods we need to call to make our game work
-       showLoadingScreen(primaryStage);
-       loadLevel();
-       eventHandling();
-       assetLoading();
-       playMusic();
-       spawnActors();
-       renderActors();
-       startGameLoop();
-       renderUI(primaryStage);
+        // Methods we need to call to make our game work
+        showLoadingScreen(primaryStage);
+        loadLevel();
+        eventHandling();
+        assetLoading();
+        playMusic();
+        spawnActors();
+        renderActors();
+        startGameLoop();
+        renderUI();
 
-       // Sets the scene of our stage to sceneGame
-       primaryStage.setScene(sceneGame);
+        // Sets the scene of our stage to sceneGame
+        primaryStage.setScene(sceneGame);
     }
 
     // This method renders a loading screen.
@@ -78,8 +87,13 @@ public class Game {
 
     // This method is used to render the level from a map.
     private void loadLevel() {
+       levels = new Level[5];
+       for (int i = 0; i < 5; i++) {
+           levels[i] = new Level(i);
+       }
+
         // Instantiates a level object, renders the level
-        level = new Level(1);
+        level = levels[2];
         level.renderMap(background);
     }
 
@@ -98,7 +112,8 @@ public class Game {
                 case DIGIT1:    UI.consumePizza(); break;
                 case DIGIT2:    UI.consumeBeer(); break;
                 case DIGIT3:    playerOne.setSpawnLocation(100, 100); break;
-                case ESCAPE:    exitGame();
+                case ESCAPE:    exitGame(); break;
+                case M:         UI.showMap(); break;
             }
         });
 
@@ -109,6 +124,7 @@ public class Game {
                 case S:     down    = false; break;
                 case D:     right   = false; break;
                 case E:     keyE    = false; break;
+                case M:         UI.hideMap(); break;
             }
         });
 
@@ -138,14 +154,9 @@ public class Game {
     // This method takes care of rendering our actors to the stackPane object that we have set up
     private static void renderActors() {
 
-        Actor[][] actors = level.getActors();
-        for (int y = 0; y < level.getImageHeight(); y++) {
-            for (int x = 0; x < level.getImageWidth(); x++) {
-                if (actors[x][y] != null) background.getChildren().add(actors[x][y].spriteFrame);
-            }
-        }
-
+        level.renderActors(background);
         root.getChildren().add(playerOne.spriteFrame);
+        playerOne.setSpawnLocation(450, 200);
     }
 
     // This method starts our game loop, so what we have here is actually a dynamic game.
@@ -155,13 +166,23 @@ public class Game {
     }
 
     // This method renders the in-game user interface.
-    private void renderUI(Stage primaryStage) {
-        root.getChildren().add(UI.getUI(primaryStage));
+    private void renderUI() {
+        root.getChildren().add(UI.getUI());
         UI.loadTextWindow("Welcome to LazyTown! Press E to continue.",
                                     "Use W A S D to move around.\nE is also used to interact with items, such as doors, lockers and water taps.",
                                     "Scavenge around for some food and drinks. Currently you can hold 2 of each.\nPress 1 to eat, and 2 to drink.",
                                     "Once you find your backpack, your food and drink inventory will increase.",
                                     "Press ESC at any time to check the controls.\nGood luck!");
+    }
+
+    public static void changeLevel(int changeTo, int spawnX, int spawnY) {
+        background.getChildren().clear();
+        director.resetCurrentActors();
+        level = levels[changeTo];
+        level.renderMap(Game.getBackground());
+        playerOne.updateLevelSize();
+        level.renderActors(Game.getBackground());
+        playerOne.setSpawnLocation(spawnX, spawnY);
     }
 
     // This method renders a new window to exit the game.
@@ -204,5 +225,9 @@ public class Game {
 
     public static GamePlayLoop getGamePlayLoop() {
         return gamePlayLoop;
+    }
+
+    public static SoundEngine getBackgroundSfx() {
+        return backgroundSfx;
     }
 }

@@ -22,8 +22,10 @@ public class Main extends Application {
     // A SoundEngine object to load the button click sounds. Specifies that this engine will be used for sfx.
     private static SoundEngine buttonClicks = new SoundEngine("sfx");
 
-
-    // The main function of a JavaFX application
+    /**
+     * This is our start method, which is our primary method for the game, it initializes our stage as well as sets it's
+     * parameters to the desired values. we also add files for menu music and button clicks.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 

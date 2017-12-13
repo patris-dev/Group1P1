@@ -9,7 +9,7 @@ import lazytown.source.game.UI;
 import lazytown.source.game.level.Tile;
 
 /**
- * A class used for the main character, extends MovedActor class.
+ * A class used for the main character, extends MovedActor class, and therefore the Actor as well.
  */
 public class MainCharacter extends MovedActor {
     protected Game game;
@@ -32,12 +32,24 @@ public class MainCharacter extends MovedActor {
     int framecounter = 0;
     int runningspeed = 12;
 
-    // Our constructor again calling up to the superclass
+    /**
+     * Our constructor again calling up to the superclass.
+     * @param newGame a Game object used for keyboard interaction, collision, etc.
+     * @param SVGdata a string which determines vector data for the collision area.
+     * @param xLoc x coordinate of the rendered MovedActor.
+     * @param yLoc y coordinate of the rendered MovedActor.
+     * @param spriteCels an array of images for animating the MovedActor.
+     */
     public MainCharacter(Game newGame, String SVGdata, double xLoc, double yLoc, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
         game = newGame;
     }
 
+    /**
+     * The necessary update method, which in this class is finally implemented and used.
+     * It is used for translating the character around the level, animation, collision, and adjusting the various stats
+     * as the game progresses.
+     */
     @Override
     public void update() {
         setXYLocation();
@@ -236,23 +248,38 @@ public class MainCharacter extends MovedActor {
                                 break;
                             case "key1":
                                 if (!UI.getKeycard(1)) UI.loadTextWindow("This door requires a keycard with ID 1 to unlock.");
-                                else UI.loadTextWindow("Door unlocked.");
+                                else {
+                                    int levelNumber = Game.level.getLevelNumber();
+                                    if (levelNumber == 1) Game.changeLevel(2, 175, 3300);
+                                    else if (levelNumber == 2) Game.changeLevel(1, 2925, 2100);
+                                }
                                 break;
                             case "key2":
                                 if (!UI.getKeycard(2)) UI.loadTextWindow("This door requires a keycard with ID 2 to unlock.");
-                                else UI.loadTextWindow("Door unlocked.");
+                                else {
+                                    int levelNumber = Game.level.getLevelNumber();
+                                    if (levelNumber == 2) Game.changeLevel(3, 675, 500);
+                                    else if (levelNumber == 3) Game.changeLevel(2, 725, 300);
+                                }
                                 break;
                             case "key3":
                                 if (!UI.getKeycard(3)) UI.loadTextWindow("This door requires a keycard with ID 3 to unlock.");
-                                else UI.loadTextWindow("Door unlocked.");
+                                else {
+                                    int levelNumber = Game.level.getLevelNumber();
+                                    if (levelNumber == 3) Game.changeLevel(4, 75, 1600);
+                                    else if (levelNumber == 4) Game.changeLevel(3, 1275, 1600);
+                                }
                                 break;
                             case "key4":
                                 if (!UI.getKeycard(4)) UI.loadTextWindow("This door requires a keycard with ID 4 to unlock.");
-                                else UI.loadTextWindow("Door unlocked.");
+                                else {
+                                    UI.bumpItem("key5");
+                                    UI.loadTextWindow("You activate your keycard. Time to escape!");
+                                }
                                 break;
                             case "key5":
-                                if (!UI.getKeycard(5)) UI.loadTextWindow("This door requires a keycard with ID 5 to unlock.");
-                                else UI.loadTextWindow("Door unlocked.");
+                                if (!UI.getKeycard(5)) UI.loadTextWindow("You need to activate your card PIN to unlock this door.\nAs far as you remember, you can do that somewhere in building A...");
+                                else UI.loadTextWindow("You escaped with all your stuff, congrats!");
                                 break;
                             case "water":
                                 UI.loadTextWindow("You drink some water.");
@@ -271,13 +298,14 @@ public class MainCharacter extends MovedActor {
         }
     }
 
-    // The player characters collision is set to true. This does not actually do anything at the moment other than being
-    // a placeholder stating that the player character can collide.
-    public boolean collide(Actor object){
-        // We check for collision in a two stage process, this is to save resources, as checking for collision can be
-        // quite costly. The way we do this is by first using an if statement to check if two imageView nodes intersect
-        // with each other, if they do we create a new Shape object from the two intersecting ImageView nodes, the width
-        // of which we measure. If this width is not negative 1, we return true, else we return false.
+    /**
+     * We check for collision in a two stage process, this is to save resources, as checking for collision can be
+     * quite costly. The way we do this is by first using an if statement to check if two imageView nodes intersect
+     * with each other, if they do we create a new Shape object from the two intersecting ImageView nodes, the width
+     * of which we measure. If this width is not negative 1, we return true, else we return false.
+     * @param object object which is checked for collision.
+     */
+    private boolean collide(Actor object){
         if (object.getSpriteFrame().getBoundsInParent().intersects(
                 iX+levelWidth/2-20, iY+levelHeight/2-37.5, 40, 75)) {
             Shape intersection = SVGPath.intersect(Game.playerOne.getSpriteBoundary(), object.getSpriteBoundary());
@@ -288,10 +316,13 @@ public class MainCharacter extends MovedActor {
         return false;
     }
 
-    // Moves the player to specific coordinates.
-    // 0, 0 point is the top left corner of the level.
-    // To spawn the player in the center of a level, X and Y values would be level.getImageWidth()*50/2
-    // and level.getImageWidth()*50/2.
+    /**
+     * Moves the player to specific coordinates.
+     * To spawn the player in the center of a level, X and Y values would be level.getImageWidth()*50/2
+     * and level.getImageWidth()*50/2.
+     * @param X x coordinate of spawned character, 0 being the very left edge.
+     * @param Y y coordinate of spawned character, 0 being the very top.
+     */
     public void setSpawnLocation(int X, int Y) {
         iX = X-levelWidth/2;
         iY = Y-levelHeight/2;
@@ -300,7 +331,14 @@ public class MainCharacter extends MovedActor {
         if (iX > levelWidth/2   - windowWidth/2)  Game.getBackground().setTranslateX(windowWidth/2  - levelWidth/2);
         if (iY < -levelHeight/2 + windowHeight/2) Game.getBackground().setTranslateY(levelHeight/2  - windowHeight/2);
         if (iY > levelHeight/2  - windowHeight/2) Game.getBackground().setTranslateY(windowHeight/2 - levelHeight/2);
+    }
 
+    /**
+     * Updates level size based on currently set level, used for switching levels.
+     */
+    public void updateLevelSize() {
+        levelWidth = Game.getLevel().getImageWidth() * 50;
+        levelHeight = Game.getLevel().getImageHeight() * 50;
     }
 
     public boolean isDead() {
