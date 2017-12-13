@@ -283,6 +283,7 @@ public class MainCharacter extends MovedActor {
                                 break;
                             case "water":
                                 UI.loadTextWindow("You drink some water.");
+                                UI.drinkWater();
                                 break;
                             case "locker":
                                 UI.loadTextWindow("This locker is empty.");

@@ -16,8 +16,6 @@ import lazytown.source.AssetManager;
  */
 public class UI {
 
-    private static Stage primaryStage;
-
     private static Text textArea;
     private static int textCounter = 0;
     private static String[] text;
@@ -231,6 +229,11 @@ public class UI {
             beerCounter.setText(Integer.toString(Integer.parseInt(beerCounter.getText()) - 1));
             thirstBar.setProgress(thirstBar.getProgress()+0.5);
         }
+    }
+
+    public static void drinkWater() {
+        Game.getBackgroundSfx().play("drinkingSound.mp3");
+        thirstBar.setProgress(1.0);
     }
 
     /**
