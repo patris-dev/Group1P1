@@ -241,7 +241,7 @@ public class UI {
      * @param damage amount of damage the main character will take.
      */
     public static void takeDamage(double damage) {
-        if (healthBar.getProgress() > damage) healthBar.setProgress(healthBar.getProgress()-damage);
+        if (healthBar.getProgress() > 0.065) healthBar.setProgress(healthBar.getProgress() - damage);
         else {
             Game.playerOne.setDead(true);
             Game.root.getChildren().remove(Game.playerOne.spriteFrame);
@@ -264,12 +264,12 @@ public class UI {
      * If both reach 0, our Health will start to go down.
      */
     public static void updateStats() {
-        double rate = 0.0001;
-        if (healthBar.getProgress() > rate) healthBar.setProgress(healthBar.getProgress()+rate);
+        double rate = 0.0003;
+        if (healthBar.getProgress() > 0.065) healthBar.setProgress(healthBar.getProgress()+rate);
 
-        if (hungerBar.getProgress() > rate) hungerBar.setProgress(hungerBar.getProgress()-rate/10);
+        if (hungerBar.getProgress() > 0.065) hungerBar.setProgress(hungerBar.getProgress()-rate/10);
         else takeDamage(rate);
-        if (thirstBar.getProgress() > rate) thirstBar.setProgress(thirstBar.getProgress()-rate/10);
+        if (thirstBar.getProgress() > 0.065) thirstBar.setProgress(thirstBar.getProgress()-rate/10);
         else takeDamage(rate);
     }
 
