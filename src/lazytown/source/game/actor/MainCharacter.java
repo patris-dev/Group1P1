@@ -73,7 +73,7 @@ public class MainCharacter extends MovedActor {
     }
 
     private void setImageState() {
-        // Idle (not moving) (need to be expanded with facing direction)
+        // Idle (not moving)
         if (!game.isDown() && !game.isUp() && !game.isLeft() && !game.isRight()){
             if(facingDown) {
                 spriteFrame.setScaleX(1);
@@ -93,18 +93,17 @@ public class MainCharacter extends MovedActor {
             animation = false;
             framecounter = 0;
         }
-
         // Moving left
-        if (game.isLeft()) {
+        else if (game.isLeft() || ((game.isLeft()) && game.isDown()) || ((game.isLeft()) && game.isUp())) {
             spriteFrame.setScaleX(1);
             this.setFlipH(false);
-            if (!animation && (!game.isDown() && !game.isUp())) {
+            if (!animation) {
                 spriteFrame.setImage(imageStates.get(11));
                 if (framecounter >= runningspeed) {
                     animation = true;
                     framecounter = 0;
                 } else {framecounter +=1;}
-            } else if(animation) {
+            } else {
                 spriteFrame.setImage(imageStates.get(9));
                 if (framecounter >= runningspeed) {
                     animation = false;
@@ -114,18 +113,17 @@ public class MainCharacter extends MovedActor {
             facingLeft = true;
             facingDown = facingRight = facingUp = false;
         }
-
         // Moving right
-        if (game.isRight()) {
+        else if (game.isRight() || ((game.isRight()) && game.isDown()) || ((game.isRight()) && game.isUp())) {
             spriteFrame.setScaleX(-1);
             this.setFlipH(true);
-            if (!animation && (!game.isDown() && !game.isUp())) {
+            if (!animation) {
                 spriteFrame.setImage(imageStates.get(9));
                 if (framecounter >= runningspeed) {
                     animation = true;
                     framecounter = 0;
                 } else {framecounter +=1;}
-            } else if(animation) {
+            } else {
                 spriteFrame.setImage(imageStates.get(11));
                 if (framecounter >= runningspeed) {
                     animation = false;
@@ -135,16 +133,15 @@ public class MainCharacter extends MovedActor {
             facingRight = true;
             facingDown = facingLeft = facingUp = false;
         }
-
         // Moving down
-        if (game.isDown()) {
-            if (!animation && (!game.isLeft() && !game.isRight())) {
+        else if (game.isDown()) {
+            if (!animation) {
                 spriteFrame.setImage(imageStates.get(6));
                 if (framecounter >= runningspeed) {
                     animation = true;
                     framecounter = 0;
                 } else {framecounter +=1;}
-            } else if(animation) {
+            } else {
                 spriteFrame.setImage(imageStates.get(7));
                 if (framecounter >= runningspeed) {
                     animation = false;
@@ -154,16 +151,15 @@ public class MainCharacter extends MovedActor {
             facingDown = true;
             facingUp = facingRight = facingLeft = false;
         }
-
         // Moving up
-        if (game.isUp()) {
-            if (!animation && (!game.isLeft() && !game.isRight())) {
+        else if (game.isUp()) {
+            if (!animation) {
                 spriteFrame.setImage(imageStates.get(0));
                 if (framecounter >= runningspeed) {
                     animation = true;
                     framecounter = 0;
                 } else {framecounter +=1;}
-            } else if(animation) {
+            } else {
                 spriteFrame.setImage(imageStates.get(1));
                 if (framecounter >= runningspeed) {
                     animation = false;
