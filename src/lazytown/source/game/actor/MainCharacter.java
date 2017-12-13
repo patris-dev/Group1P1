@@ -217,6 +217,7 @@ public class MainCharacter extends MovedActor {
                         // Bumps up the counter, symbolizing that the player picked up the item.
                         UI.bumpItem(((Item) object).getId());
                         // Removes the item from the director and the background.
+                        Game.level.setPickedUp((int)object.getiX()/50, (int)object.getiY()/50);
                         Game.director.addToRemovedActors(object);
                         Game.getBackground().getChildren().remove(object.getSpriteFrame());
                         Game.director.resetRemovedActors();

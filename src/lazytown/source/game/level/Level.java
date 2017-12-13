@@ -32,6 +32,8 @@ public class Level {
     private boolean collides;
     // Array of actors for rendering items, guards, etc.
     private Actor[][] actors;
+    // Array of booleans to determine if the item should be rendered.
+    private boolean[][] pickedUp;
 
     /**
      * Level constructor, takes in the number of our map file.
@@ -39,6 +41,12 @@ public class Level {
      */
     public Level(int levelNumber) {
         this.levelNumber = levelNumber;
+        // Reads an image as data.
+        try {image = ImageIO.read(getClass().getResource(AssetManager.getMap(levelNumber)));}
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        pickedUp = new boolean[image.getWidth()][image.getHeight()];
     }
 
     /**
@@ -47,114 +55,113 @@ public class Level {
      * @param background a Group object on which the map is rendered on.
      */
     public void renderMap(Group background) {
-        try {
-            // Reads an image as data.
-            image = ImageIO.read(getClass().getResource(AssetManager.getMap(levelNumber)));
 
-            // Tile images.
-            Image voidTile = AssetManager.getTile("void.png");
-            Image nullTile = AssetManager.getTile("null.png");
-            Image wall = AssetManager.getTile("wall.png");
-            Image grayFloor = AssetManager.getTile("gray_floor.png");
-            Image grayCarpet = AssetManager.getTile("gray_carpet.png");
-            Image redCarpet  = AssetManager.getTile("red_carpet.png");
+        // Tile images.
+        Image voidTile = AssetManager.getTile("void.png");
+        Image nullTile = AssetManager.getTile("null.png");
+        Image wall = AssetManager.getTile("wall.png");
+        Image grayFloor = AssetManager.getTile("gray_floor.png");
+        Image grayCarpet = AssetManager.getTile("gray_carpet.png");
+        Image redCarpet  = AssetManager.getTile("red_carpet.png");
 
-            // Item images.
-            Image actorNotFound = AssetManager.getItem("actor_not_found.png");
-            Image pizza = AssetManager.getItem("pizza_slice.png");
-            Image canOfSoda = AssetManager.getItem("can_of_soda.png");
-            Image keyCard = AssetManager.getItem("student_card.png");
-            Image backpack = AssetManager.getItem("backpack.png");
+        // Item images.
+        Image actorNotFound = AssetManager.getItem("actor_not_found.png");
+        Image pizza = AssetManager.getItem("pizza_slice.png");
+        Image canOfSoda = AssetManager.getItem("can_of_soda.png");
+        Image keyCard = AssetManager.getItem("student_card.png");
+        Image backpack = AssetManager.getItem("backpack.png");
 
-            // Furniture images. Most of these are InteractiveObjects, or Tiles that have some transparency.
-            Image plant = AssetManager.getFurniture("plant.png");
-            Image tableTop = AssetManager.getFurniture("table_top.png");
-            Image tableBottom = AssetManager.getFurniture("table_bottom.png");
-            Image glassDoorH = AssetManager.getFurniture("glass_door_h.png");
-            Image glassDoorV = AssetManager.getFurniture("glass_door_v.png");
-            Image whiteDoorH = AssetManager.getFurniture("white_door_h.png");
-            Image whiteDoorV = AssetManager.getFurniture("white_door_v.png");
-            Image chairUp = AssetManager.getFurniture("chair_up.png");
-            Image chairRight = AssetManager.getFurniture("chair_right.png");
-            Image chairDown = AssetManager.getFurniture("chair_down.png");
-            Image chairLeft = AssetManager.getFurniture("chair_left.png");
-            Image waterTap = AssetManager.getFurniture("sink_up.png");
+        // Furniture images. Most of these are InteractiveObjects, or Tiles that have some transparency.
+        Image plant = AssetManager.getFurniture("plant.png");
+        Image tableTop = AssetManager.getFurniture("table_top.png");
+        Image tableBottom = AssetManager.getFurniture("table_bottom.png");
+        Image glassDoorH = AssetManager.getFurniture("glass_door_h.png");
+        Image glassDoorV = AssetManager.getFurniture("glass_door_v.png");
+        Image whiteDoorH = AssetManager.getFurniture("white_door_h.png");
+        Image whiteDoorV = AssetManager.getFurniture("white_door_v.png");
+        Image chairUp = AssetManager.getFurniture("chair_up.png");
+        Image chairRight = AssetManager.getFurniture("chair_right.png");
+        Image chairDown = AssetManager.getFurniture("chair_down.png");
+        Image chairLeft = AssetManager.getFurniture("chair_left.png");
+        Image waterTap = AssetManager.getFurniture("sink_up.png");
 //            Image locker = AssetManager.getFurniture("locker.png");
 
-            // Array of guard sprites.
-            Image[] gSprites = AssetManager.getGuardSprites();
+        // Array of guard sprites.
+        Image[] gSprites = AssetManager.getGuardSprites();
 
 
-            // Image object to render a selected tile.
-            Image tileImage = null;
+        // Image object to render a selected tile.
+        Image tileImage = null;
 
-            // Instantiates the arrays of tiles and actors.
-            tiles = new Tile[image.getWidth()][image.getHeight()];
-            actors = new Actor[image.getWidth()][image.getHeight()];
+        // Instantiates the arrays of tiles and actors.
+        tiles = new Tile[image.getWidth()][image.getHeight()];
+        actors = new Actor[image.getWidth()][image.getHeight()];
 
-            // Checks each pixel for it's RGB data, render the map from tiles based on that data.
-            for (int y = 0; y < image.getHeight(); y++) {
-                for (int x = 0; x < image.getWidth(); x++) {
+        // Checks each pixel for it's RGB data, render the map from tiles based on that data.
+        for (int y = 0; y < image.getHeight(); y++) {
+            for (int x = 0; x < image.getWidth(); x++) {
 
-                    // Scans the color of a single pixel, returns a String.
-                    String render = this.scanPixel(x, y);
-                    // The returned string consists of two chars - one for tiles, one for entities.
-                    char tile = render.charAt(0);
-                    char entity = render.charAt(1);
+                // Scans the color of a single pixel, returns a String.
+                String render = this.scanPixel(x, y);
+                // The returned string consists of two chars - one for tiles, one for entities.
+                char tile = render.charAt(0);
+                char entity = render.charAt(1);
 
-                    // Sets the current tile based on RG data.
-                    switch (tile) {
-                        case 'A':
-                            tileImage = voidTile;
-                            collides = false;
-                            break;
-                        case 'B':
-                            tileImage = wall;
-                            collides = true;
-                            break;
-                        case 'I':
-                            tileImage = grayFloor;
-                            collides = false;
-                            break;
-                        case 'V':
-                            tileImage = grayCarpet;
-                            collides = false;
-                            break;
-                        case 'j':
-                            tileImage = redCarpet;
-                            collides = false;
-                            break;
-                        default:
-                            tileImage = nullTile;
-                            collides = false;
-                            break;
-                    }
+                // Sets the current tile based on RG data.
+                switch (tile) {
+                    case 'A':
+                        tileImage = voidTile;
+                        collides = false;
+                        break;
+                    case 'B':
+                        tileImage = wall;
+                        collides = true;
+                        break;
+                    case 'I':
+                        tileImage = grayFloor;
+                        collides = false;
+                        break;
+                    case 'V':
+                        tileImage = grayCarpet;
+                        collides = false;
+                        break;
+                    case 'j':
+                        tileImage = redCarpet;
+                        collides = false;
+                        break;
+                    default:
+                        tileImage = nullTile;
+                        collides = false;
+                        break;
+                }
 
-                    tiles[x][y] = new Tile(collides, x, y, tileImage);
+                tiles[x][y] = new Tile(collides, x, y, tileImage);
 
-                    // Sets the coordinates of current tile.
-                    tiles[x][y].spriteFrame.setTranslateX(x * 50);
-                    tiles[x][y].spriteFrame.setTranslateY(y * 50);
+                // Sets the coordinates of current tile.
+                tiles[x][y].spriteFrame.setTranslateX(x * 50);
+                tiles[x][y].spriteFrame.setTranslateY(y * 50);
 
-                    // Adds the current tile to our StackPane root.
-                    background.getChildren().add(tiles[x][y].spriteFrame);
+                // Adds the current tile to our StackPane root.
+                background.getChildren().add(tiles[x][y].spriteFrame);
 
-                    // If collides is true, then add the current tile to our director for collision
-                    if (collides) {
-                        director.addCurrentActors(tiles[x][y]);
-                    }
+                // If collides is true, then add the current tile to our director for collision
+                if (collides) {
+                    director.addCurrentActors(tiles[x][y]);
+                }
 
-                    // Creates an array of actors (items, guards, etc.)
-                    // Renders them externally later on (in Game.java renderActors() method) so it goes on top of tiles.
+
+                // Creates an array of actors (items, guards, etc.)
+                // Renders them externally later on (in Game.java renderActors() method) so it goes on top of tiles.
+                if (!pickedUp[x][y]) {
                     switch (entity) {
                         case '0':
                             actors[x][y] = null;
                             break;
                         case 'B':
-                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "backpack", backpack);
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "backpack", backpack);
                             break;
                         case 'E':
-                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "pizza", pizza);
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "pizza", pizza);
                             break;
                         case 'F':
                             actors[x][y] = new Tile(true, x, y, tableTop);
@@ -163,7 +170,7 @@ public class Level {
                             actors[x][y] = new Tile(true, x, y, tableBottom);
                             break;
                         case 'J':
-                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "can", canOfSoda);
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "can", canOfSoda);
                             break;
                         case 'K':
                             actors[x][y] = new Tile(true, x, y, chairUp);
@@ -178,85 +185,85 @@ public class Level {
                             actors[x][y] = new Tile(true, x, y, chairLeft);
                             break;
                         case 'O':
-                            actors[x][y] = new Guard("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, true, gSprites);
+                            actors[x][y] = new Guard("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, true, gSprites);
                             break;
                         case 'P':
-                            actors[x][y] = new Guard("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, false, gSprites);
+                            actors[x][y] = new Guard("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, false, gSprites);
                             break;
                         case 'Q':
                             actors[x][y] = new Tile(true, x, y, plant);
                             break;
                         case 'T':
-                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key1", keyCard);
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key1", keyCard);
                             break;
                         case 'U':
-                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key2", keyCard);
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key2", keyCard);
                             break;
                         case 'V':
-                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key3", keyCard);
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key3", keyCard);
                             break;
                         case 'W':
-                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key4", keyCard);
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key4", keyCard);
                             break;
                         case 'X':
-                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key5", keyCard);
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key5", keyCard);
                             break;
                         case 'd':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key1", glassDoorH);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key1", glassDoorH);
                             break;
                         case 'e':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key1", glassDoorV);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key1", glassDoorV);
                             break;
                         case 'f':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key2", glassDoorH);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key2", glassDoorH);
                             break;
                         case 'g':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key2", glassDoorV);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key2", glassDoorV);
                             break;
                         case 'h':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key3", glassDoorH);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key3", glassDoorH);
                             break;
                         case 'i':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key3", glassDoorV);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key3", glassDoorV);
                             break;
                         case 'j':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key4", glassDoorH);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key4", glassDoorH);
                             break;
                         case 'k':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key4", glassDoorV);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key4", glassDoorV);
                             break;
                         case 'l':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key5", glassDoorH);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key5", glassDoorH);
                             break;
                         case 'm':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key5", glassDoorV);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key5", glassDoorV);
                             break;
                         case 'v':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key0", whiteDoorH);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key0", whiteDoorH);
                             break;
                         case 'w':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key0", whiteDoorV);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key0", whiteDoorV);
                             break;
                         case 'x':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "water", waterTap);
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "water", waterTap);
                             break;
 //                        case 'y':
 //                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "locker", locker);
 //                            break;
-                        default: actors[x][y] = new Tile(true, x, y, actorNotFound);
+                        default:
+                            actors[x][y] = new Tile(true, x, y, actorNotFound);
                     }
-                    if (actors[x][y] != null) {
-                        director.addCurrentActors(actors[x][y]);
-                    }
-                    if (actors[x][y] instanceof Tile) {
-                        actors[x][y].spriteFrame.setTranslateX(x * 50);
-                        actors[x][y].spriteFrame.setTranslateY(y * 50);
-                    }
+                }
+                else actors[x][y] = null;
 
+                if (actors[x][y] != null) {
+                    director.addCurrentActors(actors[x][y]);
+                }
+                if (actors[x][y] instanceof Tile) {
+                    actors[x][y].spriteFrame.setTranslateX(x * 50);
+                    actors[x][y].spriteFrame.setTranslateY(y * 50);
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }
@@ -394,6 +401,10 @@ public class Level {
                 if (actors[x][y] != null) background.getChildren().add(actors[x][y].spriteFrame);
             }
         }
+    }
+
+    public void setPickedUp(int X, int Y) {
+        pickedUp[X][Y] = true;
     }
 
     public int getImageWidth() {
