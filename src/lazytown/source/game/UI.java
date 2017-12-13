@@ -166,7 +166,9 @@ public class UI {
                 break;
             case "backpack":
                 backpack = true;
-                UI.loadTextWindow("You found your backpack! Inventory increased.");
+                keycard[1] = true;
+                keycard[4] = true;
+                UI.loadTextWindow("You found your backpack! Inventory increased.\nThere's also your keycard inside! You now have access to building A.");
                 break;
             case "key1":
                 keycard[1] = true;

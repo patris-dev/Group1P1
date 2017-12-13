@@ -85,7 +85,7 @@ public class Game {
        }
 
         // Instantiates a level object, renders the level
-        level = levels[1];
+        level = levels[2];
         level.renderMap(background);
     }
 
@@ -148,7 +148,7 @@ public class Game {
 
         level.renderActors(background);
         root.getChildren().add(playerOne.spriteFrame);
-        playerOne.setSpawnLocation(1550, 1550);
+        playerOne.setSpawnLocation(450, 200);
     }
 
     // This method starts our game loop, so what we have here is actually a dynamic game.

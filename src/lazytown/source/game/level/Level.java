@@ -60,17 +60,18 @@ public class Level {
             Image backpack = AssetManager.getItem("backpack.png");
 
             // Furniture images. Most of these are InteractiveObjects, or Tiles that have some transparency.
+            Image plant = AssetManager.getFurniture("plant.png");
             Image tableTop = AssetManager.getFurniture("table_top.png");
             Image tableBottom = AssetManager.getFurniture("table_bottom.png");
             Image glassDoorH = AssetManager.getFurniture("glass_door_h.png");
             Image glassDoorV = AssetManager.getFurniture("glass_door_v.png");
             Image whiteDoorH = AssetManager.getFurniture("white_door_h.png");
             Image whiteDoorV = AssetManager.getFurniture("white_door_v.png");
-//            Image chairUp = AssetManager.getFurniture("chair_up.png");
-//            Image chairRight = AssetManager.getFurniture("chair_right.png");
-//            Image chairDown = AssetManager.getFurniture("chair_down.png");
-//            Image chairLeft = AssetManager.getFurniture("chair_left.png");
-//            Image waterTap = AssetManager.getFurniture("water_tap.png");
+            Image chairUp = AssetManager.getFurniture("chair_up.png");
+            Image chairRight = AssetManager.getFurniture("chair_right.png");
+            Image chairDown = AssetManager.getFurniture("chair_down.png");
+            Image chairLeft = AssetManager.getFurniture("chair_left.png");
+            Image waterTap = AssetManager.getFurniture("sink_up.png");
 //            Image locker = AssetManager.getFurniture("locker.png");
 
             // Array of guard sprites.
@@ -157,23 +158,26 @@ public class Level {
                         case 'J':
                             actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "can", canOfSoda);
                             break;
-//                        case 'K':
-//                            actors[x][y] = new Tile(true, x, y, chairUp);
-//                            break;
-//                        case 'L':
-//                            actors[x][y] = new Tile(true, x, y, chairRight);
-//                            break;
-//                        case 'M':
-//                            actors[x][y] = new Tile(true, x, y, chairDown);
-//                            break;
-//                        case 'N':
-//                            actors[x][y] = new Tile(true, x, y, chairLeft);
-//                            break;
+                        case 'K':
+                            actors[x][y] = new Tile(true, x, y, chairUp);
+                            break;
+                        case 'L':
+                            actors[x][y] = new Tile(true, x, y, chairRight);
+                            break;
+                        case 'M':
+                            actors[x][y] = new Tile(true, x, y, chairDown);
+                            break;
+                        case 'N':
+                            actors[x][y] = new Tile(true, x, y, chairLeft);
+                            break;
                         case 'O':
                             actors[x][y] = new Guard("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, true, gSprites);
                             break;
                         case 'P':
                             actors[x][y] = new Guard("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, false, gSprites);
+                            break;
+                        case 'Q':
+                            actors[x][y] = new Tile(true, x, y, plant);
                             break;
                         case 'T':
                             actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key1", keyCard);
@@ -226,9 +230,9 @@ public class Level {
                         case 'w':
                             actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "key0", whiteDoorV);
                             break;
-//                        case 'x':
-//                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "water", waterTap);
-//                            break;
+                        case 'x':
+                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "water", waterTap);
+                            break;
 //                        case 'y':
 //                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "locker", locker);
 //                            break;
