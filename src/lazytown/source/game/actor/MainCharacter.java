@@ -198,6 +198,9 @@ public class MainCharacter extends MovedActor {
         else if (downSide) spriteFrame.setTranslateY(iY - (levelHeight / 2 - windowHeight / 2));
         else Game.getBackground().setTranslateY(-iY);
 
+        if(framecounter >= runningspeed)
+            Game.getFootsteps().play("footsteps.mp3");
+
     }
 
     private void checkCollision() {
@@ -274,15 +277,15 @@ public class MainCharacter extends MovedActor {
                                 if (!UI.getKeycard(4)) UI.loadTextWindow("This door requires a keycard with ID 4 to unlock.");
                                 else {
                                     UI.bumpItem("key5");
-                                    UI.loadTextWindow("You activate your keycard. Time to escape!");
+                                    UI.loadTextWindow("You activated your keycard. Time to escape!");
                                 }
                                 break;
                             case "key5":
-                                if (!UI.getKeycard(5)) UI.loadTextWindow("You need to activate your card PIN to unlock this door.\nAs far as you remember, you can do that somewhere in building A...");
+                                if (!UI.getKeycard(5)) UI.loadTextWindow("You need to activate your card PIN code to unlock this door.\nAs far as you remember, you can do that somewhere in building A...");
                                 else UI.loadTextWindow("You escaped with all your stuff, congrats!");
                                 break;
                             case "water":
-                                UI.loadTextWindow("You drink some water.");
+                                UI.loadTextWindow("You drank some water.");
                                 UI.drinkWater();
                                 break;
                             case "locker":
