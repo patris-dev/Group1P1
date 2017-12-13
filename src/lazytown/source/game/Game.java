@@ -16,7 +16,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-
 /**
  * This is the class that represents the Game scene.
  * It is responsible for loading in everything and starting the game loop.
@@ -29,6 +28,8 @@ public class Game {
     private static Image[] pSprites;
     public static MainCharacter playerOne;
     private static SoundEngine backgroundMusic = new SoundEngine("music");
+    private static SoundEngine backgroundsfx = new SoundEngine("sfx");
+    private static SoundEngine footsteps = new SoundEngine("sfx");
     public static Level[] levels;
     public static Level level;
     public static Director director = new Director();
@@ -217,5 +218,9 @@ public class Game {
 
     public static GamePlayLoop getGamePlayLoop() {
         return gamePlayLoop;
+    }
+
+    public static SoundEngine getBackgroundsfx() {
+        return backgroundsfx;
     }
 }
