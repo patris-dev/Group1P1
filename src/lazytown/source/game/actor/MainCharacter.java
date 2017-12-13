@@ -1,10 +1,7 @@
 package lazytown.source.game.actor;
 
-import javafx.scene.Group;
-import javafx.scene.image.ImageView;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.Shape;
-import lazytown.assets.AssetManager;
 import lazytown.source.Main;
 import lazytown.source.game.Game;
 import javafx.scene.image.Image;
@@ -12,7 +9,7 @@ import lazytown.source.game.UI;
 import lazytown.source.game.level.Tile;
 
 /**
- * A class used for the main character, extends MovedActor class.
+ * A class used for the main character, extends MovedActor class, and therefore the Actor as well.
  */
 public class MainCharacter extends MovedActor {
     protected Game game;
@@ -35,12 +32,24 @@ public class MainCharacter extends MovedActor {
     int framecounter = 0;
     int runningspeed = 12;
 
-    // Our constructor again calling up to the superclass
+    /**
+     * Our constructor again calling up to the superclass.
+     * @param newGame a Game object used for keyboard interaction, collision, etc.
+     * @param SVGdata a string which determines vector data for the collision area.
+     * @param xLoc x coordinate of the rendered MovedActor.
+     * @param yLoc y coordinate of the rendered MovedActor.
+     * @param spriteCels an array of images for animating the MovedActor.
+     */
     public MainCharacter(Game newGame, String SVGdata, double xLoc, double yLoc, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
         game = newGame;
     }
 
+    /**
+     * The necessary update method, which in this class is finally implemented and used.
+     * It is used for translating the character around the level, animation, collision, and adjusting the various stats
+     * as the game progresses.
+     */
     @Override
     public void update() {
         setXYLocation();
@@ -289,13 +298,14 @@ public class MainCharacter extends MovedActor {
         }
     }
 
-    // The player characters collision is set to true. This does not actually do anything at the moment other than being
-    // a placeholder stating that the player character can collide.
-    public boolean collide(Actor object){
-        // We check for collision in a two stage process, this is to save resources, as checking for collision can be
-        // quite costly. The way we do this is by first using an if statement to check if two imageView nodes intersect
-        // with each other, if they do we create a new Shape object from the two intersecting ImageView nodes, the width
-        // of which we measure. If this width is not negative 1, we return true, else we return false.
+    /**
+     * We check for collision in a two stage process, this is to save resources, as checking for collision can be
+     * quite costly. The way we do this is by first using an if statement to check if two imageView nodes intersect
+     * with each other, if they do we create a new Shape object from the two intersecting ImageView nodes, the width
+     * of which we measure. If this width is not negative 1, we return true, else we return false.
+     * @param object object which is checked for collision.
+     */
+    private boolean collide(Actor object){
         if (object.getSpriteFrame().getBoundsInParent().intersects(
                 iX+levelWidth/2-20, iY+levelHeight/2-37.5, 40, 75)) {
             Shape intersection = SVGPath.intersect(Game.playerOne.getSpriteBoundary(), object.getSpriteBoundary());
@@ -306,10 +316,13 @@ public class MainCharacter extends MovedActor {
         return false;
     }
 
-    // Moves the player to specific coordinates.
-    // 0, 0 point is the top left corner of the level.
-    // To spawn the player in the center of a level, X and Y values would be level.getImageWidth()*50/2
-    // and level.getImageWidth()*50/2.
+    /**
+     * Moves the player to specific coordinates.
+     * To spawn the player in the center of a level, X and Y values would be level.getImageWidth()*50/2
+     * and level.getImageWidth()*50/2.
+     * @param X x coordinate of spawned character, 0 being the very left edge.
+     * @param Y y coordinate of spawned character, 0 being the very top.
+     */
     public void setSpawnLocation(int X, int Y) {
         iX = X-levelWidth/2;
         iY = Y-levelHeight/2;
@@ -320,6 +333,9 @@ public class MainCharacter extends MovedActor {
         if (iY > levelHeight/2  - windowHeight/2) Game.getBackground().setTranslateY(windowHeight/2 - levelHeight/2);
     }
 
+    /**
+     * Updates level size based on currently set level, used for switching levels.
+     */
     public void updateLevelSize() {
         levelWidth = Game.getLevel().getImageWidth() * 50;
         levelHeight = Game.getLevel().getImageHeight() * 50;

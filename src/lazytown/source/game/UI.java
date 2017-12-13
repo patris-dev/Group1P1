@@ -3,20 +3,16 @@ package lazytown.source.game;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import lazytown.assets.AssetManager;
-import lazytown.source.game.actor.MainCharacter;
-import lazytown.source.menu.ConfirmBox;
-import lazytown.source.menu.MainMenu;
+import lazytown.source.AssetManager;
 
 /**
  * This class is used for displaying the in-game User Interface.
- * The method getUI() returns a BorderPane containing all of the User Interface.
+ * Inventory, as well as stats are handled here as well.
  */
 public class UI {
 
@@ -40,8 +36,11 @@ public class UI {
     private static ImageView map;
 
 
-    public static BorderPane getUI(Stage pS) {
-        primaryStage = pS;
+    /**
+     * The method getUI() sets up our in-game user interface.
+     * @return returns a BorderPane which holds all of our in-game UI.
+     */
+    public static BorderPane getUI() {
 
         // BorderPane for our UI overlay.
         // Most of the layouts inside will be GridPanes.
@@ -130,7 +129,10 @@ public class UI {
         return root;
     }
 
-    // Loads in an array of Strings and displays the first one.
+    /**
+     * Loads in an array of Strings and displays the first one.
+     * @param textLines an array of Strings which will be displayed one by one.
+     */
     public static void loadTextWindow(String... textLines) {
         textCounter = 0;
         text = textLines;
@@ -140,7 +142,9 @@ public class UI {
         textCounter++;
     }
 
-    // Displays a text window with a single line. Bumps up the line index each time the method is called.
+    /**
+     * Displays a text window with a single line. Bumps up the line index each time the method is called.
+     */
     public static void displayTextWindow() {
         if(text != null && textCounter < text.length) {
             textArea.setText(text[textCounter]);
@@ -149,13 +153,18 @@ public class UI {
         else hideTextWindow();
     }
 
-    // Once the counter has reached the limit, make the text box invisible and clear the text array.
+    /**
+     * Once the counter has reached the limit, make the text box invisible and clear the text array.
+     */
     private static void hideTextWindow() {
         text = null;
         textBorder.setVisible(false);
     }
 
-    // Bumps a counter according to which item was found.
+    /**
+     * Bumps a counter according to which item was found.
+     * @param id identifying data of the item picked up.
+     */
     public static void bumpItem(String id) {
         switch (id) {
             case "pizza":
@@ -188,30 +197,46 @@ public class UI {
         }
     }
 
+    /**
+     * Makes the map in the UI visible.
+     */
     public static void showMap(){
         map.setVisible(true);
     }
+
+    /**
+     * Makes the map in the UI invisible.
+     */
     public static void hideMap(){
         map.setVisible(false);
     }
 
+    /**
+     * A method that removes one pizza from our UI counter when the user activates it, also fills the hungerBar.
+     */
     public static void consumePizza() {
         if (!pizzaCounter.getText().equals("0")) {
-            Game.getBackgroundsfx().play("eatingSound.mp3");
+            Game.getBackgroundSfx().play("eatingSound.mp3");
             pizzaCounter.setText(Integer.toString(Integer.parseInt(pizzaCounter.getText()) - 1));
             hungerBar.setProgress(hungerBar.getProgress()+0.5);
         }
     }
 
+    /**
+     * A method that removes one beer from our UI counter when the user activates it, also fills the thirstBar.
+     */
     public static void consumeBeer() {
         if (!beerCounter.getText().equals("0")) {
-            Game.getBackgroundsfx().play("drinkingSound.mp3");
+            Game.getBackgroundSfx().play("drinkingSound.mp3");
             beerCounter.setText(Integer.toString(Integer.parseInt(beerCounter.getText()) - 1));
             thirstBar.setProgress(thirstBar.getProgress()+0.5);
         }
     }
 
-    // Reduce our hp value based on damage taken.
+    /**
+     * Reduce our hp value based on damage taken. Also writes to the text window upon player death.
+     * @param damage amount of damage the main character will take.
+     */
     public static void takeDamage(double damage) {
         if (healthBar.getProgress() > damage) healthBar.setProgress(healthBar.getProgress()-damage);
         else {
@@ -229,10 +254,12 @@ public class UI {
         }
     }
 
-    // Update our stats.
-    // Health slowly regenerates.
-    // Hunger and Thirst will slowly go down. If one reaches 0, our Health will stop regenerating;
-    // If both reach 0, our Health will start to go down.
+    /**
+     * Update our stats.
+     * Health slowly regenerates.
+     * Hunger and Thirst will slowly go down. If one reaches 0, our Health will stop regenerating;
+     * If both reach 0, our Health will start to go down.
+     */
     public static void updateStats() {
         double rate = 0.0001;
         if (healthBar.getProgress() > rate) healthBar.setProgress(healthBar.getProgress()+rate);

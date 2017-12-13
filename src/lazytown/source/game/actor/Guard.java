@@ -20,12 +20,22 @@ public class Guard extends MovedActor {
     int framecounter = 0;
     int runningspeed = 14;
 
-    // Our constructor again calling up to the superclass
+    /**
+     * Our constructor again calling up to the superclass.
+     * @param SVGdata a string which determines vector data for the collision area.
+     * @param xLoc x coordinate of the rendered Guard.
+     * @param yLoc y coordinate of the rendered Guard.
+     * @param spriteCels an array of images for animating the Guard.
+     */
     public Guard(String SVGdata, double xLoc, double yLoc, boolean movesHorizontally, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
         this.movesHorizontally = movesHorizontally;
     }
 
+    /**
+     * An update method for our guard, as the guard object is animated and moving, we are using the update method to
+     * allow the game play loop to reflect changes
+     */
     @Override
     public void update() {
         setXYLocation();
@@ -37,19 +47,19 @@ public class Guard extends MovedActor {
     private void setXYLocation() {
         if (movesHorizontally) {
             if (facingLeft) {
-                iX-=2;
+                iX-=velX;
                 if (Game.getLevel().getTiles()[(int)(iX/50)][(int)(iY/50)].isCollides()) facingLeft = false;
             } else {
-                iX+=2;
+                iX+=velX;
                 if (Game.getLevel().getTiles()[(int)(iX/50)+1][(int)(iY/50)].isCollides()) facingLeft = true;
             }
         }
         else {
             if (facingUp) {
-                iY-=2;
+                iY-=velY;
                 if (Game.getLevel().getTiles()[(int)(iX/50)][(int)(iY/50)].isCollides()) facingUp = false;
             } else {
-                iY+=2;
+                iY+=velY;
                 if (Game.getLevel().getTiles()[(int)(iX/50)][(int)(iY/50)+1].isCollides()) facingUp = true;
             }
         }

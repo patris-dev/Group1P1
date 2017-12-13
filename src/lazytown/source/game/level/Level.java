@@ -2,7 +2,7 @@ package lazytown.source.game.level;
 
 import javafx.scene.Group;
 import javafx.scene.image.Image;
-import lazytown.assets.AssetManager;
+import lazytown.source.AssetManager;
 import lazytown.source.game.actor.Actor;
 import lazytown.source.game.actor.InteractiveActor;
 import lazytown.source.game.actor.Guard;
@@ -17,8 +17,8 @@ import static lazytown.source.game.Game.director;
 
 /**
  * This class is used for rendering levels from tiles.
- * The method renderMap(Group background) renders a level from a map on the background.
- *
+ * It works by scanning a level image pixel by pixel, and rendering Tiles and Actors in the corresponding locations
+ * based on the color of the pixel.
  */
 public class Level {
 
@@ -33,12 +33,19 @@ public class Level {
     // Array of actors for rendering items, guards, etc.
     private Actor[][] actors;
 
-    // Level constructor, takes in the name of our map file.
+    /**
+     * Level constructor, takes in the number of our map file.
+     * @param levelNumber the number of level it will render, handled by AssetManager.
+     */
     public Level(int levelNumber) {
         this.levelNumber = levelNumber;
     }
 
-    // Renders the map made from tiles to the user's screen.
+    /**
+     * Renders the map made from Tiles to the user's screen.
+     * Also renders Actor objects on top of those Tiles.
+     * @param background a Group object on which the map is rendered on.
+     */
     public void renderMap(Group background) {
         try {
             // Reads an image as data.

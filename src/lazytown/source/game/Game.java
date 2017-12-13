@@ -5,7 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import lazytown.assets.AssetManager;
+import lazytown.source.AssetManager;
 import lazytown.source.Main;
 import lazytown.source.game.actor.*;
 import lazytown.source.game.level.Level;
@@ -28,7 +28,7 @@ public class Game {
     private static Image[] pSprites;
     public static MainCharacter playerOne;
     private static SoundEngine backgroundMusic = new SoundEngine("music");
-    private static SoundEngine backgroundsfx = new SoundEngine("sfx");
+    private static SoundEngine backgroundSfx = new SoundEngine("sfx");
     private static SoundEngine footsteps = new SoundEngine("sfx");
     public static Level[] levels;
     public static Level level;
@@ -40,28 +40,35 @@ public class Game {
     // will be more variables as we give the player character more controls, like interaction, and using items.
     private boolean up, down, left, right, keyE;
 
-   public void show(Stage primaryStage) {
+    /**
+     * The method that takes care of nearly everything within our game world, this is being run from the main menu
+     * and is the core of our game, in this method we do just about everything from putting up loading
+     * screens, and loading assets, to rendering everything and initializing the game loop.
+     * Finally, it changes the scene of our window to the game scene, where all of this is contained.
+     * @param primaryStage our primary stage (window).
+     */
+    public void show(Stage primaryStage) {
 
-       // Variables
-       root = new StackPane();
-       background = new Group();
-       root.getChildren().add(background);
-       sceneGame = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
+        // Variables
+        root = new StackPane();
+        background = new Group();
+        root.getChildren().add(background);
+        sceneGame = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
 
 
-       // Methods we need to call to make our game work
-       showLoadingScreen(primaryStage);
-       loadLevel();
-       eventHandling();
-       assetLoading();
-       playMusic();
-       spawnActors();
-       renderActors();
-       startGameLoop();
-       renderUI(primaryStage);
+        // Methods we need to call to make our game work
+        showLoadingScreen(primaryStage);
+        loadLevel();
+        eventHandling();
+        assetLoading();
+        playMusic();
+        spawnActors();
+        renderActors();
+        startGameLoop();
+        renderUI();
 
-       // Sets the scene of our stage to sceneGame
-       primaryStage.setScene(sceneGame);
+        // Sets the scene of our stage to sceneGame
+        primaryStage.setScene(sceneGame);
     }
 
     // This method renders a loading screen.
@@ -159,8 +166,8 @@ public class Game {
     }
 
     // This method renders the in-game user interface.
-    private void renderUI(Stage primaryStage) {
-        root.getChildren().add(UI.getUI(primaryStage));
+    private void renderUI() {
+        root.getChildren().add(UI.getUI());
         UI.loadTextWindow("Welcome to LazyTown! Press E to continue.",
                                     "Use W A S D to move around.\nE is also used to interact with items, such as doors, lockers and water taps.",
                                     "Scavenge around for some food and drinks. Currently you can hold 2 of each.\nPress 1 to eat, and 2 to drink.",
@@ -220,7 +227,7 @@ public class Game {
         return gamePlayLoop;
     }
 
-    public static SoundEngine getBackgroundsfx() {
-        return backgroundsfx;
+    public static SoundEngine getBackgroundSfx() {
+        return backgroundSfx;
     }
 }

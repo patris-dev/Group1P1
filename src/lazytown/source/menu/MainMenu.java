@@ -1,7 +1,7 @@
 package lazytown.source.menu;
 
 
-import lazytown.assets.AssetManager;
+import lazytown.source.AssetManager;
 import lazytown.source.game.Game;
 import lazytown.source.Main;
 import javafx.geometry.Insets;
@@ -27,6 +27,11 @@ public class MainMenu {
     private static Button buttonOptions;
     private static Button buttonExitGame;
 
+    /**
+     * A method used for setting the scene of primaryStage to the main menu.
+     * It contains the GUI as well as the button actions.
+     * @param primaryStage our primary stage (window).
+     */
     public static void show(Stage primaryStage) {
         // Instantiates root, adds padding around it
         // BorderPane can lay out the components in the top, bottom, left, right or center

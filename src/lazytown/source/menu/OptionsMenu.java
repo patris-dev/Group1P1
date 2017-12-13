@@ -1,6 +1,6 @@
 package lazytown.source.menu;
 
-import lazytown.assets.AssetManager;
+import lazytown.source.AssetManager;
 import lazytown.source.Main;
 import lazytown.source.sound.SoundEngine;
 import javafx.geometry.Insets;
@@ -30,6 +30,11 @@ public class OptionsMenu {
     private static CheckBox muteMusic;
     private static CheckBox muteSFX;
 
+    /**
+     * A method used for setting the scene of primaryStage to the options menu.
+     * It contains the GUI as well as the button, slider and check box actions.
+     * @param primaryStage our primary stage (window).
+     */
     public static void show(Stage primaryStage) {
         // Create our layout in the form of a VBox
         // Adds padding and sets alignment of all components to center
