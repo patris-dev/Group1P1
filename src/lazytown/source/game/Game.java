@@ -25,6 +25,7 @@ public class Game {
     private static Group background;
     private static Scene sceneGame;
     private static GamePlayLoop gamePlayLoop;
+    private static FPS frameCounter;
     private static Image[] pSprites;
     public static MainCharacter playerOne;
     private static SoundEngine backgroundMusic = new SoundEngine("music");
@@ -64,7 +65,7 @@ public class Game {
         playMusic();
         spawnActors();
         renderActors();
-        startGameLoop();
+        startGameLoop(primaryStage);
         renderUI();
 
         // Sets the scene of our stage to sceneGame
@@ -159,9 +160,11 @@ public class Game {
     }
 
     // This method starts our game loop, so what we have here is actually a dynamic game.
-    private static void startGameLoop() {
+    private static void startGameLoop(Stage primaryStage) {
         gamePlayLoop = new GamePlayLoop();
         gamePlayLoop.start();
+        frameCounter = new FPS();
+        frameCounter.start(primaryStage);
     }
 
     // This method renders the in-game user interface.

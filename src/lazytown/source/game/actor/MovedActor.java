@@ -37,7 +37,7 @@ public abstract class MovedActor extends Actor {
     public MovedActor(String SVGdata, double xLoc, double yLoc, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
         health = 100;
-        velX = velY = 4;
+        velX = velY = 2;
     }
 
     /**
