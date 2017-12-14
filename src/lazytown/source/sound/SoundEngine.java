@@ -68,6 +68,9 @@ public class SoundEngine {
      */
     public void play() {
         updateVolume();
+        if (soundProperties == PROPERTIES_MUSIC) {
+            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+        }
         if (!soundProperties.isMuted()) {
             mediaPlayer.seek(Duration.ZERO);
             mediaPlayer.play();

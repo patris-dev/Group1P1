@@ -17,6 +17,8 @@ public class GamePlayLoop extends AnimationTimer {
      * The mandatory handle class for any AnimationTimer subclass. It takes care of executing the playerOne's update method
      * as well as update all of our actors in the game. This method is executed at 60Hz.
      */
+
+
     @Override
     public void handle(long now) {
         // Applying updates to the player character
