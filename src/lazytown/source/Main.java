@@ -6,7 +6,6 @@ import lazytown.source.sound.SoundEngine;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-
 /**
  * This is the main application class which creates our Stage and sets the scene to MainMenu.
  */
@@ -31,7 +30,7 @@ public class Main extends Application {
 
         // Stage is the window
         // Sets the title of the window
-        primaryStage.setTitle("lazytown");
+        primaryStage.setTitle("LazyTown");
         // Prevents the window from being resized
         primaryStage.setResizable(false);
         primaryStage.sizeToScene();

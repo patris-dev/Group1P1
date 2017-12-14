@@ -178,7 +178,8 @@ public class UI {
                 backpack = true;
                 keycard[1] = true;
                 keycard[4] = true;
-                UI.loadTextWindow("You found your backpack! Inventory increased.\nThere's also your keycard inside! You now have access to building A.");
+                UI.loadTextWindow("You found your backpack! Now you can hold 5 of both pizzas and beers.\n" +
+                        "There's also your keycard inside! You now have access to building A.");
                 break;
             case "key1":
                 Game.getBackgroundSfx().play("keycardPickup.mp3");
