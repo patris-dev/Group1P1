@@ -23,7 +23,7 @@ public class UI {
 
     private static Label pizzaCounter;
     private static Label beerCounter;
-    private static Label frameCounter;
+    private static Label fps = new Label();
 
     private static ProgressBar healthBar;
     private static ProgressBar hungerBar;
@@ -62,7 +62,6 @@ public class UI {
 
         pizzaCounter = new Label("0");
         beerCounter  = new Label("0");
-        frameCounter = new Label("Current fps is: " + Float.toString(Game.getFPS()));
 
         counters.add(pizzaIcon, 0, 0);
         counters.add(beerIcon, 0, 1);
@@ -125,7 +124,7 @@ public class UI {
         root.setRight(counters);
         root.setBottom(characterInfo);
         root.setCenter(map); //Kris
-        root.setLeft(frameCounter);
+        root.setLeft(fps);
 
         return root;
     }
@@ -283,6 +282,14 @@ public class UI {
         else takeDamage(rate);
         if (thirstBar.getProgress() > 0.065) thirstBar.setProgress(thirstBar.getProgress()-rate/10);
         else takeDamage(rate);
+    }
+
+    /**
+     * Updates the FPS value.
+     * @param FPS Float representing Frames Per Second
+     */
+    public static void updateFPS(float FPS) {
+        fps.setText(Float.toString(FPS));
     }
 
     public static boolean isBackpack() {

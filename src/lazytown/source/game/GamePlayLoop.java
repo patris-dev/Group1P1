@@ -16,7 +16,7 @@ import static lazytown.source.game.Game.playerOne;
 public class GamePlayLoop extends AnimationTimer {
 
     Game game = new Game();
-
+    public static float currentFPS;
 
 
     /**
@@ -27,8 +27,8 @@ public class GamePlayLoop extends AnimationTimer {
     public void handle(long now) {
         // Applying updates to the player character
         playerOne.update();
-        float fps = game.getFPS();
-        System.out.println(fps);
+        UI.updateFPS(currentFPS);
+
 
 
 
