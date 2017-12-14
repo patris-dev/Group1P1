@@ -50,19 +50,15 @@ public class Guard extends MovedActor {
         if (movesHorizontally) {
             if (facingLeft) {
                 iX-=velX;
-                if (Game.getLevel().getTiles()[(int)(iX/50)][(int)(iY/50)].isCollides()) facingLeft = false;
             } else {
                 iX+=velX;
-                if (Game.getLevel().getTiles()[(int)(iX/50)+1][(int)(iY/50)].isCollides()) facingLeft = true;
             }
         }
         else {
             if (facingUp) {
                 iY-=velY;
-                if (Game.getLevel().getTiles()[(int)(iX/50)][(int)(iY/50)].isCollides()) facingUp = false;
             } else {
                 iY+=velY;
-                if (Game.getLevel().getTiles()[(int)(iX/50)][(int)(iY/50)+1].isCollides()) facingUp = true;
             }
         }
 
@@ -144,48 +140,26 @@ public class Guard extends MovedActor {
     }
 
     private void checkCollision() {
-        // When we check for collision we cycle through the list of all of our actors
-        for (int i = 0; i < Game.director.getCurrentActors().size(); i++) {
-            // And as we do that we set them up in a temporary object
-            Actor object = Game.director.getCurrentActors().get(i);
-            // This object is then being parsed and tested in our collide method
-            if (collide(object)) {
+        Tile[][] tile = Game.getLevel().getTiles();
+        Actor[][] actor = Game.getLevel().getActors();
+        if (facingLeft && (tile[(int)(iX/50)][(int)(iY/50)].isCollides() ||
+                actor[(int)(iX/50)][(int)(iY/50)] instanceof Tile ||
+                actor[(int)(iX/50)][(int)(iY/50)] instanceof InteractiveActor)) facingLeft = false;
 
-                if (object instanceof Tile || object instanceof InteractiveActor) {
-                    if (!facingUp) {
-                        facingUp = true;
-                    }
-                    else if (facingUp) {
-                        facingUp = false;
-                    }
-                    if (!facingLeft) {
-                       facingLeft = true;
-                    }
-                    else if (facingLeft) {
-                        facingLeft = false;
-                    }
-                }
-            }
-        }
+        else if (!facingLeft && (tile[(int)(iX/50)+1][(int)(iY/50)].isCollides() ||
+                actor[(int)(iX/50)+1][(int)(iY/50)]instanceof Tile ||
+                actor[(int)(iX/50)+1][(int)(iY/50)] instanceof InteractiveActor)) facingLeft = true;
+
+        if (facingUp && (tile[(int)(iX/50)][(int)(iY/50)].isCollides() ||
+                actor[(int)(iX/50)][(int)(iY/50)] instanceof Tile ||
+                actor[(int)(iX/50)][(int)(iY/50)] instanceof InteractiveActor)) facingUp = false;
+
+        else if (!facingUp && (tile[(int)(iX/50)][(int)(iY/50)+1].isCollides() ||
+                actor[(int)(iX/50)][(int)(iY/50)+1] instanceof Tile ||
+                actor[(int)(iX/50)][(int)(iY/50)+1] instanceof InteractiveActor)) facingUp = true;
     }
 
-    /**
-     * We check for collision in a two stage process, this is to save resources, as checking for collision can be
-     * quite costly. The way we do this is by first using an if statement to check if two imageView nodes intersect
-     * with each other, if they do we create a new Shape object from the two intersecting ImageView nodes, the width
-     * of which we measure. If this width is not negative 1, we return true, else we return false.
-     * @param object object which is checked for collision.
-     */
-    private boolean collide(Actor object){
-        if (object.getSpriteFrame().getBoundsInParent().intersects(
-                iX, iY, 40, 75)) {
-            Shape intersection = SVGPath.intersect(getSpriteBoundary(), object.getSpriteBoundary());
-            if (intersection.getBoundsInLocal().getWidth() != -1) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     private void moveCharacter() {
         spriteFrame.setTranslateX(iX);
