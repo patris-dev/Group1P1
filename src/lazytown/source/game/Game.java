@@ -237,7 +237,7 @@ public class Game {
         return footsteps;
     }
 
-    public float getFPS () {
+    public static float getFPS () {
         float fps = tracker.getAverageFPS();
         tracker.resetAverageFPS();
         return fps;

@@ -16,6 +16,7 @@ import lazytown.source.AssetManager;
  */
 public class UI {
 
+    private static Game game = new Game();
     private static Text textArea;
     private static int textCounter = 0;
     private static String[] text;
@@ -23,6 +24,7 @@ public class UI {
 
     private static Label pizzaCounter;
     private static Label beerCounter;
+    private static Label frameCounter;
 
     private static ProgressBar healthBar;
     private static ProgressBar hungerBar;
@@ -61,6 +63,7 @@ public class UI {
 
         pizzaCounter = new Label("0");
         beerCounter  = new Label("0");
+        frameCounter = new Label("Current fps is: " + Float.toString(game.getFPS()));
 
         counters.add(pizzaIcon, 0, 0);
         counters.add(beerIcon, 0, 1);
@@ -123,6 +126,7 @@ public class UI {
         root.setRight(counters);
         root.setBottom(characterInfo);
         root.setCenter(map); //Kris
+        root.setLeft(frameCounter);
 
         return root;
     }
