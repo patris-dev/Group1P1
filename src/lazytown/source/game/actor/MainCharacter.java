@@ -203,16 +203,31 @@ public class MainCharacter extends MovedActor {
             // This object is then being parsed and tested in our collide method
             if (collide(object) && !isDead) {
                 if (object instanceof Item) {
-
-                    if (!(((Item) object).getId().equals("pizza") && !UI.isBackpack() && UI.getPizza() == 2) &&
-                            !(((Item) object).getId().equals("can") && !UI.isBackpack() && UI.getBeer() == 2)) {
-                        // Bumps up the counter, symbolizing that the player picked up the item.
-                        UI.bumpItem(((Item) object).getId());
-                        // Removes the item from the director and the background.
-                        Game.level.setPickedUp((int)object.getiX()/50, (int)object.getiY()/50);
-                        Game.director.addToRemovedActors(object);
-                        Game.getBackground().getChildren().remove(object.getSpriteFrame());
-                        Game.director.resetRemovedActors();
+                    // If the player has acquired a backpack, he can hold up to 5 of both pizzas and beers.
+                    if(UI.isBackpack()){
+                        if (!(((Item) object).getId().equals("pizza") && UI.getPizza() == 5) &&
+                                !(((Item) object).getId().equals("can") && UI.getBeer() == 5)) {
+                            // Bumps up the counter, symbolizing that the player picked up the item.
+                            UI.bumpItem(((Item) object).getId());
+                            // Removes the item from the director and the background.
+                            Game.level.setPickedUp((int)object.getiX()/50, (int)object.getiY()/50);
+                            Game.director.addToRemovedActors(object);
+                            Game.getBackground().getChildren().remove(object.getSpriteFrame());
+                            Game.director.resetRemovedActors();
+                        }
+                    }
+                    // If the player has not yet acquired a backpack, he can hold up to 2 of both pizzas and beers.
+                    else if(!UI.isBackpack()){
+                        if (!(((Item) object).getId().equals("pizza") && UI.getPizza() == 2) &&
+                                !(((Item) object).getId().equals("can") && UI.getBeer() == 2)) {
+                            // Bumps up the counter, symbolizing that the player picked up the item.
+                            UI.bumpItem(((Item) object).getId());
+                            // Removes the item from the director and the background.
+                            Game.level.setPickedUp((int)object.getiX()/50, (int)object.getiY()/50);
+                            Game.director.addToRemovedActors(object);
+                            Game.getBackground().getChildren().remove(object.getSpriteFrame());
+                            Game.director.resetRemovedActors();
+                        }
                     }
                 }
                 if (object instanceof Tile || object instanceof InteractiveActor) {
