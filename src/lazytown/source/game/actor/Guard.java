@@ -153,16 +153,16 @@ public class Guard extends MovedActor {
 
                 if (object instanceof Tile || object instanceof InteractiveActor) {
                     if (!facingUp) {
-                        iY -= velY;
+                        facingUp = true;
                     }
                     else if (facingUp) {
-                        iY += velY;
+                        facingUp = false;
                     }
                     if (!facingLeft) {
-                        iX -= velX;
+                       facingLeft = true;
                     }
                     else if (facingLeft) {
-                        iX += velX;
+                        facingLeft = false;
                     }
                 }
             }
@@ -178,8 +178,8 @@ public class Guard extends MovedActor {
      */
     private boolean collide(Actor object){
         if (object.getSpriteFrame().getBoundsInParent().intersects(
-                iX+levelWidth/2-20, iY+levelHeight/2-37.5, 40, 75)) {
-            Shape intersection = SVGPath.intersect(Game.playerOne.getSpriteBoundary(), object.getSpriteBoundary());
+                iX, iY, 40, 75)) {
+            Shape intersection = SVGPath.intersect(getSpriteBoundary(), object.getSpriteBoundary());
             if (intersection.getBoundsInLocal().getWidth() != -1) {
                 return true;
             }
