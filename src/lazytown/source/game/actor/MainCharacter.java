@@ -23,10 +23,6 @@ public class MainCharacter extends MovedActor {
 
 
     boolean leftSide, rightSide, upSide, downSide;
-    int levelWidth = Game.getLevel().getImageWidth() * 50;
-    int levelHeight = Game.getLevel().getImageHeight() * 50;
-    int windowWidth = Main.getWindowWidth();
-    int windowHeight = Main.getWindowHeight();
 
 
     int framecounter = 0;
@@ -206,9 +202,6 @@ public class MainCharacter extends MovedActor {
             Actor object = Game.director.getCurrentActors().get(i);
             // This object is then being parsed and tested in our collide method
             if (collide(object) && !isDead) {
-                // If collision has been detected, this code runs, in it's current state, it plays a sound, adds the
-                // object to another list, removes the sprite graphically and then removes it from existence by
-                // resetting the list of removed actors. Finally we call the scoringEngine() method on our object.
                 if (object instanceof Item) {
 
                     if (!(((Item) object).getId().equals("pizza") && !UI.isBackpack() && UI.getPizza() == 2) &&

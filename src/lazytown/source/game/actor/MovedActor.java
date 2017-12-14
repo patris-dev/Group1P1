@@ -1,6 +1,8 @@
 package lazytown.source.game.actor;
 
 import javafx.scene.image.Image;
+import lazytown.source.Main;
+import lazytown.source.game.Game;
 
 /**
  * An abstract class extending Actor used for moving entities.
@@ -19,6 +21,11 @@ public abstract class MovedActor extends Actor {
     // gimmick.
     protected float boundScale, boundRotation, friction;
 
+    int levelWidth = Game.getLevel().getImageWidth() * 50;
+    int levelHeight = Game.getLevel().getImageHeight() * 50;
+    int windowWidth = Main.getWindowWidth();
+    int windowHeight = Main.getWindowHeight();
+
     /**
      * Our constructor, which calls the Actor constructor with the super keyword. We also set some default values for
      * some of our variables. Health is set to 100 and movement speed to 4.
@@ -30,7 +37,7 @@ public abstract class MovedActor extends Actor {
     public MovedActor(String SVGdata, double xLoc, double yLoc, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
         health = 100;
-        velX = velY = 4;
+        velX = velY = 2;
     }
 
     /**
