@@ -34,6 +34,8 @@ public class UI {
 
     private static ImageView map;
 
+    private static Label fps = new Label();
+
 
     /**
      * The method getUI() sets up our in-game user interface.
@@ -120,6 +122,7 @@ public class UI {
         characterInfo.add(textBorder, 4, 0, 3, 3);
 
 
+        root.setLeft(fps);
         // Lays out all UI sections inside root.
         root.setRight(counters);
         root.setBottom(characterInfo);
@@ -127,6 +130,14 @@ public class UI {
         root.setLeft(fps);
 
         return root;
+    }
+
+    /**
+     * Updates the FPS value.
+     * @param FPS Float representing Frames Per Second
+     */
+    public static void updateFPS(float FPS) {
+        fps.setText(String.format("%.0f", FPS));
     }
 
     /**
