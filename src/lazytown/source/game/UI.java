@@ -34,8 +34,6 @@ public class UI {
 
     private static ImageView map;
 
-    private static Label fps = new Label();
-
 
     /**
      * The method getUI() sets up our in-game user interface.
@@ -121,8 +119,7 @@ public class UI {
         //textArea.setVisible(false);
         characterInfo.add(textBorder, 4, 0, 3, 3);
 
-
-        root.setLeft(fps);
+        
         // Lays out all UI sections inside root.
         root.setRight(counters);
         root.setBottom(characterInfo);
@@ -293,14 +290,6 @@ public class UI {
         else takeDamage(rate);
         if (thirstBar.getProgress() > 0.065) thirstBar.setProgress(thirstBar.getProgress()-rate/10);
         else takeDamage(rate);
-    }
-
-    /**
-     * Updates the FPS value.
-     * @param FPS Float representing Frames Per Second
-     */
-    public static void updateFPS(float FPS) {
-        fps.setText(Float.toString(FPS));
     }
 
     public static boolean isBackpack() {
