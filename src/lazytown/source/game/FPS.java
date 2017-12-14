@@ -1,8 +1,8 @@
 package lazytown.source.game;
 
-import javafx.application.Application;
+
 import javafx.scene.Scene;
-import javafx.stage.Stage;
+
 
 import com.sun.javafx.perf.PerformanceTracker;
 import java.security.AccessControlException;
@@ -11,13 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 
-public class FPS extends Application {
-    public static void main(String[] args) { launch(args); }
+public class FPS {
 
     private static PerformanceTracker tracker;
 
-    @Override
-    public void start(Stage stage) {
+    public void start() {
         VBox root = new VBox(20);
         Label label1 = new Label();
         Label label2 = new Label();
@@ -35,8 +33,7 @@ public class FPS extends Application {
         scene.setOnKeyPressed((e)->{
             label2.setText(label1.getText());
         });
-        stage.setScene(scene);
-        stage.show();
+
 
 
         tracker = PerformanceTracker.getSceneTracker(scene);
@@ -51,7 +48,7 @@ public class FPS extends Application {
         frameRateMeter.start();
     }
 
-    private float getFPS () {
+     public float getFPS () {
         float fps = tracker.getAverageFPS();
         tracker.resetAverageFPS();
         return fps;

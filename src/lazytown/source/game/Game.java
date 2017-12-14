@@ -16,6 +16,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import static lazytown.source.game.GamePlayLoop.frameCounter;
+
 /**
  * This is the class that represents the Game scene.
  * It is responsible for loading in everything and starting the game loop.
@@ -25,7 +27,6 @@ public class Game {
     private static Group background;
     private static Scene sceneGame;
     private static GamePlayLoop gamePlayLoop;
-    private static FPS frameCounter;
     private static Image[] pSprites;
     public static MainCharacter playerOne;
     private static SoundEngine backgroundMusic = new SoundEngine("music");
@@ -65,7 +66,7 @@ public class Game {
         playMusic();
         spawnActors();
         renderActors();
-        startGameLoop(primaryStage);
+        startGameLoop();
         renderUI();
 
         // Sets the scene of our stage to sceneGame
@@ -160,11 +161,10 @@ public class Game {
     }
 
     // This method starts our game loop, so what we have here is actually a dynamic game.
-    private static void startGameLoop(Stage primaryStage) {
+    private static void startGameLoop() {
         gamePlayLoop = new GamePlayLoop();
         gamePlayLoop.start();
-        frameCounter = new FPS();
-        frameCounter.start(primaryStage);
+        frameCounter.start();
     }
 
     // This method renders the in-game user interface.
