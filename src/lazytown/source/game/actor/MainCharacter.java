@@ -190,7 +190,7 @@ public class MainCharacter extends MovedActor {
         else if (downSide) spriteFrame.setTranslateY(iY - (levelHeight / 2 - windowHeight / 2));
         else Game.getBackground().setTranslateY(-iY);
 
-        if(framecounter >= runningspeed)
+        if(framecounter >= runningspeed && !isDead)
             Game.getFootsteps().play("footsteps.mp3");
 
     }
