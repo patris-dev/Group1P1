@@ -29,7 +29,7 @@ public class GamePlayLoop extends AnimationTimer {
         playerOne.update();
         float fps = game.getFPS();
         System.out.println(fps);
-
+        UI.updateFPS(fps);
 
 
         // Applying updates to all level-rendered actors (items, guards, etc.)
