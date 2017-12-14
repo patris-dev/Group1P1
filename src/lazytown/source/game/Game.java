@@ -1,6 +1,7 @@
 package lazytown.source.game;
 
 
+import com.sun.javafx.perf.PerformanceTracker;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -15,8 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
-import static lazytown.source.game.GamePlayLoop.frameCounter;
 
 /**
  * This is the class that represents the Game scene.
@@ -35,6 +34,7 @@ public class Game {
     public static Level[] levels;
     public static Level level;
     public static Director director = new Director();
+    private static PerformanceTracker tracker;
 
 
     // Here we declare four booleans which will be the foundation of the player controls, we do not initialize them as
@@ -56,6 +56,7 @@ public class Game {
         background = new Group();
         root.getChildren().add(background);
         sceneGame = new Scene(root, Main.getWindowWidth(), Main.getWindowHeight());
+        tracker = PerformanceTracker.getSceneTracker(sceneGame);
 
 
         // Methods we need to call to make our game work
@@ -164,7 +165,6 @@ public class Game {
     private static void startGameLoop() {
         gamePlayLoop = new GamePlayLoop();
         gamePlayLoop.start();
-        frameCounter.start();
     }
 
     // This method renders the in-game user interface.
@@ -235,5 +235,11 @@ public class Game {
 
     public static SoundEngine getFootsteps() {
         return footsteps;
+    }
+
+    public float getFPS () {
+        float fps = tracker.getAverageFPS();
+        tracker.resetAverageFPS();
+        return fps;
     }
 }

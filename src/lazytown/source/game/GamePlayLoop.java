@@ -6,6 +6,7 @@ import lazytown.source.game.actor.Actor;
 
 import static lazytown.source.game.Game.playerOne;
 
+
 /**
  * This class takes care of our gameplay loop, it extends from Animation timer, which basically just means that we
  * use JavaFX' pulse engine to cycle through our handle method as if it is a loop. this process needs to be
@@ -14,7 +15,7 @@ import static lazytown.source.game.Game.playerOne;
  */
 public class GamePlayLoop extends AnimationTimer {
 
-    public static FPS frameCounter = new FPS();
+    Game game = new Game();
 
 
 
@@ -26,7 +27,7 @@ public class GamePlayLoop extends AnimationTimer {
     public void handle(long now) {
         // Applying updates to the player character
         playerOne.update();
-        float fps = frameCounter.getFPS();
+        float fps = game.getFPS();
         System.out.println(fps);
 
 
