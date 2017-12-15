@@ -48,17 +48,17 @@
 }
 
 #text-border {
-    -fx-padding: 2px;
+    -fx-padding: 5px;
     -fx-border-color: #351c0d;
     -fx-background-color: #e8d9d0;
     -fx-border-width: 5px;
     -fx-pref-width: 800px;
-    -fx-pref-height: 44px;
+    -fx-pref-height: 80px;
 }
 
 .text-id{
     -fx-fill: black;
-    -fx-font-size: 13pt;
+    -fx-font-size: 16pt;
     -fx-font-family: 'Lunchtime Doubly So';
 
 }

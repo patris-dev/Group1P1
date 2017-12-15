@@ -15,22 +15,18 @@ import static lazytown.source.game.Game.playerOne;
  */
 public class GamePlayLoop extends AnimationTimer {
 
-    Game game = new Game();
-
-
-
     /**
      * The mandatory handle class for any AnimationTimer subclass. It takes care of executing the playerOne's update method
      * as well as update all of our actors in the game. This method is executed at 60Hz.
      */
     @Override
     public void handle(long now) {
-        // Applying updates to the player character
-        playerOne.update();
-        float fps = game.getFPS();
-        System.out.println(fps);
+        // Methods required to display FPS on the screen.
+        float fps = Game.getFPS();
         UI.updateFPS(fps);
 
+        // Applying updates to the player character.
+        playerOne.update();
 
         // Applying updates to all level-rendered actors (items, guards, etc.)
         Actor[][] actors = Game.level.getActors();

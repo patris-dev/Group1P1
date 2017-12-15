@@ -20,6 +20,7 @@ public class Main extends Application {
     private static SoundEngine menuMusic = new SoundEngine("music");
     // A SoundEngine object to load the button click sounds. Specifies that this engine will be used for sfx.
     private static SoundEngine buttonClicks = new SoundEngine("sfx");
+    private static Stage ps;
 
     /**
      * This is our start method, which is our primary method for the game, it initializes our stage as well as sets it's
@@ -27,6 +28,9 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        // We create a new stage only to use it in external methods.
+        ps = primaryStage;
 
         // Stage is the window
         // Sets the title of the window
@@ -58,6 +62,10 @@ public class Main extends Application {
         // Tells the SoundEngine menuMusic to play the loaded file.
         menuMusic.play();
 
+    }
+
+    public static void close() {
+        ps.close();
     }
 
     public static int getWindowWidth() {

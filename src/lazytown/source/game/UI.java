@@ -10,6 +10,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lazytown.source.AssetManager;
 
+import java.security.SecureRandom;
+
 /**
  * This class is used for displaying the in-game User Interface.
  * Inventory, as well as stats are handled here as well.
@@ -23,6 +25,7 @@ public class UI {
 
     private static Label pizzaCounter;
     private static Label beerCounter;
+    private static Label fps = new Label();
 
     private static ProgressBar healthBar;
     private static ProgressBar hungerBar;
@@ -32,8 +35,10 @@ public class UI {
     private static boolean backpack = false;
 
     private static ImageView map;
+    private static ImageView eKey;
 
-    private static Label fps = new Label();
+    private static int pizzaTotal = 0;
+    private static int beerTotal = 0;
 
 
     /**
@@ -41,7 +46,6 @@ public class UI {
      * @return returns a BorderPane which holds all of our in-game UI.
      */
     public static BorderPane getUI() {
-
         // BorderPane for our UI overlay.
         // Most of the layouts inside will be GridPanes.
         // GridPanes allow us to organize nodes in columns and rows.
@@ -76,9 +80,14 @@ public class UI {
         GridPane.setMargin(beerIcon, new Insets(0, 0, 0, 3));
         GridPane.setMargin(pizzaCounter, new Insets(4, 0, 0, 0));
 
-        //Kris
-        map = new ImageView(new Image("/lazytown/assets/images/levels/fullmap.png"));
+
+        // UI section for the map, which appears upon pressing M.
+        map = new ImageView(AssetManager.getUI("fullmap.png"));
         map.setVisible(false);
+
+        // UI section for the fps counter, default set to invisible. Pressing 0 in-game will make it visible.
+        fps.setVisible(false);
+
 
         // UI section for character info.
         // Includes an image of our main character, small icons for health/hunger/thirst bars and the bars themselves.
@@ -87,13 +96,13 @@ public class UI {
 
         ImageView characterIcon = new ImageView(new Image("/lazytown/assets/images/animationsprites/playercharacter/P5.png"));
 
-        ImageView healthIcon = new ImageView(new Image("/lazytown/assets/images/UI/full_heart.png"));
-        ImageView hungerIcon = new ImageView(new Image("/lazytown/assets/images/UI/stomach.png"));
-        ImageView thirstIcon = new ImageView(new Image("/lazytown/assets/images/UI/water_drop.png"));
+        ImageView healthIcon = new ImageView(AssetManager.getUI("full_heart.png"));
+        ImageView hungerIcon = new ImageView(AssetManager.getUI("stomach.png"));
+        ImageView thirstIcon = new ImageView(AssetManager.getUI("water_drop.png"));
 
-        healthBar = new ProgressBar(0.6);
-        hungerBar = new ProgressBar(0.1);
-        thirstBar = new ProgressBar(0.2);
+        healthBar = new ProgressBar(0.8);
+        hungerBar = new ProgressBar(0.4);
+        thirstBar = new ProgressBar(0.4);
 
         characterInfo.add(characterIcon, 0, 0, 1, 3);
         characterInfo.add(healthIcon, 1, 0);
@@ -106,8 +115,11 @@ public class UI {
         characterInfo.setHgap(10);
         characterInfo.setVgap(7);
 
+        GridPane.setMargin(characterIcon, new Insets(-25, 0, 0, 0));
         GridPane.setMargin(healthIcon, new Insets(-5, 0, 0, 0));
         GridPane.setMargin(healthBar, new Insets(-5, 0, 0, 0));
+        GridPane.setMargin(thirstIcon, new Insets(-28, 0, 0, 0));
+        GridPane.setMargin(thirstBar, new Insets(-28, 0, 0, 0));
 
         // UI section for the text window, meant for displaying text to our user.
         // Placed inside the same grid as the character info.
@@ -116,16 +128,18 @@ public class UI {
         textArea = new Text();
         textArea.setVisible(false);
         textArea.getStyleClass().add("text-id");
-        textBorder.getChildren().add(textArea);
-        //textArea.setVisible(false);
+        textBorder.getChildren().addAll(textArea);
         characterInfo.add(textBorder, 4, 0, 3, 3);
+        eKey = new ImageView(AssetManager.getUI("e_key.png"));
+        eKey.setTranslateX(964);
+        eKey.setTranslateY(708);
+        root.getChildren().add(eKey);
 
-
-        root.setLeft(fps);
         // Lays out all UI sections inside root.
         root.setRight(counters);
         root.setBottom(characterInfo);
-        root.setCenter(map); //Kris
+        root.setCenter(map);
+        root.setTop(fps);
 
         return root;
     }
@@ -135,7 +149,7 @@ public class UI {
      * @param FPS Float representing Frames Per Second
      */
     public static void updateFPS(float FPS) {
-        fps.setText(Float.toString(FPS));
+        fps.setText(String.format("%4.0f", FPS));
     }
 
     /**
@@ -149,6 +163,8 @@ public class UI {
         textArea.setVisible(true);
         textArea.setText(text[textCounter]);
         textCounter++;
+        eKey.toFront();
+        eKey.setVisible(true);
     }
 
     /**
@@ -158,6 +174,7 @@ public class UI {
         if(text != null && textCounter < text.length) {
             textArea.setText(text[textCounter]);
             textCounter++;
+            eKey.toFront();
         }
         else hideTextWindow();
     }
@@ -168,6 +185,8 @@ public class UI {
     private static void hideTextWindow() {
         text = null;
         textBorder.setVisible(false);
+        eKey.setVisible(false);
+        Game.playerOne.setRestricted(false);
     }
 
     /**
@@ -179,18 +198,21 @@ public class UI {
             case "pizza":
                 Game.getBackgroundSfx().play("pizzaPickup.mp3");
                 pizzaCounter.setText(Integer.toString(Integer.parseInt(pizzaCounter.getText()) + 1));
+                pizzaTotal++;
                 break;
             case "can":
                 Game.getBackgroundSfx().play("beerPickup.mp3");
                 beerCounter.setText(Integer.toString(Integer.parseInt(beerCounter.getText()) + 1));
+                beerTotal++;
                 break;
             case "backpack":
                 Game.getBackgroundSfx().play("backpackPickup.mp3");
                 backpack = true;
                 keycard[1] = true;
                 keycard[4] = true;
-                UI.loadTextWindow("You found your backpack! Now you can hold 5 of both pizzas and beers.\n" +
-                        "There's also your keycard inside! You now have access to building A.");
+                Game.playerOne.setRestricted(true);
+                UI.loadTextWindow("You found your backpack! Inventory increased.\n" +
+                        "Inside you find your keycard! You can now enter building A.");
                 break;
             case "key1":
                 Game.getBackgroundSfx().play("keycardPickup.mp3");
@@ -218,7 +240,12 @@ public class UI {
      * Makes the map in the UI visible.
      */
     public static void showMap(){
-        map.setVisible(true);
+        if (!map.isVisible()) {
+            SecureRandom sr = new SecureRandom();
+            if (sr.nextDouble() > 0.95) map.setImage(AssetManager.getUI("fullmap0.png"));
+            else map.setImage(AssetManager.getUI("fullmap.png"));
+            map.setVisible(true);
+        }
     }
 
     /**
@@ -226,6 +253,14 @@ public class UI {
      */
     public static void hideMap(){
         map.setVisible(false);
+    }
+
+    /**
+     * Makes the fps counter in the UI invisible/visible.
+     */
+    public static void switchFPS(){
+        if (fps.isVisible()) fps.setVisible(false);
+        else fps.setVisible(true);
     }
 
     /**
@@ -250,9 +285,28 @@ public class UI {
         }
     }
 
+    /**
+     * A method that fills the thirstBar, used when interacting with water taps.
+     */
     public static void drinkWater() {
         Game.getBackgroundSfx().play("drinkingSound.mp3");
         thirstBar.setProgress(1.0);
+    }
+
+    /**
+     * A method that generates loot into the locker.
+     */
+    public static void locker() {
+        double rand = new SecureRandom().nextDouble();
+        if (rand > 0.9) {
+            bumpItem("pizza");
+            UI.loadTextWindow("You found some food!");
+        }
+        else if (rand > 0.8) {
+            bumpItem("can");
+            UI.loadTextWindow("You found some sort of a drink.");
+        }
+        else UI.loadTextWindow("The locker is empty.");
     }
 
     /**
@@ -261,18 +315,16 @@ public class UI {
      */
     public static void takeDamage(double damage) {
         if (healthBar.getProgress() > 0.065) healthBar.setProgress(healthBar.getProgress() - damage);
-        else {
+        else if (healthBar.getProgress() != 0){
             Game.playerOne.setDead(true);
             Game.root.getChildren().remove(Game.playerOne.spriteFrame);
             UI.loadTextWindow("You died! Congrats!\nPress E to restart.",
                                         "Whoops, seems like restarting isn't implemented yet, huh.",
-                                        "It's a pretty lame game anyways, were you playing it because we asked you to?",
+                                        "It's a pretty lame game anyways,\nwere you playing it because we asked you to?",
                                         "Well, now we're here. How was your day so far?",
-                                        "Ours was pretty stressed, needed to finish up a game and stuff.",
+                                        "Ours was pretty stressed,\nneeded to finish up a game and stuff.",
                                         "But you don't really care about that, do you?",
-                                        "By the way, there might or might not be an easter egg involving the\nKonami code.",
-                                        "Anyways, if you want to restart, right now you would need to exit the game\n"
-                                                + "and start it again. Yup. Sorry!");
+                                        "Anyways, if you want to restart, right now you\nwould need to exit the game and start it again. Yup. Sorry!");
             healthBar.setProgress(0);
         }
     }
@@ -291,6 +343,10 @@ public class UI {
         else takeDamage(rate);
         if (thirstBar.getProgress() > 0.065) thirstBar.setProgress(thirstBar.getProgress()-rate/10);
         else takeDamage(rate);
+
+        if (healthBar.getProgress() > 1.0) healthBar.setProgress(1.0);
+        if (thirstBar.getProgress() > 1.0) thirstBar.setProgress(1.0);
+        if (hungerBar.getProgress() > 1.0) hungerBar.setProgress(1.0);
     }
 
     public static boolean isBackpack() {
@@ -307,5 +363,13 @@ public class UI {
 
     public static int getBeer() {
         return Integer.parseInt(beerCounter.getText());
+    }
+
+    public static int getPizzaTotal() {
+        return pizzaTotal;
+    }
+
+    public static int getBeerTotal() {
+        return beerTotal;
     }
 }

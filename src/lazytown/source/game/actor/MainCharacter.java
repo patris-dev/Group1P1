@@ -7,6 +7,7 @@ import lazytown.source.game.Game;
 import javafx.scene.image.Image;
 import lazytown.source.game.UI;
 import lazytown.source.game.level.Tile;
+import lazytown.source.menu.ConfirmBox;
 
 /**
  * A class used for the main character, extends MovedActor class, and therefore the Actor as well.
@@ -20,6 +21,8 @@ public class MainCharacter extends MovedActor {
     boolean facingLeft = false;
     boolean facingRight = false;
     boolean isDead = false;
+    boolean restricted = true;
+    boolean finished = false;
 
 
     boolean leftSide, rightSide, upSide, downSide;
@@ -39,6 +42,7 @@ public class MainCharacter extends MovedActor {
     public MainCharacter(Game newGame, String SVGdata, double xLoc, double yLoc, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
         game = newGame;
+        spriteFrame.setImage(imageStates.get(5));
     }
 
     /**
@@ -49,14 +53,14 @@ public class MainCharacter extends MovedActor {
     @Override
     public void update() {
         setXYLocation();
-        setImageState();
+        if (!restricted) setImageState();
         moveCharacter();
         checkCollision();
         UI.updateStats();
     }
 
     private void setXYLocation() {
-        if (!isDead) {
+        if (!isDead && !restricted) {
             if (game.isRight())
                 iX += velX;
             if (game.isLeft())
@@ -190,7 +194,7 @@ public class MainCharacter extends MovedActor {
         else if (downSide) spriteFrame.setTranslateY(iY - (levelHeight / 2 - windowHeight / 2));
         else Game.getBackground().setTranslateY(-iY);
 
-        if(framecounter >= runningspeed && !isDead)
+        if(framecounter >= runningspeed && !isDead && !restricted)
             Game.getFootsteps().play("footsteps.mp3");
 
     }
@@ -215,6 +219,7 @@ public class MainCharacter extends MovedActor {
                             Game.getBackground().getChildren().remove(object.getSpriteFrame());
                             Game.director.resetRemovedActors();
                         }
+                        else UI.loadTextWindow("Inventory limit reached.");
                     }
                     // If the player has not yet acquired a backpack, he can hold up to 2 of both pizzas and beers.
                     else if(!UI.isBackpack()){
@@ -228,6 +233,7 @@ public class MainCharacter extends MovedActor {
                             Game.getBackground().getChildren().remove(object.getSpriteFrame());
                             Game.director.resetRemovedActors();
                         }
+                        else UI.loadTextWindow("Inventory limit reached.");
                     }
                 }
                 if (object instanceof Tile || object instanceof InteractiveActor) {
@@ -249,7 +255,7 @@ public class MainCharacter extends MovedActor {
                 }
                 if (object instanceof InteractiveActor) {
                     String id = ((InteractiveActor) object).getId();
-                    if (game.isKeyE()) {
+                    if (game.isKeyE() || id.equals("key1") || id.equals("key2") || id.equals("key3") || id.equals("key4") || id.equals("key5")) {
                         switch (id) {
                             case "key0":
                                 UI.loadTextWindow("This door is locked.");
@@ -286,15 +292,24 @@ public class MainCharacter extends MovedActor {
                                 }
                                 break;
                             case "key5":
-                                if (!UI.getKeycard(5)) UI.loadTextWindow("You need to activate your card PIN code to unlock this door.\nAs far as you remember, you can do that somewhere in building A...");
-                                else UI.loadTextWindow("You escaped with all your stuff, congrats!");
+                                if (!UI.getKeycard(5)) UI.loadTextWindow("You need to activate your card first.\nYou remember that you can do that somewhere in this building.");
+                                else if (!finished){
+                                    finished = true;
+                                    restricted = true;
+                                    if (ConfirmBox.displayEnding("Congratulations!")) Main.close();
+                                }
                                 break;
                             case "water":
                                 UI.loadTextWindow("You drank some water.");
                                 UI.drinkWater();
                                 break;
                             case "locker":
-                                UI.loadTextWindow("This locker is empty.");
+                                UI.locker();
+                                ((InteractiveActor) object).setId("locker_empty");
+                                Game.level.setPickedUp((int)object.getiX()/50, (int)object.getiY()/50);
+                                break;
+                            case "locker_empty":
+                                UI.loadTextWindow("You already checked this locker.");
                                 break;
                             default:
                                 UI.loadTextWindow("Unidentified interactive object.");
@@ -316,7 +331,7 @@ public class MainCharacter extends MovedActor {
      */
     private boolean collide(Actor object){
         if (object.getSpriteFrame().getBoundsInParent().intersects(
-                iX+levelWidth/2-20, iY+levelHeight/2-37.5, 40, 75)) {
+                iX+levelWidth/2-20, iY+levelHeight/2-10, 40, 40)) {
             Shape intersection = SVGPath.intersect(Game.playerOne.getSpriteBoundary(), object.getSpriteBoundary());
             if (intersection.getBoundsInLocal().getWidth() != -1) {
                 return true;
@@ -352,6 +367,10 @@ public class MainCharacter extends MovedActor {
 
     public boolean isDead() {
         return isDead;
+    }
+
+    public void setRestricted(boolean restricted) {
+        this.restricted = restricted;
     }
 
     public void setDead(boolean dead) {
