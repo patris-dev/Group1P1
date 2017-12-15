@@ -75,9 +75,11 @@ public class UI {
         GridPane.setMargin(beerIcon, new Insets(0, 0, 0, 3));
         GridPane.setMargin(pizzaCounter, new Insets(4, 0, 0, 0));
 
-        //Kris
+
+        //UI section for the map, which appears upon pressing M.
         map = new ImageView(new Image("/lazytown/assets/images/levels/fullmap.png"));
         map.setVisible(false);
+
 
         // UI section for character info.
         // Includes an image of our main character, small icons for health/hunger/thirst bars and the bars themselves.
@@ -119,12 +121,11 @@ public class UI {
         //textArea.setVisible(false);
         characterInfo.add(textBorder, 4, 0, 3, 3);
 
-        
         // Lays out all UI sections inside root.
         root.setRight(counters);
         root.setBottom(characterInfo);
-        root.setCenter(map); //Kris
-        root.setLeft(fps);
+        root.setCenter(map);
+        root.setTop(fps);
 
         return root;
     }
@@ -134,7 +135,7 @@ public class UI {
      * @param FPS Float representing Frames Per Second
      */
     public static void updateFPS(float FPS) {
-        fps.setText(String.format("%.0f", FPS));
+        fps.setText(String.format("%4.0f", FPS));
     }
 
     /**
@@ -260,7 +261,7 @@ public class UI {
      */
     public static void takeDamage(double damage) {
         if (healthBar.getProgress() > 0.065) healthBar.setProgress(healthBar.getProgress() - damage);
-        else {
+        else if (healthBar.getProgress() != 0){
             Game.playerOne.setDead(true);
             Game.root.getChildren().remove(Game.playerOne.spriteFrame);
             UI.loadTextWindow("You died! Congrats!\nPress E to restart.",

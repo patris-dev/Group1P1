@@ -174,6 +174,7 @@ public class Game {
                                     "Use W A S D to move around.\nE is also used to interact with items, such as doors, lockers and water taps.",
                                     "Scavenge around for some food and drinks. Currently you can hold 2 of each.\nPress 1 to eat, and 2 to drink.",
                                     "Once you find your backpack, your food and drink inventory will increase.",
+                                    "M is used to show the map.",
                                     "Press ESC at any time to check the controls.\nGood luck!");
     }
 
