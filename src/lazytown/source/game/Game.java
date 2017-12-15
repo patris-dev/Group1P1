@@ -107,15 +107,16 @@ public class Game {
         // the most compact and elegant way of programming this logic.
         sceneGame.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case W:         up      = true; down    = false;  break;
-                case A:         left    = true; right   = false; break;
-                case S:         down    = true; up      = false; break;
-                case D:         right   = true; left    = false; break;
+                case W:         up      = true; down    = false;        break;
+                case A:         left    = true; right   = false;        break;
+                case S:         down    = true; up      = false;        break;
+                case D:         right   = true; left    = false;        break;
                 case E:         keyE    = true; UI.displayTextWindow(); break;
-                case DIGIT1:    UI.consumePizza(); break;
-                case DIGIT2:    UI.consumeBeer(); break;
-                case ESCAPE:    exitGame(); break;
-                case M:         UI.showMap(); break;
+                case DIGIT1:    UI.consumePizza();                      break;
+                case DIGIT2:    UI.consumeBeer();                       break;
+                case DIGIT0:    UI.switchFPS();                         break;
+                case ESCAPE:    exitGame();                             break;
+                case M:         UI.showMap();                           break;
             }
         });
 
@@ -126,7 +127,7 @@ public class Game {
                 case S:     down    = false; break;
                 case D:     right   = false; break;
                 case E:     keyE    = false; break;
-                case M:         UI.hideMap(); break;
+                case M:     UI.hideMap();    break;
             }
         });
 
@@ -149,8 +150,6 @@ public class Game {
     // and whatever the player can interact with, later it could be extended to be more things, like props.
     private void spawnActors() {
        playerOne = new MainCharacter(this,"M 17,0 L 13,4 12,22 14,36 17,44 32,44 37,35 35,0 Z", 0, 0, pSprites);
-//       Testing out a 75x75 SVG path, does not seem to make a difference.
-//       playerOne = new MainCharacter(this,"M 25,0 L 15,20 25,70 50,70 60,20 50,0 Z", 0, 0, pSprites);
     }
 
     // This method takes care of rendering our actors to the stackPane object that we have set up
@@ -171,9 +170,9 @@ public class Game {
     private void renderUI() {
         root.getChildren().add(UI.getUI());
         UI.loadTextWindow("Welcome to LazyTown! Press E to continue.",
-                                    "Use W A S D to move around.\nE is also used to interact with items, such as doors, lockers and water taps.",
-                                    "Scavenge around for some food and drinks. Currently you can hold 2 of each.\nPress 1 to eat, and 2 to drink.",
-                                    "Once you find your backpack, your food and drink inventory will increase. \nAs far as you remember, you left it in building D.",
+                                    "Use W A S D to move around.\nE is also used to interact with doors and lockers.",
+                                    "Scavenge around for some food and drinks.\nPress 1 to eat, and 2 to drink.",
+                                    "Once you find your backpack, inventory space will increase.\nAs far as you remember, you left it in building D.",
                                     "M is used to show the map.",
                                     "Press ESC at any time to check the controls.\nGood luck!");
     }

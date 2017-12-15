@@ -23,7 +23,6 @@ public class GamePlayLoop extends AnimationTimer {
     public void handle(long now) {
         // Methods required to display FPS on the screen.
         float fps = Game.getFPS();
-        System.out.println(fps);
         UI.updateFPS(fps);
 
         // Applying updates to the player character.
