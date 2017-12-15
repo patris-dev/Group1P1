@@ -294,7 +294,11 @@ public class MainCharacter extends MovedActor {
                                 UI.drinkWater();
                                 break;
                             case "locker":
-                                UI.loadTextWindow("This locker is empty.");
+                                UI.locker();
+                                ((InteractiveActor) object).setId("locker_empty");
+                                break;
+                            case "locker_empty":
+                                UI.loadTextWindow("You already checked this locker.");
                                 break;
                             default:
                                 UI.loadTextWindow("Unidentified interactive object.");

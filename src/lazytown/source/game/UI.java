@@ -10,6 +10,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lazytown.source.AssetManager;
 
+import java.security.SecureRandom;
+
 /**
  * This class is used for displaying the in-game User Interface.
  * Inventory, as well as stats are handled here as well.
@@ -92,9 +94,9 @@ public class UI {
         ImageView hungerIcon = new ImageView(new Image("/lazytown/assets/images/UI/stomach.png"));
         ImageView thirstIcon = new ImageView(new Image("/lazytown/assets/images/UI/water_drop.png"));
 
-        healthBar = new ProgressBar(0.6);
-        hungerBar = new ProgressBar(0.1);
-        thirstBar = new ProgressBar(0.2);
+        healthBar = new ProgressBar(0.8);
+        hungerBar = new ProgressBar(0.4);
+        thirstBar = new ProgressBar(0.4);
 
         characterInfo.add(characterIcon, 0, 0, 1, 3);
         characterInfo.add(healthIcon, 1, 0);
@@ -250,9 +252,28 @@ public class UI {
         }
     }
 
+    /**
+     * A method that fills the thirstBar, used when interacting with water taps.
+     */
     public static void drinkWater() {
         Game.getBackgroundSfx().play("drinkingSound.mp3");
         thirstBar.setProgress(1.0);
+    }
+
+    /**
+     * A method that generates loot into the locker.
+     */
+    public static void locker() {
+        double rand = new SecureRandom().nextDouble();
+        if (rand > 0.9) {
+            bumpItem("pizza");
+            UI.loadTextWindow("You found some food!");
+        }
+        else if (rand > 0.8) {
+            bumpItem("can");
+            UI.loadTextWindow("You found some sort of a drink.");
+        }
+        else UI.loadTextWindow("The locker is empty.");
     }
 
     /**
@@ -270,7 +291,6 @@ public class UI {
                                         "Well, now we're here. How was your day so far?",
                                         "Ours was pretty stressed, needed to finish up a game and stuff.",
                                         "But you don't really care about that, do you?",
-                                        "By the way, there might or might not be an easter egg involving the\nKonami code.",
                                         "Anyways, if you want to restart, right now you would need to exit the game\n"
                                                 + "and start it again. Yup. Sorry!");
             healthBar.setProgress(0);
