@@ -296,6 +296,7 @@ public class MainCharacter extends MovedActor {
                             case "locker":
                                 UI.locker();
                                 ((InteractiveActor) object).setId("locker_empty");
+                                Game.level.setPickedUp((int)object.getiX()/50, (int)object.getiY()/50);
                                 break;
                             case "locker_empty":
                                 UI.loadTextWindow("You already checked this locker.");

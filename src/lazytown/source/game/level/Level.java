@@ -155,7 +155,7 @@ public class Level {
 
                 // Creates an array of actors (items, guards, etc.)
                 // Renders them externally later on (in Game.java renderActors() method) so it goes on top of tiles.
-                if (!pickedUp[x][y]) {
+                if (!pickedUp[x][y] || (entity == 'u' || entity == 'y')) {
                     switch (entity) {
                         case '0':
                             actors[x][y] = null;
@@ -242,6 +242,7 @@ public class Level {
                             actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key5", glassDoorV);
                             break;
                         case 'u':
+                            if (pickedUp[x][y]) actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "locker_empty", lockerRight);
                             actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "locker", lockerRight);
                             break;
                         case 'v':
@@ -254,7 +255,8 @@ public class Level {
                             actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "water", waterTap);
                             break;
                         case 'y':
-                            actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "locker", lockerLeft);
+                            if (pickedUp[x][y]) actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "locker_empty", lockerLeft);
+                            else actors[x][y] = new InteractiveActor("M0,0 L 50,0 50,50 0,50 Z", x*50, y*50, "locker", lockerLeft);
                             break;
                         default:
                             actors[x][y] = new Tile(true, x, y, actorNotFound);

@@ -35,6 +35,7 @@ public class UI {
     private static boolean backpack = false;
 
     private static ImageView map;
+    private static ImageView eKey;
 
 
     /**
@@ -119,9 +120,12 @@ public class UI {
         textArea = new Text();
         textArea.setVisible(false);
         textArea.getStyleClass().add("text-id");
-        textBorder.getChildren().add(textArea);
-        //textArea.setVisible(false);
+        textBorder.getChildren().addAll(textArea);
         characterInfo.add(textBorder, 4, 0, 3, 3);
+        eKey = new ImageView(AssetManager.getUI("e_key.png"));
+        eKey.setTranslateX(966);
+        eKey.setTranslateY(707);
+        root.getChildren().add(eKey);
 
         // Lays out all UI sections inside root.
         root.setRight(counters);
@@ -151,6 +155,8 @@ public class UI {
         textArea.setVisible(true);
         textArea.setText(text[textCounter]);
         textCounter++;
+        eKey.toFront();
+        eKey.setVisible(true);
     }
 
     /**
@@ -160,6 +166,7 @@ public class UI {
         if(text != null && textCounter < text.length) {
             textArea.setText(text[textCounter]);
             textCounter++;
+            eKey.toFront();
         }
         else hideTextWindow();
     }
@@ -170,6 +177,7 @@ public class UI {
     private static void hideTextWindow() {
         text = null;
         textBorder.setVisible(false);
+        eKey.setVisible(false);
     }
 
     /**
@@ -311,6 +319,10 @@ public class UI {
         else takeDamage(rate);
         if (thirstBar.getProgress() > 0.065) thirstBar.setProgress(thirstBar.getProgress()-rate/10);
         else takeDamage(rate);
+
+        if (healthBar.getProgress() > 1.0) healthBar.setProgress(1.0);
+        if (thirstBar.getProgress() > 1.0) thirstBar.setProgress(1.0);
+        if (hungerBar.getProgress() > 1.0) hungerBar.setProgress(1.0);
     }
 
     public static boolean isBackpack() {

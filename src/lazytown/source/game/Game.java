@@ -190,7 +190,7 @@ public class Game {
 
     // This method renders a new window to exit the game.
     private static void exitGame(){
-        if(ConfirmBox.display("Exit Game","Are you sure you want to exit?"))
+        if(ConfirmBox.displayMenu("Menu"))
             System.exit(0);
     }
 
