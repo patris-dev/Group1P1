@@ -170,11 +170,16 @@ public class Game {
     private void renderUI() {
         root.getChildren().add(UI.getUI());
         UI.loadTextWindow("Welcome to LazyTown! Press E to continue.",
-                                    "Use W A S D to move around.\nE is also used to interact with doors and lockers.",
-                                    "Scavenge around for some food and drinks.\nPress 1 to eat, and 2 to drink.",
-                                    "Once you find your backpack, inventory space will increase.\nAs far as you remember, you left it in building D.",
-                                    "M is used to show the map.",
-                                    "Press ESC at any time to check the controls.\nGood luck!");
+                                    "Looks like you had a wild time yesterday at the Friday bar\n" +
+                                            "and you slept in the bar’s storage room in building B.",
+                                    "What’s worse, you’ve lost your backpack with your student card.\n" +
+                                            "Try to find it and then to escape through building A.",
+                                    "Also you should scavenge around for some food and drinks. Use\n" +
+                                            "WASD to move and E to interact with lockers and water taps.",
+                                    "Press 1 to eat and 2 to drink. M brings up the map.\nPress ESC at any time to check the controls.",
+                                    "One more thing: if any of the guards catch you,\n" +
+                                            "you’ll be in a lot of trouble. So try to avoid them.",
+                                    "Good luck!");
     }
 
     public static void changeLevel(int changeTo, int spawnX, int spawnY) {

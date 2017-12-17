@@ -287,12 +287,17 @@ public class MainCharacter extends MovedActor {
                             case "key4":
                                 if (!UI.getKeycard(4)) UI.loadTextWindow("This door requires a keycard with ID 4 to unlock.");
                                 else {
+                                    restricted = true;
                                     UI.bumpItem("key5");
                                     UI.loadTextWindow("You activated your keycard. Time to escape!");
                                 }
                                 break;
                             case "key5":
-                                if (!UI.getKeycard(5)) UI.loadTextWindow("You need to activate your card first.\nYou remember that you can do that somewhere in this building.");
+                                if (!UI.getKeycard(5)) {
+                                    restricted = true;
+                                    UI.loadTextWindow("You need to activate your keycard first.\n" +
+                                            "You remember that you can do it somewhere in this building.");
+                                }
                                 else if (!finished){
                                     finished = true;
                                     restricted = true;
