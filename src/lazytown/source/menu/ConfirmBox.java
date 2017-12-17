@@ -2,6 +2,7 @@ package lazytown.source.menu;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import lazytown.source.AssetManager;
 import lazytown.source.Main;
 import javafx.geometry.Insets;
@@ -22,6 +23,7 @@ public class ConfirmBox {
     private static Stage primaryStage;
     private static Scene scene;
     private static VBox root;
+    private static BorderPane borderpane;
     private static Label label;
     private static Button yesButton;
     private static Button noButton;
@@ -192,24 +194,32 @@ public class ConfirmBox {
         primaryStage.setTitle(title);
         primaryStage.setResizable(false);
 
+        borderpane = new BorderPane();
+
         // Creates a root (VBox) to store our message and our buttons
         // Adds padding, sets the alignment of all components to center
-        root = new VBox(20);
-        root.setPadding(new Insets(10, 10, 10, 10));
+        root = new VBox(15);
         root.setAlignment(Pos.CENTER);
 
         // Instantiates sceneMainMenu which will contain our root and sets the window size
         // Tells all nodes in scene to use the MenuWindowTheme.css style
-        scene = new Scene(root, BIG_WINDOW_WIDTH, BIG_WINDOW_HEIGHT);
+        scene = new Scene(borderpane, BIG_WINDOW_WIDTH, BIG_WINDOW_HEIGHT);
         scene.getStylesheets().add(AssetManager.getTheme("MenuWindowTheme.css"));
 
         // Label for displaying the ending
-        Label ending1 = new Label(" You escaped with all your stuff, Congrats!\nYou feel a sense of pride and accomplishment.");
-        Label ending2 = new Label("Pizzas collected - " + UI.getPizzaTotal());
-        Label ending3 = new Label("Beer cans collected - " + UI.getBeerTotal());
+        Label ending1 = new Label("You escaped with all your stuff, congratulations!");
+        Label ending2 = new Label("You feel a sense of pride and accomplishment.");
+        Label ending3 = new Label("Pizza slices collected: " + UI.getPizzaTotal());
+        Label ending4 = new Label("Beer cans collected: " + UI.getBeerTotal());
+        Label ending5 = new Label("Press Enter or Escape to exit the game.");
 
         // Adds all nodes to root
-        root.getChildren().addAll(ending1, ending2, ending3);
+        root.getChildren().addAll(ending1, ending2, ending3, ending4);
+        borderpane.setCenter(root);
+
+        BorderPane.setAlignment(ending5, Pos.CENTER);
+        BorderPane.setMargin(ending5, new Insets(0, 0, 20, 0));
+        borderpane.setBottom(ending5);
 
         // Sets the scene of our stage to scene
         primaryStage.setScene(scene);
