@@ -204,12 +204,15 @@ public class ConfirmBox {
         scene.getStylesheets().add(AssetManager.getTheme("MenuWindowTheme.css"));
 
         // Label for displaying the ending
-        Label ending1 = new Label(" You escaped with all your stuff, Congrats!\nYou feel a sense of pride and accomplishment.");
-        Label ending2 = new Label("Pizzas collected - " + UI.getPizzaTotal());
-        Label ending3 = new Label("Beer cans collected - " + UI.getBeerTotal());
+        Label ending1 = new Label("You escaped with all your stuff, congratulations!");
+        Label ending2 = new Label("You feel a sense of pride and accomplishment.");
+        Label ending3 = new Label("Pizza slices collected: " + UI.getPizzaTotal());
+        Label ending4 = new Label("Beer cans collected: " + UI.getBeerTotal());
+        Label ending5 = new Label("Press Enter or Escape to exit the game.");
+        ending5.setPadding(new Insets(60, 0, 0, 0));
 
         // Adds all nodes to root
-        root.getChildren().addAll(ending1, ending2, ending3);
+        root.getChildren().addAll(ending1, ending2, ending3, ending4, ending5);
 
         // Sets the scene of our stage to scene
         primaryStage.setScene(scene);

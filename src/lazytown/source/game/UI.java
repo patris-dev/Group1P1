@@ -211,8 +211,9 @@ public class UI {
                 keycard[1] = true;
                 keycard[4] = true;
                 Game.playerOne.setRestricted(true);
-                UI.loadTextWindow("You found your backpack! Inventory increased.\n" +
-                        "Inside you find your keycard! You can now enter building A.");
+                UI.loadTextWindow("You found your backpack! Inventory increased. Now you can hold\n" +
+                        "5 of both pizza slices and beer cans.",
+                        "Also you found your keycard inside!\nYou can now enter building A from where you can leave the uni.");
                 break;
             case "key1":
                 Game.getBackgroundSfx().play("keycardPickup.mp3");

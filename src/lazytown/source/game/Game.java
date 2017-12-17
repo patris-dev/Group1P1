@@ -112,9 +112,9 @@ public class Game {
                 case S:         down    = true; up      = false;        break;
                 case D:         right   = true; left    = false;        break;
                 case E:         keyE    = true; UI.displayTextWindow(); break;
+                case DIGIT0:    UI.switchFPS();                         break;
                 case DIGIT1:    UI.consumePizza();                      break;
                 case DIGIT2:    UI.consumeBeer();                       break;
-                case DIGIT0:    UI.switchFPS();                         break;
                 case ESCAPE:    exitGame();                             break;
                 case M:         UI.showMap();                           break;
             }
