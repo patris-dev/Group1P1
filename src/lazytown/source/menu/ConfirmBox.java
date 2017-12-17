@@ -125,17 +125,17 @@ public class ConfirmBox {
 
         // Creates a root (VBox) to store our message and our buttons
         // Adds padding, sets the alignment of all components to center
-        root = new VBox(20);
+        root = new VBox(10);
         root.setPadding(new Insets(10, 10, 10, 10));
         root.setAlignment(Pos.CENTER);
 
         // Instantiates sceneMainMenu which will contain our root and sets the window size
         // Tells all nodes in scene to use the MenuWindowTheme.css style
-        scene = new Scene(root, BIG_WINDOW_WIDTH, BIG_WINDOW_HEIGHT);
+        scene = new Scene(root, BIG_WINDOW_WIDTH, BIG_WINDOW_HEIGHT+60);
         scene.getStylesheets().add(AssetManager.getTheme("MenuWindowTheme.css"));
 
         // Image displaying all controls
-        controls = new ImageView(AssetManager.getUI("e_key.png"));                  // To be changed
+        controls = new ImageView(AssetManager.getUI("controls.png"));
 
         // Creates the yes and no buttons
         yesButton = new Button("Exit Game");
