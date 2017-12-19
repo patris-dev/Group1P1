@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>lazytown.source.sound.SoundEngine</OriginalElement>
+  <nodes>
+    <node x="1043.0" y="1307.0">lazytown.source.game.GamePlayLoop</node>
+    <node x="844.0" y="1329.0">javafx.animation.AnimationTimer.AnimationTimerReceiver</node>
+    <node x="310.0" y="1073.0">lazytown.source.menu.ConfirmBox</node>
+    <node x="661.1071428571429" y="311.5">lazytown.source.game.actor.InteractiveActor</node>
+    <node x="1646.107142857143" y="389.0">lazytown.source.Main</node>
+    <node x="341.10714285714283" y="311.5">lazytown.source.game.level.Tile</node>
+    <node x="0.0" y="491.0">lazytown.source.game.actor.MainCharacter</node>
+    <node x="0.0" y="1073.0">lazytown.source.sound.SoundEngine</node>
+    <node x="583.0" y="1073.0">lazytown.source.AssetManager</node>
+    <node x="0.0" y="1632.0">lazytown.source.game.actor.Director</node>
+    <node x="846.1071428571429" y="0.0">lazytown.source.game.UI</node>
+    <node x="1425.107142857143" y="521.5">javafx.application.Application.Parameters</node>
+    <node x="1500.0" y="1073.0">lazytown.source.menu.OptionsMenu</node>
+    <node x="253.0" y="623.5">lazytown.source.game.actor.Guard</node>
+    <node x="1474.357142857143" y="0.0">javafx.application.Application</node>
+    <node x="891.5" y="1073.0">javafx.animation.AnimationTimer</node>
+    <node x="157.10714285714283" y="256.0">lazytown.source.game.actor.MovedActor</node>
+    <node x="548.0" y="1632.0">lazytown.source.sound.SoundProperties</node>
+    <node x="501.10714285714283" y="311.5">lazytown.source.game.actor.Item</node>
+    <node x="1123.107142857143" y="0.0">lazytown.source.game.Game</node>
+    <node x="1251.0" y="1073.0">lazytown.source.game.level.Level</node>
+    <node x="396.75" y="0.0">lazytown.source.game.actor.Actor</node>
+    <node x="304.0" y="1632.0">lazytown.source.menu.MainMenu</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="lazytown.source.game.actor.Guard" target="lazytown.source.game.actor.MovedActor">
+      <point x="0.0" y="-136.0" />
+      <point x="360.0" y="466.0" />
+      <point x="280.10714285714283" y="466.0" />
+      <point x="41.0" y="92.5" />
+    </edge>
+    <edge source="lazytown.source.game.actor.Item" target="lazytown.source.game.actor.Actor">
+      <point x="0.0" y="-37.0" />
+      <point x="571.1071428571429" y="236.0" />
+      <point x="513.625" y="236.0" />
+      <point x="23.375" y="103.0" />
+    </edge>
+    <edge source="lazytown.source.game.actor.InteractiveActor" target="lazytown.source.game.actor.Actor">
+      <point x="0.0" y="-37.0" />
+      <point x="731.1071428571429" y="226.0" />
+      <point x="560.375" y="226.0" />
+      <point x="70.125" y="103.0" />
+    </edge>
+    <edge source="lazytown.source.game.level.Tile" target="lazytown.source.game.actor.Actor">
+      <point x="0.0" y="-37.0" />
+      <point x="411.10714285714283" y="236.0" />
+      <point x="466.875" y="236.0" />
+      <point x="-23.375" y="103.0" />
+    </edge>
+    <edge source="javafx.application.Application.Parameters" target="javafx.application.Application">
+      <point x="0.0" y="-47.5" />
+      <point x="1525.607142857143" y="364.0" />
+      <point x="1559.357142857143" y="364.0" />
+      <point x="-85.0" y="169.5" />
+    </edge>
+    <edge source="lazytown.source.game.actor.MovedActor" target="lazytown.source.game.actor.Actor">
+      <point x="0.0" y="-92.5" />
+      <point x="239.10714285714283" y="226.0" />
+      <point x="420.125" y="226.0" />
+      <point x="-70.125" y="103.0" />
+    </edge>
+    <edge source="lazytown.source.Main" target="javafx.application.Application">
+      <point x="0.0" y="-180.0" />
+      <point x="1763.107142857143" y="364.0" />
+      <point x="1729.357142857143" y="364.0" />
+      <point x="85.0" y="169.5" />
+    </edge>
+    <edge source="lazytown.source.game.actor.MainCharacter" target="lazytown.source.game.actor.MovedActor">
+      <point x="0.0" y="-268.5" />
+      <point x="116.5" y="466.0" />
+      <point x="198.10714285714283" y="466.0" />
+      <point x="-41.0" y="92.5" />
+    </edge>
+    <edge source="javafx.animation.AnimationTimer.AnimationTimerReceiver" target="javafx.animation.AnimationTimer">
+      <point x="0.0" y="-25.5" />
+      <point x="933.5" y="1282.0" />
+      <point x="960.25" y="1282.0" />
+      <point x="-68.75" y="92.0" />
+    </edge>
+    <edge source="lazytown.source.game.GamePlayLoop" target="javafx.animation.AnimationTimer">
+      <point x="0.0" y="-47.5" />
+      <point x="1124.5" y="1282.0" />
+      <point x="1097.75" y="1282.0" />
+      <point x="68.75" y="92.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.011683969734295" x="411.3191637388252" y="488.55325773124173" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
