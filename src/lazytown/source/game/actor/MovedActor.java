@@ -15,11 +15,7 @@ public abstract class MovedActor extends Actor {
     // progresses. These variables include velocity in the x and y direction, the actors health and the damage output
     // when it shoots, our player character wont be able to shoot, but there will also be enemy guards that will be able
     // to damage the player.
-    protected double velX, velY, health, damage;
-    // We also have variables for controlling the bounds and if there is friction on movement, this friction could be
-    // used to adjust player speed when in water or similar. It is not an essential variable, but it seems like a fun
-    // gimmick.
-    protected float boundScale, boundRotation, friction;
+    protected double velX, velY;
 
     int levelWidth = Game.getLevel().getImageWidth() * 50;
     int levelHeight = Game.getLevel().getImageHeight() * 50;
@@ -36,7 +32,6 @@ public abstract class MovedActor extends Actor {
      */
     public MovedActor(String SVGdata, double xLoc, double yLoc, Image... spriteCels) {
         super(SVGdata, xLoc, yLoc, spriteCels);
-        health = 100;
         velX = velY = 4;
     }
 
@@ -62,45 +57,5 @@ public abstract class MovedActor extends Actor {
 
     public void setVelY(double velY) {
         this.velY = velY;
-    }
-
-    public double getHealth() {
-        return health;
-    }
-
-    public void setHealth(double lifespan) {
-        this.health = lifespan;
-    }
-
-    public double getDamage() {
-        return damage;
-    }
-
-    public void setDamage(double damage) {
-        this.damage = damage;
-    }
-
-    public float getBoundScale() {
-        return boundScale;
-    }
-
-    public void setBoundScale(float boundScale) {
-        this.boundScale = boundScale;
-    }
-
-    public float getBoundRotation() {
-        return boundRotation;
-    }
-
-    public void setBoundRotation(float boundRotation) {
-        this.boundRotation = boundRotation;
-    }
-
-    public float getFriction() {
-        return friction;
-    }
-
-    public void setFriction(float friction) {
-        this.friction = friction;
     }
 }

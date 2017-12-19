@@ -169,7 +169,7 @@ public class Game {
     // This method renders the in-game user interface.
     private void renderUI() {
         root.getChildren().add(UI.getUI());
-        UI.loadTextWindow("Welcome to LazyTown! Press E to continue.",
+        UI.loadTextWindow("Welcome to The Great Campus Escape!\nPress E to continue.",
                                     "Looks like you had a wild time yesterday at the Friday bar\n" +
                                             "and you slept in the bar’s storage room in building B.",
                                     "What’s worse, you’ve lost your backpack with your student card.\n" +

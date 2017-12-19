@@ -21,8 +21,6 @@ public abstract class Actor {
     // Variables for x and y coordinates in our scene
     protected double iX, iY;
     // Four booleans to keep track of if an object is alive, is fixed, or is flipped either vertically or horizontally.
-    protected boolean isAlive;
-    protected boolean isFixed;
     protected boolean isFlipV;
     protected boolean isFlipH;
 
@@ -43,8 +41,6 @@ public abstract class Actor {
         // The coordinates for the x and y direction of our actors
         iX = xLoc;
         iY = yLoc;
-        isAlive = false;
-        isFixed = true;
         // Boolean values to check if our actor needs to be flipped vertically or horizontally
         isFlipV = false;
         isFlipH = false;
@@ -97,22 +93,6 @@ public abstract class Actor {
 
     public void setiY(double iY) {
         this.iY = iY;
-    }
-
-    public boolean isAlive() {
-        return isAlive;
-    }
-
-    public void setAlive(boolean alive) {
-        isAlive = alive;
-    }
-
-    public boolean isFixed() {
-        return isFixed;
-    }
-
-    public void setFixed(boolean fixed) {
-        isFixed = fixed;
     }
 
     public boolean isFlipV() {

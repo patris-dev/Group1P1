@@ -60,7 +60,7 @@ public class MainMenu {
         // Sets the ID of our label to label-title to differentiate it from other labels in CSS.
         // Places gameTitle to the top of BorderPane root
         // Aligns it to the center
-        gameTitle = new Label("Lazy Town");
+        gameTitle = new Label("The Great Campus Escape");
         gameTitle.setId("label-title");
         root.setTop(gameTitle);
         BorderPane.setAlignment(gameTitle, Pos.CENTER);

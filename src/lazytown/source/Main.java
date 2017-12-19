@@ -34,7 +34,7 @@ public class Main extends Application {
 
         // Stage is the window
         // Sets the title of the window
-        primaryStage.setTitle("LazyTown");
+        primaryStage.setTitle("The Great Campus Escape");
         // Prevents the window from being resized
         primaryStage.setResizable(false);
         primaryStage.sizeToScene();
