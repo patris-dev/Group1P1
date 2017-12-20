@@ -214,6 +214,12 @@ public class UI {
                 UI.loadTextWindow("You found your backpack! Inventory increased.\nNow you can hold 5 of both pizza slices and beer cans.",
                         "And you found your keycard inside! You can now enter building A\nfrom where you can leave the campus.");
                 break;
+            case "note":
+                Game.getBackgroundSfx().play("notePickup.mp3");
+                Game.playerOne.setRestricted(true);
+                UI.loadTextWindow("You found a mysterious note with scribles on it!",
+                        "LOST AND FOUND: building D");
+                break;
             case "key1":
                 Game.getBackgroundSfx().play("keycardPickup.mp3");
                 keycard[1] = true;

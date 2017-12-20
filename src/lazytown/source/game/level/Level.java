@@ -71,6 +71,7 @@ public class Level {
         Image canOfSoda = AssetManager.getItem("can_of_soda.png");
         Image keyCard = AssetManager.getItem("student_card.png");
         Image backpack = AssetManager.getItem("backpack.png");
+        Image note = AssetManager.getItem("note.png");
 
         // Furniture images. Most of these are InteractiveObjects, or Tiles that have some transparency.
         Image plant = AssetManager.getFurniture("plant.png");
@@ -188,15 +189,20 @@ public class Level {
                             actors[x][y] = new Tile(true, x, y, chairLeft);
                             break;
                         case 'O':
+
                             actors[x][y] = new Guard("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, true, gSprites);
                             break;
                         case 'P':
                             actors[x][y] = new Guard("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, false, gSprites);
                             break;
+                        case 'D':
+                            actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "note", note);
+                            break;
                         case 'Q':
                             actors[x][y] = new Tile(true, x, y, plant);
                             break;
                         case 'T':
+
                             actors[x][y] = new Item("M0,0 L 50,0 50,50 0,50 Z", x * 50, y * 50, "key1", keyCard);
                             break;
                         case 'U':
