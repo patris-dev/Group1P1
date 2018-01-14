@@ -176,8 +176,9 @@ public class Game {
                                             "Try to find it and then to escape through building A.",
                                     "Also you should scavenge around for some food and drinks. Use\n" +
                                             "WASD to move and E to interact with lockers and water taps.",
-                                    "Press 1 to eat and 2 to drink. M brings up the map.\nPress ESC at any time to check the controls.",
-                                    "One more thing: if any of the guards catch you,\n" +
+                                    "Press 1 to eat and 2 to drink. M brings up the map and your\n" +
+                                            "location. Press ESC at any time to check the controls.",
+                                    "One more thing: if any of the guards catches you,\n" +
                                             "you’ll be in a lot of trouble. So try to avoid them.",
                                     "Good luck!");
     }

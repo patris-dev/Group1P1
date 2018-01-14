@@ -26,6 +26,7 @@ public class UI {
     private static Label pizzaCounter;
     private static Label beerCounter;
     private static Label fps = new Label();
+    private static Label playerPosLabel;
 
     private static ProgressBar healthBar;
     private static ProgressBar hungerBar;
@@ -80,14 +81,12 @@ public class UI {
         GridPane.setMargin(beerIcon, new Insets(0, 0, 0, 3));
         GridPane.setMargin(pizzaCounter, new Insets(4, 0, 0, 0));
 
-
         // UI section for the map, which appears upon pressing M.
         map = new ImageView(AssetManager.getUI("fullmap.png"));
         map.setVisible(false);
 
         // UI section for the fps counter, default set to invisible. Pressing 0 in-game will make it visible.
         fps.setVisible(false);
-
 
         // UI section for character info.
         // Includes an image of our main character, small icons for health/hunger/thirst bars and the bars themselves.
@@ -130,10 +129,20 @@ public class UI {
         textArea.getStyleClass().add("text-id");
         textBorder.getChildren().addAll(textArea);
         characterInfo.add(textBorder, 4, 0, 3, 3);
+
         eKey = new ImageView(AssetManager.getUI("e_key.png"));
         eKey.setTranslateX(964);
         eKey.setTranslateY(708);
         root.getChildren().add(eKey);
+
+        // UI section that displays the player's position
+        playerPosLabel = new Label();
+        playerPosLabel.setTranslateX(170);
+        playerPosLabel.setTranslateY(130);
+        playerPosLabel.setPrefWidth(298);
+        playerPosLabel.setStyle("-fx-text-fill: red");
+        playerPosLabel.setVisible(false);
+        root.setLeft(playerPosLabel);
 
         // Lays out all UI sections inside root.
         root.setRight(counters);
@@ -217,8 +226,8 @@ public class UI {
             case "note":
                 Game.getBackgroundSfx().play("notePickup.mp3");
                 Game.playerOne.setRestricted(true);
-                UI.loadTextWindow("You found a mysterious note with scribles on it!",
-                        "LOST AND FOUND: building D");
+                UI.loadTextWindow("You found a note with some text on it!",
+                        "\"LOST AND FOUND: building D\"");
                 break;
             case "key1":
                 Game.getBackgroundSfx().play("keycardPickup.mp3");
@@ -243,7 +252,7 @@ public class UI {
     }
 
     /**
-     * Makes the map in the UI visible.
+     * Makes the map and the player's position in the UI visible.
      */
     public static void showMap(){
         if (!map.isVisible()) {
@@ -251,14 +260,32 @@ public class UI {
             if (sr.nextDouble() > 0.95) map.setImage(AssetManager.getUI("fullmap0.png"));
             else map.setImage(AssetManager.getUI("fullmap.png"));
             map.setVisible(true);
+
+            switch(Game.getLevel().getLevelNumber()){
+                case 1:
+                    playerPosLabel.setText("You are in building A");
+                    break;
+                case 2:
+                    playerPosLabel.setText("You are in building B");
+                    break;
+                case 3:
+                    playerPosLabel.setText("You are in building C");
+                    break;
+                case 4:
+                    playerPosLabel.setText("You are in building D");
+                    break;
+            }
+            playerPosLabel.toFront();
+            playerPosLabel.setVisible(true);
         }
     }
 
     /**
-     * Makes the map in the UI invisible.
+     * Makes the map and the player's position in the UI invisible.
      */
     public static void hideMap(){
         map.setVisible(false);
+        playerPosLabel.setVisible(false);
     }
 
     /**
